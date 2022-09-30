@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename = 'css/404.css') }}">
+{% endblock %}
+
+{% block body %}
+<h1 style="text-align:center">404<br>
+This page don't exist</h1>
+<img src="https://www.bensonchow.cf/static/images/404image.png" alt="404 image" class="image">
+{% endblock %}

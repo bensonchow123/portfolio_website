@@ -1,0 +1,94 @@
+{
+  "projects": [
+    {
+      "name": "Secret Santa Website",
+      "link": "Freya-gravity",
+      "date": "November 2021  - November 2021",
+      "short": "A secret santa gift inspired by google gravity",
+      "status": "complete",
+      "weight": 4,
+      "tags": [
+        "Web Development"
+      ],
+      "videos": [
+        "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/kCNZ5XajM8I\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>"
+      ],
+      "photos": [
+        "/static/projects/Freya-gravity/Secret-santa.png"
+      ],
+      "github": "https://github.com/bensonchow123/secret-santa-website"
+    },
+    {
+      "name": "Auto online lesson joiner",
+      "link": "Auto-online-lesson-joiner",
+      "date": "2020 January - 2020 March",
+      "short": "A python selenium project which joins teams lesson for you according to a timetable",
+      "status": "complete",
+      "weight": 1,
+      "tags": [
+        "python",
+        "selenium"
+      ],
+      "videos": [
+        "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/UgE5uYQ0lHE\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>"
+      ],
+      "photos": [
+        "/static/projects/Auto-online-lesson-joiner/Microsoft_Teams.png"
+      ]
+    },
+    {
+      "name": "Gpt-3 girlfriend",
+      "link": "Gpt-3-girlfriend",
+      "date": "October 2021 - Ongoing",
+      "short": "A Gpt-3 chatbot fine tuned to response like your girlfriend as if you have one",
+      "status": "ongoing",
+      "weight": 3,
+      "tags": [
+        "Gpt-x",
+        "Machine learning",
+        "Ai"
+      ],
+      "videos": [
+        "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/meVqbRT4fJ0\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>"
+      ],
+      "photos": [
+        "/static/projects/Gpt-3-girlfriend/girlfriend_pic.jpg"
+      ]
+    },
+    {
+      "name": "MineZone bot",
+      "link": "MineZoneBot",
+      "date": "June 2021  - Ongoing",
+      "short": "A Discord bot designed to improve activity within MineZone and allow users to connect to minecraft within the discord server",
+      "status": "ongoing",
+      "weight": 5,
+      "tags": [
+        "async programming",
+        "Ai"
+      ],
+      "photos": [
+        "/static/projects/MineZoneBot/MineZone.jpg",
+        "/static/projects/MineZoneBot/chatbot.jpg"
+      ],
+      "github": "https://github.com/bensonchow123/MineZone"
+    },
+    {
+      "name": "Motion Detector",
+      "link": "Rabbit-Protection-Scanner",
+      "date": "2021 January - 2021 February",
+      "short": "A motion detector that is built with OpenCV",
+      "status": "complete",
+      "weight": 2,
+      "tags": [
+        "python",
+        "OpenCV"
+      ],
+      "videos": [
+        "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/aYoJAe0QNZU\" title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>"
+      ],
+      "photos": [
+        "/static/projects/Rabbit-Protection-Scanner/OpenCV_Logo.png"
+      ]
+    }
+  ]
+}

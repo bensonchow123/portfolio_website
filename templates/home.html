@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block head %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<link type="text/css" rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<script src='https://cdnjs.cloudflare.com/ajax/libs/typed.js/1.1.1/typed.min.js'></script>
+
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename = 'css/home.css') }}">
+<script type="text/javascript" src="{{ url_for('static', filename = 'js/home.js') }}"></script>
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="wrapper fixed-wrapper">
+        <section id="terminal">
+            <div id="terminal-container">
+                <div class="terminal">
+                    <div class="window-title">
+                        <div class="win-buttons">
+                            <a id="close" class="button" href="#"></a>
+                            <a id="min" class="button" href="#"></a>
+                            <a id="max" class="button" href="#"></a>
+                        </div>
+                        <span class="title">Terminal</span>
+                    </div>
+                    <div class="message">
+                        <span class='prompt'><span class='user'>Benson Chow</span><span class="at">@</span><span
+                                class="path">C:\Users\Benson Chow></span>><span class="caret">$</span></span>
+                        <span class="typed"></span>
+                        <form>><span class="caret">$</span>&nbsp;<input type="text" name="response"/></form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="wrapper scroll-wrapper">
+        <div class="top-text">
+            <p class="text-title desktop-view">Benson</p>
+            <p class="text-title desktop-view">Chow</p>
+            <p class="text-title mobile-view">Benson chow</p>
+            <div class="social-icons">
+                <a target="_blank" href="https://github.com/bensonchow123">
+                    <img class="title-logo" src="static/images/github.svg" alt="github icon">
+                </a>
+                <a target="_blank" href="https://twitter.com/bensonchow2">
+                    <img class="title-logo" src="static/images/twitter.svg" alt="twitter icon">
+                </a>
+                <a target="_blank" href="https://discord.gg/eZGcMeCfXM">
+                    <img class="title-logo" src="static/images/discord_icon.svg" alt="discord icon">
+                </a>
+            </div>
+        </div>
+        <div class="middle-text">
+
+            <p class="text-content">Hi thanks for visiting this website where I demonstrate all my projects!!! </p>
+            <p class="text-content">For this website, its web framework is flask, hosted on heroku, where its domain is brought from namecheap and uses Cloudflare for free SSL certificate</p>
+            <p class="text-content">Thanks for visiting my website!!!</p>
+
+            <br>
+        </div>
+    </div>
+</div>
+{% endblock %}
