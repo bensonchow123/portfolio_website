@@ -1,92 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
 
 
 <url>
-  <loc>https://www.bensonchow.xyz/</loc>
-  <lastmod>2021-12-15T19:12:40+00:00</lastmod>
+  <loc>https://bensonchow.cf/</loc>
+  <lastmod>2022-10-01T19:12:32+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://www.bensonchow.xyz/projects</loc>
-  <lastmod>2021-12-15T19:12:40+00:00</lastmod>
+  <loc>https://bensonchow.cf/%F0%9F%9A%A7projects%F0%9F%9A%A7</loc>
+  <lastmod>2022-10-01T19:12:32+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://www.bensonchow.xyz/shop</loc>
-  <lastmod>2021-12-15T19:12:40+00:00</lastmod>
+  <loc>https://bensonchow.cf/%F0%9F%9B%92shop%F0%9F%9B%92</loc>
+  <lastmod>2022-10-01T19:12:32+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://www.bensonchow.xyz/comment</loc>
-  <lastmod>2021-12-15T19:12:40+00:00</lastmod>
+  <loc>https://bensonchow.cf/%F0%9F%A4%97comments%F0%9F%A4%97</loc>
+  <lastmod>2022-10-01T19:12:32+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://www.bensonchow.xyz/projects?tags=async%20programming</loc>
-  <lastmod>2021-12-15T19:12:40+00:00</lastmod>
+  <loc>https://bensonchow.cf/%F0%9F%9A%A7projects%F0%9F%9A%A7?tags=async%20programming</loc>
+  <lastmod>2022-10-01T19:12:32+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://www.bensonchow.xyz/projects?tags=Ai</loc>
-  <lastmod>2021-12-15T19:12:40+00:00</lastmod>
+  <loc>https://bensonchow.cf/%F0%9F%9A%A7projects%F0%9F%9A%A7?tags=Machine%20learning</loc>
+  <lastmod>2022-10-01T19:12:32+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://www.bensonchow.xyz/projects/MineZoneBot</loc>
-  <lastmod>2021-12-15T19:12:40+00:00</lastmod>
+  <loc>https://bensonchow.cf/%F0%9F%9A%A7projects%F0%9F%9A%A7/seraphine</loc>
+  <lastmod>2022-10-01T19:12:32+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://www.bensonchow.xyz/projects?tags=Web%20Development</loc>
-  <lastmod>2021-12-15T19:12:40+00:00</lastmod>
+  <loc>https://bensonchow.cf/%F0%9F%9A%A7projects%F0%9F%9A%A7?tags=Web%20Development</loc>
+  <lastmod>2022-10-01T19:12:32+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://www.bensonchow.xyz/projects/Freya-gravity</loc>
-  <lastmod>2021-12-15T19:12:40+00:00</lastmod>
+  <loc>https://bensonchow.cf/%F0%9F%9A%A7projects%F0%9F%9A%A7/secret_santa_website</loc>
+  <lastmod>2022-10-01T19:12:32+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://www.bensonchow.xyz/projects?tags=Gpt-x</loc>
-  <lastmod>2021-12-15T19:12:40+00:00</lastmod>
+  <loc>https://bensonchow.cf/%F0%9F%9A%A7projects%F0%9F%9A%A7?tags=Gpt-x</loc>
+  <lastmod>2022-10-01T19:12:32+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 <url>
-  <loc>https://www.bensonchow.xyz/projects?tags=Machine%20learning</loc>
-  <lastmod>2021-12-15T19:12:40+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.bensonchow.xyz/projects/Gpt-3-girlfriend</loc>
-  <lastmod>2021-12-15T19:12:40+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.bensonchow.xyz/projects?tags=python</loc>
-  <lastmod>2021-12-15T19:12:40+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.bensonchow.xyz/projects?tags=OpenCV</loc>
-  <lastmod>2021-12-15T19:12:40+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.bensonchow.xyz/projects/Rabbit-Protection-Scanner</loc>
-  <lastmod>2021-12-15T19:12:40+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.bensonchow.xyz/projects?tags=selenium</loc>
-  <lastmod>2021-12-15T19:12:40+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://www.bensonchow.xyz/projects/Auto-online-lesson-joiner</loc>
-  <lastmod>2021-12-15T19:12:40+00:00</lastmod>
+  <loc>https://bensonchow.cf/%F0%9F%9A%A7projects%F0%9F%9A%A7/gpt_3_girlfriend</loc>
+  <lastmod>2022-10-01T19:12:32+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 

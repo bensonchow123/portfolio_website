@@ -6,7 +6,7 @@
       "date": "November 2021  - November 2021",
       "short": "A secret santa gift inspired by google gravity",
       "status": "complete",
-      "weight": 4,
+      "weight": 1,
       "tags": [
         "Web Development"
       ],
@@ -24,7 +24,7 @@
       "date": "October 2021 - November 2021",
       "short": "A GPT-3 chatbot fine tuned to response like a girlfriend",
       "status": "ongoing",
-      "weight": 3,
+      "weight": 2,
       "tags": [
         "Gpt-x",
         "Machine learning"
@@ -42,7 +42,7 @@
       "date": "June 2021  - Ongoing",
       "short": "A Discord bot designed to improve activity within Seraphine and allow for integration of hypixel skyblock within Skyhub",
       "status": "ongoing",
-      "weight": 5,
+      "weight": 3,
       "tags": [
         "async programming",
         "Machine learning"
