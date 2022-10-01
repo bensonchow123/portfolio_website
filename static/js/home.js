@@ -4,10 +4,9 @@ $(function() {
     strings: [
       "stat Benson.human<br/>" +
       "><span class='caret'>$</span> languages: Python, Javascript, HTML, CSS, Golang<br/>" +
-      "><span class='caret'>$</span> school: year 11 at <a href='https://www.malverncollege.org.uk/'>Malvern college</a><br/> ^200" +
-      "><span class='caret'>$</span> hobbies: programming, minecraft/Hoi 4 playing<br/> ^150" +
-      "><span class='caret'>$</span> known as: MetallicWeb7080 <br/>" +
-      "><span class='caret'>$</span> highlight:  Owner of <a href='https://discord.gg/eZGcMeCfXM'>Minezone</a>, a Minecraft technical discussion server<br/> ^300"
+      "><span class='caret'>$</span> school: year 12 at <a href='https://www.malverncollege.org.uk/'>Malvern college</a><br/> ^200" +
+      "><span class='caret'>$</span> hobbies: programming, minecraft<br/> ^150" +
+      "><span class='caret'>$</span> known as: Hypicksell <br/>"
     ],
     showCursor: true,
     cursorChar: '_',
