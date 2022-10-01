@@ -1,3 +1,2 @@
 User-agent: *
-Disallow:
-Sitemap: https://www.bensonchow.xyz/sitemap.xml
+Sitemap: https://www.bensonchow.cf/sitemap.xml
