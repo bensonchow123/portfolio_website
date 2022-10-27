@@ -39,13 +39,13 @@
     {
       "name": "Seraphine",
       "link": "seraphine",
-      "date": "June 2021  - Ongoing",
+      "date": "June 2021  - On going",
       "short": "A Discord bot designed to improve activity within Seraphine and allow for integration of hypixel skyblock within Skyhub",
-      "status": "ongoing",
+      "status": "completed",
       "weight": 3,
       "tags": [
         "async programming",
-        "Machine learning"
+        "discord.py"
       ],
       "photos": [
         "/static/projects/seraphine/seraphine.png",
