@@ -3,13 +3,17 @@ import io
 import json
 import os
 import smtplib
+from requests import get, exceptions
+
 from apis import apis
 from flask import Flask, render_template, request, send_from_directory
-from requests import get
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 
-
+limiter = Limiter(key_func=get_remote_address)
 app = Flask(__name__)
 app.register_blueprint(apis)
+ALLOWED_EXTENSIONS = {'html', 'htm'}
 
 @app.route('/')
 def index():
@@ -77,16 +81,46 @@ def get_static_file(path):
 def get_static_json(path):
     return json.load(open(get_static_file(path)))
 
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+def sanitize_input(user_input):
+    """Sanitize user input to prevent LFI vulnerabilities"""
+    # remove any leading/trailing whitespace
+    user_input = user_input.strip()
+    # check if the user input is a valid file name
+    if not allowed_file(user_input):
+        return None
+    # check if the file exists
+    file_path = os.path.join(app.config['UPLOAD_FOLDER'], user_input)
+    if not os.path.isfile(file_path):
+        return None
+    return file_path
+
 @app.route('/chat-exporter', methods=['GET'])
+@limiter.limit("10/minute")
 def chat_exporter():
     url = request.args.get('url')
     if url:
-        headers = {'User-Agent': 'Mozilla/5.0'}
-        response = get(url, headers=headers)
+        # extract the file name from the url
+        file_name = os.path.basename(url)
+        # sanitize the file name
+        file_path = sanitize_input(file_name)
+        if file_path is None:
+            return "Invalid file name"
+        # Validate the URL
+        if not url.startswith("https://"):
+            return "Invalid URL. Only https is allowed."
+        try:
+            response = get(url)
+        except exceptions.RequestException as e:
+            return "Error: Invalid URL or Unable to connect to the server"
+
         if response.ok:
             html = response.text
-            print(f'html: {html}') # debug
-            return render_template('chat_exporter.html', html=html)
+            return render_template('render.html', html=html)
         else:
             return f"Error: {response.status_code} {response.reason}"
     else:
