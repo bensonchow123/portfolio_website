@@ -1,0 +1,8 @@
+
+{% block head %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename = 'css/chat_exporter.css') }}">
+{% endblock %}
+{% block body %}
+    <iframe src="{{ url }}"></iframe>
+{% endblock %}
