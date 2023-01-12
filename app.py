@@ -2,7 +2,6 @@ import datetime
 import io
 import json
 import os
-import smtplib
 from requests import get, exceptions
 
 from apis import apis
@@ -110,7 +109,7 @@ def chat_exporter():
 
         if response.ok:
             html = response.text
-            return render_template('render.html', html=html)
+            return render_template('chat_exporter.html', html=html)
         else:
             return f"Error: {response.status_code} {response.reason}"
     else:
