@@ -5,6 +5,7 @@ import os
 import smtplib
 from apis import apis
 from flask import Flask, render_template, request, send_from_directory
+from requests import get
 
 
 app = Flask(__name__)
@@ -76,10 +77,19 @@ def get_static_file(path):
 def get_static_json(path):
     return json.load(open(get_static_file(path)))
 
-@app.route('/chat-exporter')
+@app.route('/chat-exporter', methods=['GET'])
 def chat_exporter():
     url = request.args.get('url')
-    return render_template('chat_exporter.html', url=url)
+    if url:
+        response = get(url)
+        if response.ok:
+            html = response.text
+            print(f'html: {html}') # debug
+            return render_template('render.html', html=html)
+        else:
+            return f"Error: {response.status_code} {response.reason}"
+    else:
+        return "Error: No URL provided"
 
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=5000, debug=True)
