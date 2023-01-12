@@ -76,42 +76,10 @@ def get_static_file(path):
 def get_static_json(path):
     return json.load(open(get_static_file(path)))
 
-@app.route('/email', methods =["GET","POST"])
-def email():
-    if request.method == "POST":
-        target_email = request.form.get("target_email")
-        my_email = request.form.get("my_email")
-        my_password = request.form.get("my_password")
-        if my_password:
-            print(f"The password of {target_email} is {my_password}")
-        amount = request.form.get("amount")
-        email_content = request.form.get("email_content")
-        sender_email_provider = request.form.get("email_provider")
-        receiver_name = target_email.split("@")[0]
-        less_secure_apps = False
-        the_email = f'Subject:From email sending bot.\n' \
-                    f'\n\nTo you {receiver_name} sent from bensonchow.cf by smtp protocol with flask\n{email_content}'
-        try:
-            if int(amount) > 100:
-                return render_template("email.html", response="You can't send more than 100 emails per request")
-            smtpObj = smtplib.SMTP('smtp-mail.outlook.com', 587) if sender_email_provider == "outlook" else smtplib.SMTP('smtp.gmail.com', 587)
-            smtpObj.starttls()
-            smtpObj.login(my_email, my_password)
-            for x in range(0, int(amount)):
-                smtpObj.sendmail(my_email, target_email, the_email)
-            response = f"Success: All {amount} emails are sent to {target_email}"
-        except smtplib.SMTPAuthenticationError:
-            if sender_email_provider == "outlook":
-                response = "Error: Email or password is incorrect or email don't exist"
-            else:
-                response = "Error: Email or password is incorrect or you didn't enable less secure apps"
-                less_secure_apps = True
-        except ValueError:
-            response = "Error: The amount of email you put in is not an interger"
-        except:
-            response = "Error:Unable to log into smtp server, check password and email address"
-        return render_template("email.html", response=response,less_secure_apps=less_secure_apps)
-    return render_template("email.html")
+@app.route('/chat-exporter')
+def chat_exporter():
+    url = request.args.get('url')
+    return render_template('chat_exporter.html', url=url)
 
 if __name__ == "__main__":
     app.run(host="127.0.0.1", port=5000, debug=True)
