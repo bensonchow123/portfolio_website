@@ -4,5 +4,5 @@
 <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename = 'css/chat_exporter.css') }}">
 {% endblock %}
 {% block body %}
-    <iframe src="{{ url }}"></iframe>
+    {{html|safe}}
 {% endblock %}
