@@ -81,11 +81,12 @@ def get_static_json(path):
 def chat_exporter():
     url = request.args.get('url')
     if url:
-        response = get(url)
+        headers = {'User-Agent': 'Mozilla/5.0'}
+        response = get(url, headers=headers)
         if response.ok:
             html = response.text
             print(f'html: {html}') # debug
-            return render_template('render.html', html=html)
+            return render_template('chat_exporter.html', html=html)
         else:
             return f"Error: {response.status_code} {response.reason}"
     else:
