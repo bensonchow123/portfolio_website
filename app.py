@@ -87,30 +87,20 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 def sanitize_input(user_input):
-    """Sanitize user input to prevent LFI vulnerabilities"""
-    # remove any leading/trailing whitespace
     user_input = user_input.strip()
-    # check if the user input is a valid file name
     if not allowed_file(user_input):
         return None
-    # check if the file exists
-    file_path = os.path.join(app.config['UPLOAD_FOLDER'], user_input)
-    if not os.path.isfile(file_path):
-        return None
-    return file_path
+    return user_input
 
 @app.route('/chat-exporter', methods=['GET'])
 @limiter.limit("10/minute")
 def chat_exporter():
     url = request.args.get('url')
     if url:
-        # extract the file name from the url
         file_name = os.path.basename(url)
-        # sanitize the file name
         file_path = sanitize_input(file_name)
         if file_path is None:
             return "Invalid file name"
-        # Validate the URL
         if not url.startswith("https://"):
             return "Invalid URL. Only https is allowed."
         try:
