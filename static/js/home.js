@@ -3,7 +3,7 @@ $(function() {
   $(".typed").typed({
     strings: [
       "stat Benson.human<br/>" +
-      "><span class='caret'>$</span> Fluent languages: Python, Javascript, HTML, CSS<br/>" +
+      "><span class='caret'>$</span> fluent languages: Python, Javascript, HTML, CSS<br/>" +
       "><span class='caret'>$</span> hobbies: minecraft, machanical keyboard building, audiophile, programming<br/> ^150" +
       "><span class='caret'>$</span> school: year 12 at <a href='https://www.malverncollege.org.uk/'>Malvern college</a><br/> ^200" +
       "><span class='caret'>$</span> known as: Hypicksell <br/>"
