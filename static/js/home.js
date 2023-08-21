@@ -4,17 +4,16 @@ $(function() {
     strings: [
       "stat Benson.human<br/>" +
       "><span class='caret'>$</span> Fluent languages: Python, Javascript, HTML, CSS<br/>" +
-      "><span class='caret'>$</span> school: year 12 at <a href='https://www.malverncollege.org.uk/'>Malvern college</a><br/> ^200" +
       "><span class='caret'>$</span> hobbies: minecraft, machanical keyboard building, audiophile, programming<br/> ^150" +
+      "><span class='caret'>$</span> school: year 12 at <a href='https://www.malverncollege.org.uk/'>Malvern college</a><br/> ^200" +
       "><span class='caret'>$</span> known as: Hypicksell <br/>"
     ],
-    showCursor: true,
+    showCursor: false,
     cursorChar: '_',
     autoInsertCss: true,
     typeSpeed: 0.001,
     startDelay: 50,
     loop: false,
-    showCursor: false,
     onStart: $('.message form').hide(),
     onStop: $('.message form').show(),
     onTypingResumed: $('.message form').hide(),
