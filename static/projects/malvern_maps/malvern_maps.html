@@ -1,0 +1,53 @@
+<div>
+    <span> This is my a level computer science project, the problem it solves is the fact that
+      mapping platforms didn't map my school, due to it being a private property.
+    </span>
+   <span class="lb">This project has three main features.</span>
+    <ul>
+        <li>Interactive map</li>
+        <li>Shortest path calculation between points</li>
+        <li>Events report system</li>
+    </ul>
+    <span class="lb">Interactive map</span>
+    <ul>
+        <li>
+            First using a satellite image of a school, with the JavaScript library leaflet.js, an image map is initiated.
+        </li>
+        <li>
+            The satellite image is then drawn onto, to highlight paths, parking spaces, shortcuts, stairs and entrances.
+        </li>
+        <li>
+            Leaflet popup are then made for each entrance and intersection, with a special code associated with each popup.
+        </li>
+        <li>
+            It will allow the user to click on the popup, and use the special code to preform shortest path calculation between two points.
+        </li>
+    </ul>
+    <span class="lb">Shortest path calculation between points</span>
+    <ul>
+        <li>
+            Using a bootstrap offcanvas sidebar, the user can enter the special code of the entrance or intersection, and the shortest path to the destination will be calculated.
+        </li>
+        <li>
+            Parameters can be used to filter out certain paths, e.g. stairs.
+        </li>
+        <li>
+            The shortest path algorithm used is Dijkstra's algorithm.
+        </li>
+    </ul>
+    <span class="lb">Events report system</span>
+    <ul>
+        <li>
+            Using mongodb, a database to hold events and staff member accounts are made.
+        </li>
+        <li>
+            A web cookie system allows staff members to login and report events, e.g. Someone crashing a school bus into a gate
+        </li>
+        <li>
+            Admins can demote and promote staff members.
+        </li>
+        <li>
+            A caching system is implemented for the events, so the events are available for the users to view without the need to query the database.
+        </li>
+    </ul>
+</div>

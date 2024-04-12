@@ -4,14 +4,12 @@ import json
 import os
 from requests import get, exceptions
 
-from apis import apis
 from flask import Flask, render_template, request, send_from_directory
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 
 limiter = Limiter(key_func=get_remote_address)
 app = Flask(__name__)
-app.register_blueprint(apis)
 ALLOWED_EXTENSIONS = {'html', 'htm'}
 
 @app.route('/')
