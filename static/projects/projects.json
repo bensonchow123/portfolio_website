@@ -19,27 +19,9 @@
       "github": "https://github.com/bensonchow123/secret-santa-website"
     },
     {
-      "name": "Gpt-3 girlfriend",
-      "link": "gpt_3_girlfriend",
-      "date": "October 2021 - November 2021",
-      "short": "A GPT-3 chatbot fine tuned to response like a girlfriend",
-      "status": "ongoing",
-      "weight": 2,
-      "tags": [
-        "Gpt-x",
-        "Machine learning"
-      ],
-      "videos": [
-        "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/meVqbRT4fJ0\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>"
-      ],
-      "photos": [
-        "/static/projects/gpt_3_girlfriend/gpt_3_girlfriend.jpg"
-      ]
-    },
-    {
       "name": "Seraphine",
       "link": "seraphine",
-      "date": "June 2021  - On going",
+      "date": "June 2021  - January 2024",
       "short": "A Discord bot designed to improve activity within Seraphine and allow for integration of hypixel skyblock within Skyhub",
       "status": "completed",
       "weight": 3,
@@ -52,6 +34,23 @@
         "/static/projects/seraphine/seraphine_chat_bot.jpg"
       ],
       "github": "https://github.com/bensonchow123/seraphine"
+    },
+    {
+      "name": "Malvern Maps",
+      "link": "malvern_maps",
+      "date": "December 2022  - december 2023",
+      "short": "An interactive map of Malvern College",
+      "status": "completed",
+      "weight": 4,
+      "tags": [
+        "Web Development"
+      ],
+      "photos": [
+        "/static/projects/malvern_maps/malvern_maps_logo.png",
+        "/static/projects/malvern_maps/malvern_maps_landing.png",
+        "/static/projects/malvern_maps/map.png"
+      ],
+      "github": "https://github.com/bensonchow123/malvern-maps"
     }
   ]
 }
