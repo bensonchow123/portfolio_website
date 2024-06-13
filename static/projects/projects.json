@@ -1,24 +1,6 @@
 {
   "projects": [
     {
-      "name": "Secret Santa Website",
-      "link": "secret_santa_website",
-      "date": "November 2021  - November 2021",
-      "short": "A secret santa gift inspired by google gravity",
-      "status": "complete",
-      "weight": 1,
-      "tags": [
-        "Web Development"
-      ],
-      "videos": [
-        "<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/kCNZ5XajM8I\" frameborder=\"0\" allow=\"autoplay; encrypted-media\" allowfullscreen></iframe>"
-      ],
-      "photos": [
-        "/static/projects/secret_santa_website/secret_santa.png"
-      ],
-      "github": "https://github.com/bensonchow123/secret-santa-website"
-    },
-    {
       "name": "Seraphine",
       "link": "seraphine",
       "date": "June 2021  - January 2024",
