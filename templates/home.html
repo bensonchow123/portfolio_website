@@ -1,15 +1,9 @@
 {% extends "base.html" %}
 
 {% block head %}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-<link type="text/css" rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-<script src='https://cdnjs.cloudflare.com/ajax/libs/typed.js/1.1.1/typed.min.js'></script>
-<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename = 'css/home.css') }}">
-<script type="text/javascript" src="{{ url_for('static', filename = 'js/home.js') }}"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
 {% endblock %}
 
 {% block body %}
@@ -27,10 +21,16 @@
                         <span class="title">Terminal</span>
                     </div>
                     <div class="message">
-                        <span class='prompt'><span class='user'>Benson Chow</span><span class="at">@</span><span
-                                class="path">C:\Users\Benson Chow></span>><span class="caret">$</span></span>
+                        <span class='prompt'>
+                            <span class='user'>Benson Chow</span>
+                            <span class="at">@</span>
+                            <span class="path">C:\Users\Benson Chow></span>
+                            <span class="caret">$</span>
+                        </span>
                         <span class="typed"></span>
-                        <form>><span class="caret">$</span>&nbsp;<input type="text" name="response"/></form>
+                        <form>
+                            ><span class="caret">$</span>&nbsp;<input type="text" name="response"/>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -43,28 +43,41 @@
             <p class="text-title mobile-view">Benson chow</p>
             <div class="social-icons">
                 <a target="_blank" href="https://github.com/bensonchow123">
-                    <img class="title-logo" src="static/images/github.svg" alt="github icon">
+                    <img class="title-logo" src="{{ url_for('static', filename='images/github.svg') }}" alt="github icon">
                 </a>
                 <a target="_blank" href="https://twitter.com/bensonchow2">
-                    <img class="title-logo" src="static/images/twitter.svg" alt="twitter icon">
+                    <img class="title-logo" src="{{ url_for('static', filename='images/twitter.svg') }}" alt="twitter icon">
                 </a>
                 <a target="_blank" href="https://discord.gg/KkFW7uDfw7">
-                    <img class="title-logo" src="static/images/discord_icon.svg" alt="discord icon">
+                    <img class="title-logo" src="{{ url_for('static', filename='images/discord_icon.svg') }}" alt="discord icon">
                 </a>
             </div>
         </div>
         <div class="middle-text">
             <p class="text-content">This website is for demonstrating my projects, thanks for visiting it!</p>
             <p class="text-content">
-                For this website, its web framework is flask, hosted on a webserver on render.com
+                For this website, its web framework is Flask, hosted on a web server on render.com,
                 and its domain name is a free domain name from freenom.com!
             </p>
-            <p class="text-content">My spotify playlist is below!</p>
-            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/5qZmlbRA9WvL1SiTaKk9Sw?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-
-
+            <p class="text-content">My Spotify playlist is below!</p>
+            <iframe
+                style="border-radius:12px"
+                src="https://open.spotify.com/embed/playlist/5qZmlbRA9WvL1SiTaKk9Sw?utm_source=generator&theme=0"
+                width="100%"
+                height="152"
+                frameBorder="0"
+                allowfullscreen=""
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy">
+            </iframe>
             <br>
         </div>
     </div>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/1.1.1/typed.min.js"></script>
+<script src="{{ url_for('static', filename='js/home.js') }}"></script>
 {% endblock %}
