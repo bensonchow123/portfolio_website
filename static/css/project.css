@@ -103,3 +103,10 @@ span {
     width: 100%;
   }
 }
+.carousel-control-prev, .carousel-control-next {
+    transition: background-color 0.3s ease;
+}
+
+.carousel-control-prev:hover, .carousel-control-next:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+}
