@@ -1,0 +1,26 @@
+h1, h2 {
+
+  border-radius: 5px; /* optional rounded corners */
+  padding: 0.5rem 1rem; /* add some padding around the text */
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+.background {
+  background-image: url('../images/comments-background.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}

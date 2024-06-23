@@ -17,9 +17,9 @@ def index():
     age = int((datetime.date.today() - datetime.date(2005, 11, 22)).days / 365)
     return render_template('home.html', age=age)
 
-@app.route('/🤗comments🤗')
+@app.route('/🤗guestbook🤗')
 def comment():
-    return render_template('comment.html')
+    return render_template('guestbook.html')
 
 
 @app.route('/🛒shop🛒')

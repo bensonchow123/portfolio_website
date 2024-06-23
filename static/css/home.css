@@ -27,8 +27,8 @@ body {
   width: 50%;
 }
 
-.scroll-wrapper::-webkit-scrollbar { 
-    display: none; 
+.scroll-wrapper::-webkit-scrollbar {
+    display: none;
     margin-right: 5%;
 }
 

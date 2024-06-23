@@ -41,7 +41,7 @@
 }
 
 .links {
-  margin: 20px 0px 10px 0px;
+  margin: 20px 0 10px;
 }
 
 span {
@@ -55,7 +55,7 @@ span {
 }
 
 .date {
-  margin: 0px 100px 20px 0px;
+  margin: 0 100px 20px 0;
   color: #555;
 }
 
@@ -70,14 +70,15 @@ span {
   .wrapper {
     width: 100%;
   }
-  .mobile-view {
-    display: block;
-  }
-  .desktop-view {
-    display: none;
-  }
   .scroll-wrapper {
     width: 100%;
+  }
+  .title {
+    font-size: 40px;
+    margin-top: 10px;
+  }
+  .date {
+    margin: 0 20px 10px 0;
   }
 }
 
@@ -103,10 +104,11 @@ span {
     width: 100%;
   }
 }
+
 .carousel-control-prev, .carousel-control-next {
-    transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease;
 }
 
 .carousel-control-prev:hover, .carousel-control-next:hover {
-    background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.5);
 }
