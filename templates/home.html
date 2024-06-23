@@ -1,22 +1,22 @@
 {% extends "base.html" %}
 
 {% block head %}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
 {% endblock %}
 
 {% block body %}
-<div class="container">
+<div class="container-fluid d-flex justify-content-end align-items-center h-100">
     <div class="wrapper fixed-wrapper">
         <section id="terminal">
             <div id="terminal-container">
                 <div class="terminal">
-                    <div class="window-title">
-                        <div class="win-buttons">
-                            <a id="close" class="button" href="#"></a>
-                            <a id="min" class="button" href="#"></a>
-                            <a id="max" class="button" href="#"></a>
+                    <div class="window-title d-flex align-items-center justify-content-between">
+                        <div class="win-buttons d-flex">
+                            <a id="close" class="button me-1" href="#"></a>
+                            <a id="min" class="button me-1" href="#"></a>
+                            <a id="max" class="button me-1" href="#"></a>
                         </div>
                         <span class="title">Terminal</span>
                     </div>
@@ -24,12 +24,12 @@
                         <span class='prompt'>
                             <span class='user'>Benson Chow</span>
                             <span class="at">@</span>
-                            <span class="path">C:\Users\Benson Chow></span>
+                            <span class="path">C:\Users\Benson Chow&gt;</span>
                             <span class="caret">$</span>
                         </span>
                         <span class="typed"></span>
-                        <form>
-                            ><span class="caret">$</span>&nbsp;<input type="text" name="response"/>
+                        <form class="d-inline">
+                            <span class="caret">$</span>&nbsp;<input type="text" name="response" class="bg-transparent border-0 text-white">
                         </form>
                     </div>
                 </div>
@@ -41,16 +41,16 @@
             <p class="text-title desktop-view">Benson</p>
             <p class="text-title desktop-view">Chow</p>
             <p class="text-title mobile-view">Benson chow</p>
-            <div class="social-icons">
-                <a target="_blank" href="https://github.com/bensonchow123">
-                    <img class="title-logo" src="{{ url_for('static', filename='images/github.svg') }}" alt="github icon">
-                </a>
-                <a target="_blank" href="https://twitter.com/bensonchow2">
-                    <img class="title-logo" src="{{ url_for('static', filename='images/twitter.svg') }}" alt="twitter icon">
-                </a>
-                <a target="_blank" href="https://discord.gg/KkFW7uDfw7">
-                    <img class="title-logo" src="{{ url_for('static', filename='images/discord_icon.svg') }}" alt="discord icon">
-                </a>
+            <div class="social-icons d-flex justify-content-centertext-decoration-none">
+                <a class="text-decoration-none" target="_blank" href="https://github.com/bensonchow123">
+                    <img class="title-logo text-decoration-none" src="{{ url_for('static', filename='images/github.svg') }}"
+                         alt="github icon"></a>
+                <a class="text-decoration-none" target="_blank" href="https://twitter.com/bensonchow2">
+                    <img class="title-logo text-decoration-none" src="{{ url_for('static', filename='images/twitter.svg') }}"
+                         alt="twitter icon"></a>
+                <a class="text-decoration-none" target="_blank" href="https://discord.gg/KkFW7uDfw7">
+                    <img class="title-logo text-decoration-none" src="{{ url_for('static', filename='images/discord_icon.svg') }}"
+                         alt="discord icon"></a> <!-- if newline for /a tag, it adds an underscore for some reason -->
             </div>
         </div>
         <div class="middle-text">
@@ -65,7 +65,7 @@
                 src="https://open.spotify.com/embed/playlist/5qZmlbRA9WvL1SiTaKk9Sw?utm_source=generator&theme=0"
                 width="100%"
                 height="152"
-                frameBorder="0"
+                frameborder="0"
                 allowfullscreen=""
                 allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                 loading="lazy">
@@ -75,9 +75,9 @@
     </div>
 </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.7/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/1.1.1/typed.min.js"></script>
 <script src="{{ url_for('static', filename='js/home.js') }}"></script>
 {% endblock %}
