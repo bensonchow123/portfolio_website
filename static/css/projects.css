@@ -1,23 +1,16 @@
 .cards-container {
   max-width: 950px;
-  margin: 0 auto; /* Center the container itself */
 }
 
-@media only screen and (max-width: 600px) {
-  .cards-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0 15px;
-  }
-
-  .cards-container > div {
-    width: 100%; /* Make each card container take full width */
-    max-width: 90%;
-    margin-bottom: 10px;
-  }
-
-  .card {
-    width: 100%;
-  }
+.background {
+  background-image: url('../images/projects-background.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
 }
