@@ -7,18 +7,18 @@
 
 {% block body %}
 <div class="background"></div>
-<div class="container text-center mt-5 mb-5">
-  <h1><span class="bg-dark bg-opacity-50 text-white rounded px-3 py-1">Thanks for visiting my website</span></h1>
-  <h2><span class="bg-dark bg-opacity-50 text-white rounded px-3 py-1">Feel free to leave a comment below!</span></h2>
+<div class="container text-center mt-5 mb-5 ">
+  <h1><span class="bg-white bg-opacity-50 rounded text-black px-3 py-1">Thanks for visiting my website</span></h1>
+  <h2><span class="bg-white bg-opacity-50 rounded text-black px-3 py-1">Feel free to leave a comment below!</span></h2>
 </div>
-<div class="container mb-5">
+<div class="container mb-5 bg-white bg-opacity-25 rounded">
   <div class="commentbox"></div>
 </div>
 <script src="https://unpkg.com/commentbox.io/dist/commentBox.min.js"></script>
 <script>
 commentBox('5692900272766976-proj', {
-    textColor: '#FFF',
-    subtextColor: '#FFF'
+    textColor: '#000',
+    subtextColor: '#000'
 });
 </script>
 {% endblock %}
