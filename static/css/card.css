@@ -30,6 +30,7 @@
   max-height: 325px;
   min-height: 325px;
   max-width: 320px;
+  background: rgba(255, 255, 255, 0.7);
 }
 
 .card-reveal .card-title {

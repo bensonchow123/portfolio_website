@@ -9,6 +9,7 @@
 {% endblock %}
 
 {% block body %}
+<div class="background"></div>
 {% if tag is not none %}
 <div class="row">
     <div class="md-chips md-chips-center col s2 offset-s5">
@@ -22,7 +23,7 @@
 
 <div class="row cards-container">
     {% for project in projects %}
-        <div class="col-12 col-md-6 col-lg-4 mb-4">
+        <div class="">
             {% include "card.html" %}
         </div>
     {% endfor %}
