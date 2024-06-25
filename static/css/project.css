@@ -109,11 +109,25 @@
     width: 100%;
   }
 }
-
 .carousel-control-prev, .carousel-control-next {
   transition: background-color 0.3s ease;
 }
-
 .carousel-control-prev:hover, .carousel-control-next:hover {
   background-color: rgba(0, 0, 0, 0.5);
+}
+.fixed-size-container {
+  width: 400px;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.fixed-size-container img,
+.fixed-size-container video {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
 }
