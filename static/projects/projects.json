@@ -8,7 +8,7 @@
       "status": "completed",
       "weight": 3,
       "tags": [
-        "discord.py"
+        "discord.py", "asyncio"
       ],
       "photos": [
         "/static/projects/seraphine/seraphine.png",
@@ -24,7 +24,7 @@
       "status": "completed",
       "weight": 4,
       "tags": [
-        "Web Development"
+        "web development"
       ],
       "photos": [
         "/static/projects/malvern_maps/malvern_maps_logo.png",
