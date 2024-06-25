@@ -19,10 +19,14 @@
 
 .card {
   margin: 10px;
-  max-height: 325px;
-  min-height: 325px;
-  max-width: 320px;
   background: rgba(255, 255, 255, 0.7);
+}
+
+@media (max-width: 600px) {
+  .card {
+    width: 200px;
+    height: 340px;
+  }
 }
 
 .card-reveal .card-title {

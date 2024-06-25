@@ -8,10 +8,6 @@
     flex-direction: column;
     align-items: center; /* Center the cards within the container */
   }
-  .card {
-    width: 200px;
-    height: 200px;
-  }
 }
 
 .background {
