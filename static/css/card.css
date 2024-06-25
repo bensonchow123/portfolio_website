@@ -32,13 +32,18 @@
     height: 340px;
   }
 }
-
+.card .card-reveal {
+  background-color: rgba(0,0,0)
+}
 .card-reveal .card-title {
   overflow: auto;
   white-space: normal;
   text-overflow: unset;
+  color:white;
 }
-
+.class-content {
+  color:white;
+}
 .md-chip-link {
   padding: 0 8px;
 }
@@ -56,7 +61,7 @@
 }
 
 .status {
-  color: #7699c2;
+  color: #ADD8E6;
 }
 
 .card-title {

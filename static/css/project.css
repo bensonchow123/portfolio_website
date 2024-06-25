@@ -1,3 +1,6 @@
+body {
+}
+
 .container {
   height: 100%;
   max-width: none;
@@ -43,6 +46,7 @@
   font-size: 60px;
   margin-top: 20px;
   font-family: 'Roboto', sans-serif;
+  color: white;
 }
 
 .links {
@@ -61,7 +65,10 @@
 
 .date {
   margin: 0 100px 20px 0;
-  color: #555;
+  color: #DADEDF;
+}
+.content {
+  color:white;
 }
 
 @media only screen and (max-width: 1094px) {
@@ -113,7 +120,7 @@
   transition: background-color 0.3s ease;
 }
 .carousel-control-prev:hover, .carousel-control-next:hover {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(255, 255, 255, 0.5);
 }
 .fixed-size-container {
   width: 400px;
@@ -130,4 +137,26 @@
   max-height: 100%;
   width: auto;
   height: auto;
+}
+.background {
+  background-image: url('../images/project-background.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+.background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: -1;
 }
