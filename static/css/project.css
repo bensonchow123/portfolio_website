@@ -13,10 +13,15 @@
 }
 
 .scroll-wrapper {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
   height: 100%;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+}
+.scroll-wrapper::-webkit-scrollbar {
+  display: none;
 }
 
 .fixed-wrapper {
@@ -44,7 +49,7 @@
   margin: 20px 0 10px;
 }
 
-span {
+.span {
   display: inline-block;
   margin: 10px 0;
 }
