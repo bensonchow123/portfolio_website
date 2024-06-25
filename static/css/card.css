@@ -1,6 +1,7 @@
-#title {
+.title {
   font-size: 1.2rem;
   font-weight: 300;
+  color: white;
 }
 
 .icon {
@@ -19,7 +20,10 @@
 
 .card {
   margin: 10px;
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(000, 000, 000, 0.4);
+}
+.right.icon-white {
+    color: white !important;
 }
 
 @media (max-width: 600px) {

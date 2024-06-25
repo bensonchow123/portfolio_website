@@ -8,17 +8,17 @@
 {% block body %}
 <div class="background"></div>
 <div class="container  mt-5 mb-5 text-center">
-  <p class="guestbook-title"><span class="bg-white bg-opacity-50 rounded text-black px-3 py-1">Thanks for visiting my website</span></p>
-  <p class="guestbook-description"><span class="bg-white bg-opacity-50 rounded text-black px-3 py-1">Feel free to leave a comment below!</span></p>
+  <p class="guestbook-title"><span class="bg-black bg-opacity-50 text-white rounded px-3 py-1">Thanks for visiting my website</span></p>
+  <p class="guestbook-description"><span class="bg-black bg-opacity-50 text-white rounded px-3 py-1">Feel free to leave a comment below!</span></p>
 </div>
-<div class="container mb-5 bg-white bg-opacity-25 rounded">
+<div class="container mb-5 bg-black bg-opacity-25 rounded">
   <div class="commentbox"></div>
 </div>
 <script src="https://unpkg.com/commentbox.io/dist/commentBox.min.js"></script>
 <script>
 commentBox('5692900272766976-proj', {
-    textColor: '#000',
-    subtextColor: '#000'
+    textColor: '#FFF',
+    subtextColor: '#FFF'
 });
 </script>
 {% endblock %}
