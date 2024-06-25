@@ -10,46 +10,48 @@
 <div class="container">
     <div class="wrapper fixed-wrapper">
         {% if 'photos' in project or 'videos' in project %}
-        <div>
-            <div id="myCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
-                <!-- Indicators -->
-                <div class="carousel-indicators">
-                    {% for video in project['videos'] %}
-                    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="{{ loop.index0 }}"
-                        class="{{'active' if loop.index0 == 0}}" aria-current="true" aria-label="Slide {{ loop.index0 + 1 }}"></button>
-                    {% endfor %}
-                    {% for photo in project['photos'] %}
-                    <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="{{ loop.index0 }}"
-                        class="{{'active' if ((loop.index0 == 0) and (not 'videos' in project)) }}" aria-current="true" aria-label="Slide {{ loop.index0 + 1 }}"></button>
-                    {% endfor %}
-                </div>
+        <div id="myCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
+            <!-- Indicators -->
+            <div class="carousel-indicators">
+                {% for video in project['videos'] %}
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="{{ loop.index0 }}"
+                    class="{{'active' if loop.index0 == 0}}" aria-current="true" aria-label="Slide {{ loop.index0 + 1 }}"></button>
+                {% endfor %}
+                {% for photo in project['photos'] %}
+                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="{{ loop.index0 }}"
+                    class="{{'active' if ((loop.index0 == 0) and (not 'videos' in project)) }}" aria-current="true" aria-label="Slide {{ loop.index0 + 1 }}"></button>
+                {% endfor %}
+            </div>
 
-                <!-- Wrapper for slides -->
-                <div class="carousel-inner">
-                    {% for video in project['videos'] %}
-                    <div class="carousel-item {{'active' if loop.index0 == 0}}">
-                        {{ project['videos'][loop.index0] | safe }}
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                {% for video in project['videos'] %}
+                <div class="carousel-item {{'active' if loop.index0 == 0}}">
+                    <div class="fixed-size-container">
+                    {{ project['videos'][loop.index0] | safe }}
                     </div>
-                    {% endfor %}
-                    {% for photo in project['photos'] %}
-                    <div class="carousel-item {{'active' if ((loop.index0 == 0) and (not 'videos' in project)) }}">
+                </div>
+                {% endfor %}
+                {% for photo in project['photos'] %}
+                <div class="carousel-item {{'active' if ((loop.index0 == 0) and (not 'videos' in project)) }}">
+                    <div class="fixed-size-container">
                         <img src="{{photo}}" alt="project-photo" class="d-block w-100">
                     </div>
-                    {% endfor %}
                 </div>
-
-                <!-- Left and right controls -->
-                {% if ((project['videos'] | length) + (project['photos'] | length)) > 1 %}
-                <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-                {% endif %}
+                {% endfor %}
             </div>
+
+            <!-- Left and right controls -->
+            {% if ((project['videos'] | length) + (project['photos'] | length)) > 1 %}
+            <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+            {% endif %}
         </div>
         {% endif %}
     </div>
