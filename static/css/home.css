@@ -51,11 +51,12 @@ ul li a {
 .text-title {
   margin: 0;
   color:white;
-  -webkit-text-stroke-width: 3px;
+  -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: black;
 }
 
 .title-logo {
+    fill: #FFFFFF;
     height: 24px;
     width: 24px;
     margin: 0 12px 0 2px;
@@ -121,8 +122,6 @@ ul li a {
   }
   .title-logo {
     opacity: 1;
-    background-color:rgba(255,255,255,0.3);
-    border-radius:3px;
   }
   #terminal {
     width: 100%;

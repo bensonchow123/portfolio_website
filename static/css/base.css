@@ -4,7 +4,7 @@ body {
 }
 
 .navbar-ref {
-  color: #000000;
+  color: #FFFFFF;
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   text-decoration: none;
@@ -13,7 +13,7 @@ body {
 }
 
 .navbar-ul {
-    background-color: rgba(255,255,255,0.5);
+    background-color: rgba(000,000,000,0.5);
     display: flex;
     justify-content: flex-end;
     width: 100%;
@@ -35,7 +35,6 @@ body {
   }
 
   .navbar-ref {
-    color: #000000;
     font-family: 'Open Sans', sans-serif;
     font-size: 14.5px;
   }
