@@ -17,14 +17,6 @@
   padding: 3px 5px;
 }
 
-.react {
-  background: #bad5f5;
-}
-
-.react span::after {
-  content: "React.js";
-}
-
 .card {
   margin: 10px;
   max-height: 325px;
