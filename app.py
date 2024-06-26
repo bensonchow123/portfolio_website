@@ -18,7 +18,7 @@ def index():
     return render_template('home.html', age=age)
 
 @app.route('/🤗guestbook🤗')
-def comment():
+def guestbook():
     return render_template('guestbook.html')
 
 
