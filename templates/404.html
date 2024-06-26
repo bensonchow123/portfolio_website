@@ -2,10 +2,21 @@
 
 {% block head %}
 <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename = 'css/404.css') }}">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
 {% endblock %}
 
 {% block body %}
-<h1 style="text-align:center">404<br>
-This page don't exist</h1>
-<img src="https://www.bensonchow.cf/static/images/404image.png" alt="404 image" class="image">
+<div class="background"></div>
+<div class="content">
+    <h1>Lost in the Galaxy (404)</h1>
+    <p>Oops! Looks like you've drifted into uncharted space.</p>
+    <div class="details">
+        <h2>What went wrong?</h2>
+        <ul>
+            <li>The page you're looking for has been sucked into a black hole.</li>
+            <li>The URL could be light-years off course.</li>
+            <li>Or maybe, my website is exploring new galaxies.</li>
+        </ul>
+    </div>
+</div>
 {% endblock %}
