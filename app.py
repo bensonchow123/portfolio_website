@@ -48,7 +48,7 @@ def order_projects_by_weight(projects):
 def project(title):
     projects = get_static_json("static/projects/projects.json")['projects']
 
-    in_project = next((p for p in projects if p['link'] == title), None)
+    in_project = next((p for p in projects if p['directory_name'] == title), None)
 
     if in_project is None:
         return render_template('404.html'), 404
@@ -57,7 +57,7 @@ def project(title):
 
     if 'description' not in selected:
         selected['description'] = io.open(get_static_file(
-            'static/%s/%s/%s.html' % ("projects", selected['link'], selected['link'])), "r", encoding="utf-8").read()
+            'static/%s/%s/%s.html' % ("projects", selected['directory_name'], selected['directory_name'])), "r", encoding="utf-8").read()
     return render_template('project.html', project=selected)
 
 @app.route('/robots.txt')

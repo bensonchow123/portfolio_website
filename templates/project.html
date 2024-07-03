@@ -59,7 +59,7 @@
 
     <div class="wrapper scroll-wrapper">
         <div class="heading">
-            <div class="title">{{ project['name'] }}</div>
+            <div class="title">{{ project['project_name'] }}</div>
 
             <div class="date">{{ project['date'] }}</div>
 
@@ -71,15 +71,11 @@
             </div>
 
             <div class="links">
-                {% if ('github' in project and 'website' in project)%}
-                <div><a class="github" href="{{project['github']}}">Find on Github</a></div>
-                <div><a class="github" href="{{project['website']}}">View Website</a></div>
-
-                {% elif 'github' in project %}
-                <div><a class="github" href="{{project['github']}}">Find on Github</a></div>
-
-                {% elif 'website' in project %}
-                <div><a class="github" href="{{project['website']}}">View website</a></div>
+                {% if 'github' in project %}
+                  <div><a class="outgoing-links" href="{{ project['github'] }}">Find on Github</a></div>
+                {% endif %}
+                {% if 'website' in project %}
+                  <div><a class="outgoing-links" href="{{ project['website'] }}">View Website</a></div>
                 {% endif %}
             </div>
         </div>
