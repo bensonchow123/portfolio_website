@@ -1,0 +1,58 @@
+.background {
+  background-image: url('../images/404-background.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+.background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: -1;
+}
+.content {
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+    color:white;
+}
+
+p {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    color:white;
+}
+
+.details {
+    text-align: left;
+    max-width: 600px;
+    margin: 0 auto;
+    color:white;
+}
+
+.details h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+    color:white;
+}
+
+.details ul {
+    font-size: 1.2em;
+    color:white;
+}

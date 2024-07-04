@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename = 'css/projects.css') }}">
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename = 'css/card.css') }}">
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename = 'css/chip.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="background"></div>
+{% if tag is not none %}
+<div class="row">
+    <div class="md-chips md-chips-center col s2 offset-s5">
+        <div class="md-chip md-chip-hover">
+            <a class="md-chip-link" href="/🚧projects🚧">{{tag}}</a>
+            <div class="md-chip-remove"><a href="/🚧projects🚧" class="md-chip-remove-span">x</a></div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<div class="row cards-container">
+    {% for project in projects %}
+        <div>
+            {% include "card.html" %}
+        </div>
+    {% endfor %}
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+{% endblock %}

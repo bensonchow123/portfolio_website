@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+{% endblock %}
+
+{% block body %}
+<div class="background"></div>
+<div class="body-container">
+    <div class="wrapper fixed-wrapper">
+        <section id="terminal">
+            <div id="terminal-container">
+                <div class="terminal">
+                    <div class="window-title">
+                        <div class="win-buttons">
+                            <a id="close" class="button" href="#"></a>
+                            <a id="min" class="button" href="#"></a>
+                            <a id="max" class="button" href="#"></a>
+                        </div>
+                        <span class="title">Terminal</span>
+                    </div>
+                    <div class="message">
+                        <span class='prompt'>
+                            <span class='user'>Benson Chow</span>
+                            <span class="at">@</span>
+                            <span class="path">C:\Users\Benson Chow&gt;</span>
+                            <span class="caret">$</span>
+                        </span>
+                        <span class="typed"></span>
+                        <form>
+                            <span class="caret"></span><input type="text" name="response">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="wrapper scroll-wrapper">
+        <div class="top-text">
+            <p class="text-title desktop-view">Benson</p>
+            <p class="text-title desktop-view">Chow</p>
+            <p class="text-title mobile-view">Benson chow</p>
+            <div class="social-icons">
+                <a  target="_blank" href="https://github.com/bensonchow123">
+                    <img class="title-logo" src="{{ url_for('static', filename='images/github-icon.svg') }}"
+                         alt="github icon"></a>
+                <a target="_blank" href="https://open.spotify.com/user/31wfzod4x3udnenb4k562jhihiyu?si=342a4d15ec754519">
+                    <img class="title-logo" src="{{ url_for('static', filename='images/spotify-logo.svg') }}"
+                         alt="twitter icon"></a>
+                <a target="_blank" href="https://discordapp.com/users/736933464292589568">
+                    <img class="title-logo" src="{{ url_for('static', filename='images/discord_icon.svg') }}"
+                         alt="discord icon"></a> <!-- if newline after /a tag, it adds an underscore for some reason -->
+            </div>
+        </div>
+        <div class="middle-text">
+            <div class="text-content">
+                Hi there! I'm Benson Chow. Thanks for visiting my website—it's a space where I showcase my projects and interests.<br><br>
+
+                I recently started getting into 3D printing, and although I'm just designing basic parts for now, it's been a lot of fun, especially when I can create something useful for my other hobbies.<br>
+                I don't own a 3D printer yet, so I send my designs to people on eBay to print them for me.<br><br>
+
+                Speaking of other hobbies, I'm a big fan of high-fidelity audio and love collecting high-quality FLAC music.<br>
+                My gear includes a Schiit Modi + Magni AMP and DAC stack, Sennheiser HD6XX headphones, MMCX-modded Koss Porta Pros with Yaxi pads, a Parts Express headpad, a 3D-printed cover, Truthear Hexa and Red IEMs, another pair of Koss Porta Pros, Apple AirPods Pro (1st gen), and an Earfun UboomL speaker.<br>
+                I enjoy tweaking my setup and experimenting with AMP and DAC dongles for on-the-go listening.<br><br>
+
+                Another hobby of mine is building and customizing mechanical keyboards.<br>
+                My favorite is a modded Keychron Q3. You can read more about it on the Projects page.<br><br>
+
+                And of course, I love programming.<br>
+                You can check out my Projects page to see some of the things I've been working on and detailed information about creations related to my hobbies.<br>
+                Coding ties all my hobbies together and keeps me constantly learning and exploring new ideas.<br><br>
+
+                For this site, it is made with the Python Flask web framework for the backend.<br>
+                It's hosted on a web server on render.com, and the domain name is a free domain from freenom.com!<br><br>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/1.1.1/typed.min.js"></script>
+<script src="{{ url_for('static', filename='js/home.js') }}"></script>
+{% endblock %}

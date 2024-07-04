@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Title and regular tags -->
+        <title>Benson Chow</title>
+        <meta name="title" content="Benson Chow">
+        <meta name="description" content="Benson Chow's personal website">
+        <meta name="keywords" content="benson chow,bensonchow,benson">
+        <meta name="robots" content="index, follow">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="language" content="English">
+        <meta name="revisit-after" content="1 days">
+        <meta name="author" content="Benson Chow">
+        <meta name="msvalidate.01" content="B1F008E936710A0909347007FCA28430" />
+
+        <!-- Facebook Meta Tags -->
+        <meta property="og:url" content="{{ url_for('index') }}">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Benson Chow">
+        <meta property="og:description" content="Benson Chow's personal website">
+        <meta property="og:image" content="{{ url_for('static', filename='images/benson-chow.jpg') }}">
+
+        <!-- Twitter Meta Tags -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta property="twitter:domain" content="{{ request.host }}">
+        <meta property="twitter:url" content="{{ url_for('index') }}">
+        <meta name="twitter:title" content="Benson Chow">
+        <meta name="twitter:description" content="Benson Chow's personal website">
+        <meta name="twitter:image" content="{{ url_for('static', filename='images/benson-chow.jpg') }}">
+
+        <!--Favicons-->
+        <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='favicons/apple-touch-icon.png') }}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicons/favicon-32x32.png') }}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicons/favicon-16x16.png') }}">
+        <link rel="manifest" href="{{ url_for('static', filename='favicons/site.webmanifest') }}">
+        <link rel="mask-icon" href="{{ url_for('static', filename='favicons/safari-pinned-tab.svg') }}" color="#5bbad5">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicons/favicon.ico') }}">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="msapplication-config" content="{{ url_for('static', filename='favicons/browserconfig.xml') }}">
+        <meta name="theme-color" content="#f79862">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!--fonts-->
+        <link rel='stylesheet'
+              href='https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i|Source+Code+Pro:400,500,600,700'
+              type='text/css' media='screen'/>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto:900" rel="stylesheet">
+
+        <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+
+        {% block head %}
+        {% endblock %}
+    </head>
+    <body>
+        <div class="navbar-ul">
+            <ul id="navbar-list" class="list-inline">
+                <li><a class="navbar-ref" href="{{ url_for('index') }}"><b>About me</b></a></li>
+                <li><a class="navbar-ref" href="{{ url_for('projects') }}"><b>Projects</b></a></li>
+                <li><a class="navbar-ref" href="{{ url_for('shop') }}"><b>Shop</b></a></li>
+                <li><a class="navbar-ref" href="{{ url_for('guestbook') }}"><b>Guestbook</b></a></li>
+            </ul>
+        </div>
+        {% block body %}
+        {% endblock %}
+    </body>
+</html>

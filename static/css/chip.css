@@ -1,0 +1,52 @@
+.md-chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.md-chip {
+  margin: 0 5px 3px 0;
+  background: #e0e0e0;
+  padding: 0 12px;
+  border-radius: 32px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  transition: background 0.3s;
+}
+
+.md-chip-hover:hover {
+  background: #ccc;
+}
+
+.md-chips-center {
+  justify-content: center;
+}
+
+.md-chip-link {
+  color: #555;
+  text-decoration: none;
+}
+
+.md-chip-link:hover {
+  text-decoration: none;
+}
+
+.md-chip-remove {
+  display: inline-flex;
+  background: #aaa;
+  border: none;
+  border-radius: 50%;
+  color: #fff;
+  width: 20px;
+  height: 20px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-left: 8px;
+}
+
+.md-chip-remove-span {
+  color: #fff;
+  font-size: 14px;
+}

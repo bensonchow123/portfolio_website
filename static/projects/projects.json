@@ -1,0 +1,60 @@
+{
+  "projects": [
+    {
+      "project_name": "Seraphine",
+      "directory_name": "seraphine",
+      "date": "June 2021  - January 2024",
+      "short": "A Discord bot designed to improve activity within Seraphine and allow for integration of hypixel skyblock within Skyhub",
+      "status": "completed",
+      "weight": 2,
+      "tags": [
+        "discord.py", "asyncio"
+      ],
+      "photos": [
+        "/static/projects/seraphine/seraphine.png",
+        "/static/projects/seraphine/seraphine_chat_bot.jpg"
+      ],
+      "github": "https://github.com/bensonchow123/seraphine"
+    },
+    {
+      "project_name": "Malvern Maps",
+      "directory_name": "malvern_maps",
+      "date": "December 2022  - december 2023",
+      "short": "An interactive map of Malvern College",
+      "status": "completed",
+      "weight": 3,
+      "tags": [
+        "web development"
+      ],
+      "photos": [
+        "/static/projects/malvern_maps/malvern_maps_logo.png",
+        "/static/projects/malvern_maps/malvern_maps_landing.png",
+        "/static/projects/malvern_maps/map.png"
+      ],
+      "github": "https://github.com/bensonchow123/malvern-maps"
+    },
+    {
+      "project_name": "Modded Keychron Q3",
+      "directory_name": "modded_keychron_q3",
+      "date": "September 2022  - June 2023",
+      "short": "The details of a custom keyboard build.",
+      "status": "completed",
+      "weight": 1,
+      "tags": [
+        "keyboard"
+      ],
+      "photos": [
+        "/static/projects/modded_keychron_q3/full_keyboard.png",
+        "/static/projects/modded_keychron_q3/case.png",
+        "/static/projects/modded_keychron_q3/poron_cutout.png",
+        "/static/projects/modded_keychron_q3/polyfill.png",
+        "/static/projects/modded_keychron_q3/tape_mod.png",
+        "/static/projects/modded_keychron_q3/pe_foam_pads.png",
+        "/static/projects/modded_keychron_q3/plate.png",
+        "/static/projects/modded_keychron_q3/black_ink_v2.png",
+        "/static/projects/modded_keychron_q3/lube_and_film.png"
+      ],
+      "github": "https://github.com/bensonchow123/malvern-maps"
+    }
+  ]
+}

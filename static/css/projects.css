@@ -1,0 +1,34 @@
+.cards-container {
+  max-width: 950px;
+}
+
+@media (max-width: 600px) {
+  .cards-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the cards within the container */
+  }
+}
+
+.background {
+  background-image: url('../images/projects-background.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+.background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: -1;
+}

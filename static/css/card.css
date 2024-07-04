@@ -1,0 +1,83 @@
+.title {
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: white;
+}
+
+.icon {
+  font-size: 0.9rem;
+  display: inline-flex;
+  background: #d8d8d8;
+  border-radius: 3px;
+  margin-right: 5px;
+  margin-bottom: 15px;
+}
+
+.icon span {
+  border-radius: 5px;
+  padding: 3px 5px;
+}
+
+.card {
+  margin: 10px;
+  background: rgba(000, 000, 000, 0.7);
+}
+.right.icon-white {
+    color: white !important;
+}
+
+@media (max-width: 600px) {
+  .card {
+    width: 200px;
+    height: 340px;
+  }
+}
+.card .card-reveal {
+  background-color: rgba(0,0,0)
+}
+.card-reveal .card-title {
+  overflow: auto;
+  white-space: normal;
+  text-overflow: unset;
+  color:white;
+}
+.class-content {
+  color:white;
+}
+.md-chip-link {
+  padding: 0 8px;
+}
+
+.card-image {
+  max-width: 400px;
+  display: flex;
+  justify-content: center;
+}
+
+.card .card-image img.card-image {
+  max-height: 180px;
+  min-height: 180px;
+  width: auto;
+}
+
+.status {
+  color: #ADD8E6;
+}
+
+.card-title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.container-outer {
+  overflow: hidden;
+}
+
+.container-inner {
+  white-space: nowrap;
+  overflow-y: hidden;
+  overflow-x: auto;
+  margin-bottom: -25px;
+  padding-bottom: 25px;
+}

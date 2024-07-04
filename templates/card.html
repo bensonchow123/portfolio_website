@@ -1,0 +1,43 @@
+<div class="col s12 m4 l4">
+    <div class="card hoverable">
+        <div class="card-image waves-effect waves-block waves-light">
+            {% if 'photos' in project %}
+            <img class="card-image activator" src={{project['photos'][0]}}/>
+            {% else %}
+            <img class="card-image activator" src="/static/images/project_default.png/">
+            {% endif %}
+        </div>
+        <div class="card-content activator">
+            <div class="container-outer">
+                <div class="md-chips container-inner">
+                    {% for tag in project['tags'] %}
+                    <div class="md-chip md-chip-clickable"><a class="md-chip-link" href="/🚧projects🚧?tags={{tag}}">{{tag}}</a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div>
+            <span class="title" title="{{project['project_name']}}">
+              {{project['project_name']}}
+            </span>
+                <i class="material-icons right icon-white">more_vert</i>
+            </div>
+            <div>
+                <span><a href="/🚧projects🚧/{{project['directory_name']}}">Read More</a></span>
+                {% if 'website' in project %}
+                    <span><a href={{project['website']}}> | Website</a></span>
+                {% endif %}
+                {% if 'github' in project %}
+                    <span><a href={{project['github']}}> | Github</a></span>
+                {% endif %}
+            </div>
+        </div>
+        <div class="card-reveal">
+            <span class="card-title">{{project['project_name']}}<i
+                    class="material-icons right icon-white">close</i></span>
+            <div><span class="status">{{project['date']}}</span></div>
+            <p class="class-content">{{project['short']}}</p>
+            <span><a href="/🚧projects🚧/{{project['directory_name']}}">Read More</a></span>
+        </div>
+    </div>
+</div>
