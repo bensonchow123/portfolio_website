@@ -1,0 +1,183 @@
+<div>
+    <p>This is the project made during my 2 months as an intern at ARUP.</p>
+    <p>Its goal is to automate the process of picking data for the Hong Kong Annual Traffic Census (ATC).</p>
+    <p>The program is distributed to employees as an .exe file, created with Pyinstaller.</p>
+    <p>The user interface has two tabs, a path selection tab, and a tool tab, and is created with PyQt6, a Python wrapper for the Qt C++ libraries.</p>
+    <p>The path selection tab allows users to enter or select file or directory paths for processing.</p>
+    <p>The tool tab consists of buttons that activate tools, processing the files or directory specified in the first tab.</p>
+    <p class="lb">Path selection tab</p>
+    <ul>
+        <li>
+            The path selection tabs have six labeled input fields, each with a button to open the Windows file dialog.
+        </li>
+        <li>
+            The selected file or directory's path is then pasted into the corresponding input field.
+        </li>
+        <li>
+            Tools might require specific input fields to be filled, if not, the program will raise an error.
+        </li>
+        <li>
+            The file or directory might need to be in a specific format, if not, the program will raise an error.
+        </li>
+    </ul>
+    <p class="lb">Intro to the tool tab</p>
+    <ul>
+       <li>
+           The tools use Pandas to output .xlsx Excel files,
+           allowing for manual adjustments before further processing by parsing the Excel files.
+       </li>
+        <li>
+            B files are formatted from A files, which are formatted from CDL files created by car counting machines; all
+            of them can be treated as text files with different formats.
+       </li>
+        <li>
+            A/B files are generated directly from the car counting machine,
+            but if an error occurred, only the CDL files are returned.
+       </li>
+        <li>
+            Threading is used, so even if a tool is running, the user can see the status of the process from the tool tab.
+       </li>
+        <li>
+            If a GUI is required but is closed, the tool will terminate and an error prompt will be shown to the user, specifying why it is required.
+       </li>
+        <li>
+            <p>The tool tab consists of 6 tools:</p>
+            <ol>
+                <li>Sort and format contractor raw data</li>
+                <li>Format A and B files</li>
+                <li>Format most recent cor files</li>
+                <li>Format XDT files</li>
+                <li>Pick most similar data</li>
+                <li>Picked data to COR/FLO</li>
+            </ol>
+        </li>
+    </ul>
+    <p class="lb">Sort and format contractor raw data tool</p>
+    <ul>
+        <li>The contractor raw data consists of .CDL files, image files, A and B files.</li>
+        <li>Once you press the button for the tool:</li>
+        <ol>
+            <li>A GUI asks if the user wants to copy the A/B files to the grouped A/B files directory.</li>
+            <li>
+                Another GUI asks if the user wants to format CDL files into A or B files, as they must
+                be converted for final data submission to the government.
+            </li>
+            <li>The CDL files are then formatted to an Excel file, but as CDL files don't contain the bound of what the cars are heading to...</li>
+            <li>Another GUI asks for the bound data and the formula to code the data from the CDL files.</li>
+            <li>If A/B files are set to be recreated, for each CDL file, a GUI will ask the user for the counting accuracy.</li>
+            <li>Recreated A/B files are saved to a directory named "from_cld_a_b_files" in the output directory.</li>
+            <li>The formatted CDL file's Excel file is saved to a directory named "excel_files" in the output directory.</li>
+        </ol>
+    </ul>
+    <p class="lb">Sort and format contractor raw data tool</p>
+    <ul>
+        <li>The contractor raw data consists of .CDL files, image files, A and B files.</li>
+        <li>The main purpose of this tool is to group up the A and B files and format the .CDL files to an Excel file.</li>
+        <li>The formatted .CDL files can then be viewed and edited, which then can be used for data comparison and picking.</li>
+        <li>Once you press the button for the tool:</li>
+        <ol>
+            <li>If the "grouped_a_b_files" directory exists, a GUI prompts the user to keep any existing A/B files.</li>
+            <li>A GUI asks if the user wants to copy the A/B files to the grouped A/B files directory.</li>
+            <li>
+                Another GUI asks if the user wants to format .CDL files into A or B files, as they must
+                be converted for final data submission to the government.
+            </li>
+            <li>The CDL files are then formatted to an Excel file, but as CDL files don't contain the bound of what the cars are heading to...</li>
+            <li>Another GUI asks for the bound data and the formula to code the data from the CDL files.</li>
+            <li>If A/B files are set to be recreated, for each CDL file, a GUI will ask the user for the counting accuracy.</li>
+            <li>Recreated A/B files are saved to a directory named "from_cld_a_b_files" in the output directory.</li>
+            <li>The formatted CDL file's Excel file is saved to a directory named "excel_files" in the output directory.</li>
+        </ol>
+    </ul>
+    <p class="lb">Format A and B files tool</p>
+    <ul>
+        <li>A and B files, though formatted, still aren't human-friendly to view and edit.</li>
+        <li>This tool formats grouped A/B files for easy viewing, editing, and future data comparison or picking.</li>
+        <li>Once you press the button for the tool:</li>
+        <ol>
+            <li>If the "grouped_a_b_files" directory exists, a GUI prompts the user to keep any existing A/B files.</li>
+            <li>
+                Another GUI will then ask if the user wants to add A/B files from the government directories into the "grouped_a_b_files" directory.
+                The paths of the government A/B directories are read from the first tab.
+            </li>
+            <li>The A/B files in the "grouped_a_b_files" directory will then be formatted.</li>
+            <li>The formatted A/B Excel file is saved to a directory named "excel_files" in the output directory.</li>
+        </ol>
+    </ul>
+    <p class="lb">Format most recent cor files tool</p>
+    <ul>
+        <li>Cor files are text files in a specific format, which are a month's picked data.</li>
+        <li>The tool formats COR files for easy viewing, editing, and future data comparison.</li>
+        <li>Once you press the button for the tool:</li>
+        <ol>
+            <li>If the "latest_cor_files" directory is not empty, a GUI asks the user if they want to keep the COR files in it.</li>
+            <li>If COR files are not selected to be kept, or if no COR files exist in the "latest_cor_files" directory...</li>
+            <li>The program will search through the monthly selected data directory, the path is specified in the path selection tab</li>
+            <li>Each selected data directory for a month must include the year and month in its name.</li>
+            <li>For each station, the most recent selected data, which is a COR file, is copied to the "latest_cor_files" directory.</li>
+            <li>The program will then format the COR files in the 'latest_cor_files' directory into an Excel file, with each COR file represented as a separate sheet.</li>\
+            <li>The Excel file is then saved as "formatted_cor_files.xlsx" in the output directory.</Li>
+        </ol>
+    </ul>
+    <p class="lb">Format XDT files tool</p>
+    <ul>
+        <li>XDT files are text files that contain a year's selected data for a specific station.</li>
+        <li>This tool turns XDT files into an Excel file, with each station represented by a sheet.</li>
+        <li>Once you press the button for the tool:</li>
+        <ol>
+            <li>The program gets the path of the XDT files directory from the path selection tab.</li>
+            <li>Parsing each XDT file, it is formatted into sheets within the Excel file named "formatted_yearly_xdt_files.xlsx".</li>
+            <li>The Excel file is then saved in the output directory.</li>
+        </ol>
+    </ul>
+    <p class="lb">Format XDT files tool</p>
+    <ul>
+        <li>XDT files are text files that contain a year's selected data for a specific station.</li>
+        <li>This tool turns XDT files into an Excel file, with each station represented by a sheet.</li>
+        <li>Once you press the button for the tool:</li>
+        <ol>
+            <li>The program gets the path of the XDT files directory from the path selection tab.</li>
+            <li>Parsing each XDT file, it is formatted into sheets within the Excel file named "formatted_yearly_xdt_files.xlsx".</li>
+            <li>The Excel file is then saved in the output directory.</li>
+        </ol>
+    </ul>
+    <p class="lb">Pick most similar data tool</p>
+    <ul>
+        <li>This tool is used to compare the most recent COR files with the formatted A/B files and CDL files.</li>
+        <li>Selects the closest matching date for each weekday from the comparison as the picked data.</li>
+        <li>Once you press the button for the tool:</li>
+        <ol>
+            <li>A GUI requests the desired month for comparison, as the formatted data may span multiple months.</li>
+            <li>A GUI asks if the user wants to paste the station's yearly data into the comparison results sheet for manual review.</li>
+            <li>For each station:</li>
+            <ol>
+    `           <li>An Excel sheet is created.</li>
+                <li>The monthly data within the desired month is separated into blocks of weeks and pasted into the sheet.</li>
+                <li>The comparison is performed, and the percentage results for each data value are placed next to each weekly block.</li>
+                <li>Excel conditional formatting is applied to the compared data, with rules of:</li>
+                <ul>
+                    <li>White if percentage results are invalid</li>
+                    <li>Black if percentage results not between 0.5 and 1.5</li>
+                    <li>Magenta if percentage results not between 0.7 and 1.3</li>
+                    <li>Red if percentage results not between 0.85 and 1.15</li>
+                </ul>
+                <li>Weights are then assigned to the dates, which then the desired dates are selected.</li>
+                <li>The selected dates are then pasted to the top of the sheet, with the percentage results of the selected dates next to it.</li>
+                <li>If corresponding yearly data is selected to be pasted onto the sheet, it is then pasted onto the sheet.</li>
+            </ol>
+            <li>The Excel file is then saved in the output directory, as "compared_formatted_a_b_files.xlsx" or "compared_formatted_cdl_files.xlsx".</li>
+        </ol>
+    </ul>
+    <p class="lb">Picked data to COR/FLO tool</p>
+    <ul>
+        <li>FLO files are COR files in a different more human-readable format, required by the government.</li>
+        <li>This tool is used to format the picked data into COR/ FLO files for submission to the government.</li>
+        <li>Once you press the button for the tool:</li>
+        <ol>
+            <li>Check for either "compared_formatted_a_b_files.xlsx" or "compared_formatted_cdl_files.xlsx" in the output directory.</li>
+            <li>Parse each sheet of the Excel files.</li>
+            <li>Write the data parsed to a text file in the COR/ FLO file format.</li>
+            <li>Save the text files in directories named "flo_file_output" or "cor_file_output", with the correct file names.</li>
+        </ol>
+    </ul>
+</div>
