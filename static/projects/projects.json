@@ -8,7 +8,7 @@
       "status": "completed",
       "weight": 2,
       "tags": [
-        "discord.py", "asyncio"
+        "Python","Discord.py", "Asyncio"
       ],
       "photos": [
         "/static/projects/seraphine/seraphine.png",
@@ -22,9 +22,9 @@
       "date": "December 2022  - december 2023",
       "short": "An interactive map of Malvern College",
       "status": "completed",
-      "weight": 3,
+      "weight": 4,
       "tags": [
-        "web development"
+        "Multi languages", "Web Development", "Flask"
       ],
       "photos": [
         "/static/projects/malvern_maps/malvern_maps_logo.png",
@@ -41,7 +41,7 @@
       "status": "completed",
       "weight": 1,
       "tags": [
-        "keyboard"
+        "Keyboard"
       ],
       "photos": [
         "/static/projects/modded_keychron_q3/full_keyboard.png",
@@ -55,6 +55,21 @@
         "/static/projects/modded_keychron_q3/lube_and_film.png"
       ],
       "github": "https://github.com/bensonchow123/malvern-maps"
+    },
+    {
+      "project_name": "ATC tools",
+      "directory_name": "ATC_tools",
+      "date": "July 2024  - September 2024",
+      "short": "Automated data picking of Hong Kong's Annual Traffic Census",
+      "status": "completed",
+      "weight": 3,
+      "tags": [
+        "Python", "PyQt", "Pandas", "Pyinstaller"
+      ],
+      "photos": [
+        "/static/projects/ATC_tools/path_selection_tab.png",
+        "/static/projects/ATC_tools/tools_tab.png"
+      ]
     }
   ]
 }
