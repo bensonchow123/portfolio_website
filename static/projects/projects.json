@@ -68,7 +68,8 @@
       ],
       "photos": [
         "/static/projects/ATC_tools/path_selection_tab.png",
-        "/static/projects/ATC_tools/tools_tab.png"
+        "/static/projects/ATC_tools/tools_tab.png",
+        "/static/projects/ATC_tools/picked_data.png"
       ]
     }
   ]
