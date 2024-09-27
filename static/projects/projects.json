@@ -53,8 +53,7 @@
         "/static/projects/modded_keychron_q3/plate.png",
         "/static/projects/modded_keychron_q3/black_ink_v2.png",
         "/static/projects/modded_keychron_q3/lube_and_film.png"
-      ],
-      "github": "https://github.com/bensonchow123/malvern-maps"
+      ]
     },
     {
       "project_name": "ATC tools",
