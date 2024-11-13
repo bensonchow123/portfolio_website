@@ -2,7 +2,7 @@ $(function() {
   $(".typed").typed({
     strings: [
       "stat benson.human<br/>" +
-      "><span class='caret'>$</span> Hobbies: programming, audiophilia, VR gaming, mechanical keyboard building<br/> ^100" +
+      "><span class='caret'>$</span> Hobbies: programming, audiophilia, 3D printing, virtual reality, mechanical keyboard building<br/> ^100" +
       "><span class='caret'>$</span> Organisation: Year 1 at <a href='https://www.york.ac.uk/'>University of york</a><br/>" +
       ">"
     ],
