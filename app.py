@@ -94,10 +94,6 @@ def sanitize_input(user_input):
 def chat_exporter():
     url = request.args.get('url')
     if url:
-        file_name = os.path.basename(url)
-        file_path = sanitize_input(file_name)
-        if file_path is None:
-            return "Invalid file name"
         if not url.startswith("https://"):
             return "Invalid URL. Only https is allowed."
         try:
