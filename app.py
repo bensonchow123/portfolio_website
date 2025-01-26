@@ -103,7 +103,7 @@ def sanitize_input(url):
     
     return url
 
-@app.route('/chat-exporter', methods=['GET'])
+@app.route('/guide-exporter', methods=['GET'])
 @limiter.limit("10/minute")
 def chat_exporter():
     url = request.args.get('url')
@@ -124,7 +124,7 @@ def chat_exporter():
         
         if response.ok:
             html = response.text
-            return render_template('chat_exporter.html', html=html)
+            return render_template('guide-exporter.html', html=html)
         else:
             return f"Error: {response.status_code} {response.reason}"
     else:
