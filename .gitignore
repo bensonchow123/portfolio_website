@@ -1,4 +1,4 @@
-.idea/
-.venv/
-*.pyc
+venv/
 .env
+.vscode/
+.idea/
