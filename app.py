@@ -134,6 +134,7 @@ def chat_exporter():
 def hypixel_mining_event():
     return render_template('hypixel_mining_event.html')
 
-
-if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=5000, debug=True)
+if __name__ == '__main__':
+    from livereload import Server
+    server = Server(app.wsgi_app)
+    server.serve()
