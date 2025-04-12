@@ -201,40 +201,6 @@ ul li a {
   padding: 1px 8px;
 }
 
-#terminal .terminal .window-title .win-buttons {
-  position: relative;
-  width: 15%;
-  left: -11px;
-  float: left;
-  margin: 0;
-}
-
-#terminal .terminal .window-title .button {
-  display: inline-block;
-  text-align: center;
-  width: 10px;
-  height: 10px;
-  border: 0.5px solid;
-  border-radius: 100px;
-  vertical-align: middle;
-  margin: 3px 2px 3px 0;
-}
-
-#terminal .terminal .window-title #close {
-  background: #e25544;
-  border-color: #d84b3a;
-}
-
-#terminal .terminal .window-title #min {
-  background: #f5b640;
-  border-color: #e0a12b;
-}
-
-#terminal .terminal .window-title #max {
-  background: #7cb058;
-  border-color: #6fa44b;
-}
-
 #terminal .terminal .title {
   position: relative;
   display: inline-block;
@@ -243,8 +209,6 @@ ul li a {
   letter-spacing: 0.06em;
   text-align: center;
   vertical-align: middle;
-  top: 0.5px;
-  left: -43px;
 }
 
 #terminal .terminal .prompt {
