@@ -15,8 +15,7 @@ ALLOWED_EXTENSIONS = {'html', 'htm'}
 
 @app.route('/')
 def index():
-    age = int((datetime.date.today() - datetime.date(2005, 11, 22)).days / 365)
-    return render_template('home.html', age=age)
+    return render_template('home.html')
 
 @app.route('/🤗guestbook🤗')
 def guestbook():
