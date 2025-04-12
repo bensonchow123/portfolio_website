@@ -214,7 +214,6 @@ ul li a {
 
 #terminal .terminal .user {
   color: #ea7e7d;
-  letter-spacing: 0.002em;
 }
 
 #terminal .terminal .at {
@@ -223,7 +222,6 @@ ul li a {
 
 #terminal .terminal .path {
   color: #7ecdcb;
-  letter-spacing: 0.002em;
 }
 
 #terminal .terminal .caret {
