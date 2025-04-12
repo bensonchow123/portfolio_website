@@ -254,18 +254,15 @@ ul li a {
 #terminal .terminal .user {
   color: #ea7e7d;
   letter-spacing: 0.002em;
-  padding-right: 3px;
 }
 
 #terminal .terminal .at {
   color: #e8d880;
-  padding-right: 2px;
 }
 
 #terminal .terminal .path {
   color: #7ecdcb;
   letter-spacing: 0.002em;
-  padding-right: 2px;
 }
 
 #terminal .terminal .caret {
