@@ -2,22 +2,15 @@ $(function() {
   $(".typed").typed({
     strings: [
       "stat benson.human<br/>" +
-      "><span class='caret'>$</span> Hobbies: programming, audiophilia, 3D printing, virtual reality, mechanical keyboard building<br/> ^100" +
-      "><span class='caret'>$</span> Organisation: Year 1 at <a href='https://www.york.ac.uk/'>University of york</a><br/>" +
-      ">"
+      "Hobbies: programming, audiophilia, 3D printing, virtual reality, mechanical keyboard building<br/> ^100" +
+      "Organisation: Year 1 at <a href='https://www.york.ac.uk/'>University of york</a><br/>" +
+      "<span class='user'>benson</span><span class='at'>@</span><span class='path'>my-computer</span><span class='caret'>:~$</span>"
     ],
-    showCursor: false,
-    cursorChar: '_',
+    showCursor: true,
+    cursorChar: '|',
     autoInsertCss: true,
     typeSpeed: 0.001,
     startDelay: 10,
     loop: false,
-    onStart: function() { $('.message form').hide(); },
-    onStop: function() { $('.message form').show(); },
-    onTypingResumed: function() { $('.message form').hide(); },
-    onTypingPaused: function() { $('.message form').show(); },
-    onComplete: function() { $('.message form').show(); },
-    onStringTyped: function() { $('.message form').show(); },
   });
-  $('.message form').hide();
 });

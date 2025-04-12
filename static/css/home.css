@@ -211,9 +211,6 @@ ul li a {
   vertical-align: middle;
 }
 
-#terminal .terminal .prompt {
-  font-size: 98%;
-}
 
 #terminal .terminal .user {
   color: #ea7e7d;
@@ -243,28 +240,9 @@ ul li a {
   z-index: 999;
 }
 
-#terminal .message span {
-  font-size: 90%;
-  font-weight: 300;
-  line-height: 1.5;
-  letter-spacing: 0.045em;
-  margin-bottom: 1em;
-}
-
 #terminal .message span a {
   font-family: "Source Code Pro", monospace;
   border-bottom: 1px dotted rgba(255, 255, 255, 0.75);
-}
-
-#terminal .message form input {
-  background: transparent;
-  border: none;
-  outline: none;
-  caret-color: #50cd70;
-}
-
-#terminal .message form input:focus {
-  color: rgba(255, 255, 255, 0.75);
 }
 
 #terminal .message .typed-cursor {
