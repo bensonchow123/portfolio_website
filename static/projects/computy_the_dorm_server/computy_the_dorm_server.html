@@ -1,0 +1,110 @@
+<div>
+    <p>This is my NAS(network attached storage) & server I set up in my first-year dorm at the University of York, which does not break any university rules.</p>
+    <p class="lb">What is the justification for setting this up?</p>
+    <ul>
+        <li>
+            I had over 300GB of media files stored on my 1TB NVME SSD on my laptop before this
+        </li>
+        <li>
+            I could not access the 300GB of media files on my other devices.
+        </li>
+        <li>
+            My laptop and music library were not backed up.
+        </li>
+        <li>
+            I needed a computer that runs 24/7 to execute scripts, instead of running scripts on the cloud.
+        </li>
+        <li>
+            Having a NAS is very convenient for day-to-day life—for example, it lets you work on the same files from different devices and transfer files between them
+        </li>
+    </ul>
+    <p class="lb">This project can be split into two main parts</p>
+    <ul>
+        <li>
+            <p>Hardware:</p>
+            <ul>
+                <li>Server hardware</li>
+                <li>3D printed parts</li>
+            </ul>
+        </li>
+        <li>
+            <p>Software:</p>
+            <ul>
+                <li>Networking configurations</li>
+                <li>Media server</li>
+                <li>NAS</li>
+                <li>Backups</li>
+            </ul>
+        </li>
+    </ul>
+    <p class="lb">Server Hardware</p>
+    <ul>
+        <li>
+            <p>Hardware (closeup in image 2 & 3):</p>
+            <ul>
+                <li>Used PI5 from Ebay with a fan included for £55</li>
+                <li>27W USB-C power supply for £11</li>
+                <li>Waveshare PCIE to M.2 Hat from Aliexpress for £1 (using the welcome coupon)</li>
+                <li>256GB Patriot P300 gen 3 NVME SSD for £16</li>
+                <li>Used 2TB seagate barracuda HDD with 10k power on hours for £20</li>
+                <li>Barely used 960GB MSI S270 SSD for £30</li>
+                <li>USB 3.0 duo bay SATA caddy for £20</li>
+                <li>USB 3.0 to SATA cable I already got</li>
+                <li>Ethernet cable I aready got</li>
+            </ul>
+        </li>
+        <li>
+            <p>Hardware usage:</p>
+            <ul>
+                <li>The PI is used as the server, powered by the 27W power supply.</li>
+                <li>There is one singular lane of Gen 3 PCIE exposed on the PI, by using the HAT, I can add an M.2 slot onto the PI.</li>
+                <li>The 256GB NVME SSD will be my boot drive for the Raspbian OS</li>
+                <li>The 2TB HDD will be my backup drive.</li>
+                <li>The 960GB SSD will be where media is stored, a SSD is used despite high price is cause I sleep in the same room, HDD is too noisy.</li>
+                <li>The caddy is for housing the 2TB HDD, the 2 bays are for future proving, in case I need to spare a USB 3.0 slot.</li>
+                <li>The USB 3.0 to SATA cable is for the 960GB SSD.</li>
+                <li>The Ethernet cable lets me connect to the University network through the RJ45 ports in my dorm.</li>
+            </ul>
+        </li>
+    </ul>
+    <p class="lb">3D printed parts</p>
+    <ul>
+        <li>
+            <p>The parts (Seen in image 2):</p>
+            <ul>
+                <li>Case for the PI5.</li>
+                <li>Case for the 960GB SSD, with a no screw locking system.</li>
+                <li>Anti vibration TPU feets.</li>
+            </ul>
+        </li>
+        <li>
+            <p>How did I create them?</p>
+            <li>All the parts are printed with my dorm room 3D printing setup, it is also in my projects page.</li>
+            <ul>
+                <li>
+                    <p>For the PI5 case (3D render in image 4):</p>
+                    <ul>
+                        <li>Customized a generic Pi 5 case in Fusion 360 with letter indentations on the outer wall and a notch in the inner wall to fit the HAT.</li>
+                        <li>Printed the case in PETG to prevent thermal warping.</li>
+                        <li>Printed the letters in PLA and superglued them into the indentations for perfect alignment.</li>
+                    </ul>
+                </li>
+                <li>
+                    <p>For the SSD case (3D render in image 5):</p>
+                    <ul>
+                        <li>I took a 2.5 inch SSD case with a very clever screwless locking system, and again with Fusion360 added letter indentations.</li>
+                        <li>I added indentations for the anti-vibration feets, positioned to match the spacing of the four main screw holes on the Pi 5.</li>
+                    </ul>
+                </li>
+                <li>
+                    <p>For the anti vibration feets (3D render in image 6):</p>
+                    <ul>
+                        <li>They are very much needed, as I sleep in the same room as the server.</li>
+                        <li>To maximize dampening, the feets have a single-wall structure with a wave-like infill pattern.</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+    </ul>
+
+</div>

@@ -4,7 +4,6 @@
 
 .container {
   height: 100%;
-  max-width: none;
   margin: 0;
   display: flex;
   justify-content: flex-end;
@@ -31,16 +30,14 @@
 .fixed-wrapper {
   position: fixed;
   right: 50%;
-  top: calc(50% - 275px);
   display: flex;
   justify-content: center;
-  height: calc(100vh - 60px);
   align-items: center;
 }
 
 .carousel-inner .carousel-item {
-  max-height: 500px;
-  max-width: 500px;
+  max-height: 400px;
+  max-width: 400px;
 }
 
 .title {
@@ -54,14 +51,8 @@
   margin: 20px 0 10px;
 }
 
-.span {
-  display: inline-block;
-  margin: 10px 0;
-}
-
 .lb {
-  display: inline-block;
-  margin: 20px 0;
+  font-style: italic;
 }
 
 .date {
@@ -73,18 +64,15 @@
 }
 
 @media only screen and (max-width: 1094px) {
-  .fixed-wrapper {
-    display: none;
-  }
   .container {
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
   }
-  .wrapper {
-    width: 100%;
-  }
-  .scroll-wrapper {
-    width: 100%;
+  .fixed-wrapper {
+    position: relative;
+    right: auto;
+    top: auto;
+    height: auto;
   }
   .title {
     font-size: 40px;
@@ -92,31 +80,27 @@
   }
   .date {
     margin: 0 20px 10px 0;
+  }
+  .wrapper {
+    width: 100%;
   }
 }
 
-@media only screen and (max-width: 767px) {
-  .fixed-wrapper {
-    display: none;
-  }
-  .container {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .scroll-wrapper {
-    width: 100%;
-  }
-  .title {
-    font-size: 40px;
-    margin-top: 10px;
-  }
-  .date {
-    margin: 0 20px 10px 0;
-  }
-  .wrapper {
-    width: 100%;
+@media only screen and (max-width: 768px) {
+  .fixed-size-container {
+    max-width: 50vw;
+    max-height: 50vw;
   }
 }
+
+@media (min-width: 769px) and (max-width: 1094px) {
+  .fixed-size-container {
+    max-width: 30vw;
+    max-height: 30vw;
+  }
+}
+
+
 .carousel-control-prev, .carousel-control-next {
   transition: background-color 0.3s ease;
 }
@@ -136,9 +120,11 @@
 .fixed-size-container video {
   max-width: 100%;
   max-height: 100%;
+  object-fit: contain;
   width: auto;
   height: auto;
 }
+
 .background {
   background-image: url('../images/project-background.png');
   background-size: cover;

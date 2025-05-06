@@ -5,7 +5,7 @@ import os
 from requests import get, exceptions
 from urllib.parse import urlparse
 
-from flask import Flask, render_template, request, send_from_directory
+from flask import Flask, render_template, request, send_from_directory, redirect, url_for
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 
@@ -21,10 +21,18 @@ def index():
 def guestbook():
     return render_template('guestbook.html')
 
+@app.route('/guestbook')
+def guestbook_redirect():
+    return redirect(url_for('guestbook'))
+
 
 @app.route('/🛒shop🛒')
 def shop():
     return render_template('shop.html')
+
+@app.route('/shop')
+def shop_redirect():
+    return redirect(url_for('shop'))
 
 
 @app.route('/🚧projects🚧')
@@ -36,6 +44,11 @@ def projects():
     if tag is not None:
         data = [project for project in data if tag.lower() in [project_tag.lower() for project_tag in project['tags']]]
     return render_template('projects.html', projects=data, tag=tag)
+
+
+@app.route('/projects')
+def projects_redirect():
+    return redirect(url_for('projects'))
 
 
 def order_projects_by_weight(projects):
@@ -59,6 +72,11 @@ def project(title):
         selected['description'] = io.open(get_static_file(
             'static/%s/%s/%s.html' % ("projects", selected['directory_name'], selected['directory_name'])), "r", encoding="utf-8").read()
     return render_template('project.html', project=selected)
+
+
+@app.route('/projects/<title>')
+def project_redirect(title):
+    return redirect(url_for('project', title=title))
 
 @app.route('/robots.txt')
 @app.route('/sitemap.xml')
