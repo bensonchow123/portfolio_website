@@ -21,11 +21,9 @@
 </div>
 {% endif %}
 
-<div class="row cards-container">
+<div class="cards-container">
     {% for project in projects %}
-        <div>
-            {% include "card.html" %}
-        </div>
+        {% include "card.html" %}
     {% endfor %}
 </div>
 
