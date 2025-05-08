@@ -20,8 +20,8 @@
     {
       "project_name": "Computy the dorm server",
       "directory_name": "computy_the_dorm_server",
-      "date": "January 2025- May 2025",
-      "short": "NAS & Server setup in my Y1 dorm at University of York",
+      "date": "January 2025 - May 2025",
+      "short": "NAS, media steaming server and general server setup in my Y1 dorm at University of York",
       "status": "completed",
       "weight": 5,
       "tags": [
@@ -33,8 +33,10 @@
         "/static/projects/computy_the_dorm_server/computy_without_case.jpg",
         "/static/projects/computy_the_dorm_server/pi5_case.png",
         "/static/projects/computy_the_dorm_server/ssd_case.png",
-        "/static/projects/computy_the_dorm_server/feets.jpg"
-      ]
+        "/static/projects/computy_the_dorm_server/feets.jpg",
+        "/static/projects/computy_the_dorm_server/music_library.png"
+      ],
+      "github": "https://github.com/bensonchow123/computy_scripts"
     },
     {
       "project_name": "ATC tools",

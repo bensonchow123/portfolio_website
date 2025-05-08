@@ -1,5 +1,5 @@
 <div>
-    <p>This is my NAS(network attached storage) & server I set up in my first-year dorm at the University of York, which does not break any university rules.</p>
+    <p>This is my NAS(network attached storage), media streaming server and general server, I set up in my first-year dorm at the University of York, which does not break any university rules.</p>
     <p class="lb">What is the justification for setting this up?</p>
     <ul>
         <li>
@@ -31,7 +31,7 @@
             <p>Software:</p>
             <ul>
                 <li>Networking configurations</li>
-                <li>Media server</li>
+                <li>Media steaming server</li>
                 <li>NAS</li>
                 <li>Backups</li>
             </ul>
@@ -79,8 +79,8 @@
         </li>
         <li>
             <p>How did I create them?</p>
-            <li>All the parts are printed with my dorm room 3D printing setup, it is also in my projects page.</li>
             <ul>
+                <li>All the parts are printed with my dorm room 3D printing setup, it is also in my projects page.</li>
                 <li>
                     <p>For the PI5 case (3D render in image 4):</p>
                     <ul>
@@ -105,5 +105,121 @@
                 </li>
             </ul>
         </li>
+    </ul>
+    <p class="lb">Network Configurations</p>
+    <ul>
+        <li>
+            <p>What I have done:</p>
+            <ul>
+                <li>Conenct server to the University network.</li>
+                <li>Creating a VPN between my devices.</li>
+                <li>Setting up a firewall.</li>
+            </ul>
+        </li>
+        <li>
+            <p>Connecting server to the University network:</p>
+            <ul>
+                <li>I followed <a class="outgoing-links" href="https://support.york.ac.uk/s/article/Wired-Connecting-RaspberryPiOS" target="_blank">this useful guide from the IT department</a>.</li>
+                <li>For other Linux distributions, <a class="outgoing-links" href="https://support.york.ac.uk/s/article/Wired-network-Connecting-Linux" target="_blank">follow this guide</a>.</li>
+            </ul>
+        </li>
+        <li>
+            <p>Creating a VPN between my devices:</p>
+            <ul>
+                <li>This ensures security and being able to access the server outside of the University network.</li>
+                <li>As the server is connected to the University network, anyone can attempt to access it if services like SSH or web servers are exposed and not properly secured.</li>
+                <li>This will allow us to block all inbound traffic to the server except via the VPN.</li>
+                <li>Tailscale is the simplest solution to create a mesh VPN.</li>
+                <li>I simply downloaded Tailscale on all my devices and configured them to be in the same Tailnet.</li>
+            </ul>
+        </li>
+        <li>
+            <p>Setting up a firewall</p>
+            <ul>
+                <li>The firewall's main purpose is to block all inbound traffic.</li>
+                <li>This is simple with the Linux kernal bundled UFW firewall (uncomplicated firewall).</li>
+                <li>I simply setted up a rule to block all inbound traffic.</li>
+                <li>Tailscale by defult bypasses UFW, so you can send inbound traffic to the server as long as they are within the same Tailnet.</li>
+                <li>After this is setted up, you can run a SSH server on the server safely and do not need to be physically connected to the server to work on it.</li>
+            </ul>
+        </li>
+    </ul>
+    <p class="lb">Media steaming server</p>
+    <ul>
+        <li>
+            <p>What I have done:</p>
+            <ul>
+                <li>Organising my music library with Beets.</li>
+                <li>Setting up Jellyfin media steaming server.</li>
+                <li>Setting up Jellyfin clients on my devices.</li>
+                <li>Creating scripts to manage my music library.</li>
+            </ul>
+        </li>
+        <li>
+            <p>Organising my music library with Beets (see my organised music library in image 7)</p>
+            <ul>
+                <li>My music library was a mess, a single folder containing 100s of FLAC files in random album folders.</li>
+                <li>The embedded metadata tags on the FLAC files are also horrible, this is bad news as Jellyfin cataloges music files with metadata tags. </li>
+                <li>Beets is a python commandline tool that I uses to ensure a consistent file structure, fetch lyrics, art and other metadata from the internet, and remove duplicated files.</li>
+                <li>
+                    I organised my library in the following structure:<br>
+                    <code>
+                        /library<br>
+                        //artist1<br>
+                        ///album1<br>
+                        ////album_cover.jpg<br>
+                        ////track1.flac<br>
+                        ////track2.flac<br>
+                        ...<br>
+                        //artist2<br>
+                        ...
+                    </code>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <p>Setting up Jellyfin media steaming server</p>
+            <ul>
+                <li>Jellyfin is a free, open-source media steaming server software.</li>
+                <li>I will use it to steam my music library and movies to my other devices.</li>
+                <li>I simply downloaded the Jellyfin server software and followed <a class="outgoing-links" href=https://jellyfin.org/docs/general/installation/linux/#debuntu-debian-ubuntu-and-derivatives-using-apt" target="_blank">this guide</a> to install it.</li>
+                <li>With that I have a media server running on port 8096 on my server, where all devices on my Tailnet can accesss with `myserver-tailnet-ip:8096` with a browser</li>
+                <li>For extra security, I used the `tailscale serve` feature on port 8096, so all steaming connections are encrypted by HTTPS.</li>
+                <li>Configurations are done on the webserver itself, after following the setup wizard and configuring some annoying EXT4 file permissions, I now have a media steaming server running in my dorm!</li>
+            </ul>
+        </li>
+        <li>
+            <p>Setting up Jellyfin clients on my devices</p>
+            <ul>
+                <li>I can access my media streaming server by using a web browser, but the web client lacks features.</li>
+                <li>So downloaded a Jellyfin client called Finamp, which is also a free, open source software that is built for Jellyfin on my mobile devices.</li>
+                <li>Finamp lets me download music in any format (MP3, AAC, etc.) for offline listening, supports background playback, and offers more features on my mobile devices.</li>
+            </ul>
+        </li>
+        <li>
+            <p>Creating scripts to manage my music library</p>
+            <ul>
+                <li>Click the `find on github` button above to see those scripts.</li>
+                <li>The scripts include a script that syncs my M3U music playlists to my Spotify account</li>
+                <li>Also one that splits my playlist into 100-song chunks, so I can sync them to my downloads automaticly in Finamp, without using too much storage.</li>
+                <li>The last one I will mention is a script that turns my M3U playlists to Windows file format, so I can use them on my windows partition on my laptop.</li>
+                <li>All of the scripts are running via cron jobs automaticly.</li>
+            </ul>
+        </li>
+    </ul>
+    <p class="lb">NAS</p>
+    <ul>
+        <li>A network attached storage is as the name said, stroage attached to a network, in this case the network is my Tailnet.</li>
+        <li>I used Sambas, the free and open source software that allows file shareing between Linux/Unix systems and windows.</li>
+        <li>The university uses the same software to allow each student to have their 5GB of free storage.</li>
+        <li>Editing the Sambas config file, I shared my 960GB SSD to my tailnet.</li>
+    </ul>
+    <p class="lb">Backups</p>
+    <ul>
+        <li>Borg is another free and open-source software I used in my server.</li>
+        <li>It provides fast, secure and space-efficent backups, through deduplication, compression and encryption.</li>
+        <li>The 960GB SSD on the server backups to the 2TB HDD everyday on 5am via a cron job.</li>
+        <li>For my Linux partition on my laptop (I duoboot both Linux and Windows on my laptop), a startup script backups my laptop to the 2TB HDD via SSH if I haven't done so that day.</li>
+        <li>The 2TB HDD itself then backup to the cloud with SSH via another cronjob to achieve 3-2-1 backup.</li>
     </ul>
 </div>
