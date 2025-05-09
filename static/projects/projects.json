@@ -34,7 +34,10 @@
         "/static/projects/computy_the_dorm_server/pi5_case.png",
         "/static/projects/computy_the_dorm_server/ssd_case.png",
         "/static/projects/computy_the_dorm_server/feets.jpg",
-        "/static/projects/computy_the_dorm_server/music_library.png"
+        "/static/projects/computy_the_dorm_server/music_library.png",
+        "/static/projects/computy_the_dorm_server/jellyfin.png",
+        "/static/projects/computy_the_dorm_server/foobar2k.jpg",
+        "/static/projects/computy_the_dorm_server/deadbeef.png"
       ],
       "github": "https://github.com/bensonchow123/computy_scripts"
     },

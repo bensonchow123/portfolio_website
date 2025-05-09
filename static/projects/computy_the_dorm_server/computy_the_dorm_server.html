@@ -178,7 +178,7 @@
             </ul>
         </li>
         <li>
-            <p>Setting up Jellyfin media steaming server</p>
+            <p>Setting up Jellyfin media steaming server (see the setted up web GUI on image 8)</p>
             <ul>
                 <li>Jellyfin is a free, open-source media steaming server software.</li>
                 <li>I will use it to steam my music library and movies to my other devices.</li>
@@ -194,6 +194,7 @@
                 <li>I can access my media streaming server by using a web browser, but the web client lacks features.</li>
                 <li>So downloaded a Jellyfin client called Finamp, which is also a free, open source software that is built for Jellyfin on my mobile devices.</li>
                 <li>Finamp lets me download music in any format (MP3, AAC, etc.) for offline listening, supports background playback, and offers more features on my mobile devices.</li>
+                <li>For my laptop, I will not be using Jellyfin to access the music files.</li>
             </ul>
         </li>
         <li>
@@ -213,13 +214,23 @@
         <li>I used Sambas, the free and open source software that allows file shareing between Linux/Unix systems and windows.</li>
         <li>The university uses the same software to allow each student to have their 5GB of free storage.</li>
         <li>Editing the Sambas config file, I shared my 960GB SSD to my tailnet.</li>
+        <li>I then mount the Sambas share as a network drive on all my devices.</li>
+        <p>Accessing music library on my laptop:</p>
+            <ul>
+                <li>Jellyfin is useful for steaming media, but it doesn't allow you to copy, edit, or manipulate the media files.</li>
+                <li>It also doesn't allow for advanced playback features, like DSP support and have limited audio focused plugins.</li>
+                <li>Therefore, I uses a audio player called Foobar2000 and its Linux equivelance, the DeaDBeeF player on my laptop (I duoboot both Linux and Windows on my laptop).</li>
+                <li>The music player will access the files through the network share as if the files are on my local storage.</li>
+                <li>The setted up Foobar2k music player on my Windows partition can be seen in image 9</li>
+                <li>The setted up DeaDBeeF music player on my Linux partition can be seen in image 10</li>
+            </ul>
     </ul>
     <p class="lb">Backups</p>
     <ul>
         <li>Borg is another free and open-source software I used in my server.</li>
         <li>It provides fast, secure and space-efficent backups, through deduplication, compression and encryption.</li>
         <li>The 960GB SSD on the server backups to the 2TB HDD everyday on 5am via a cron job.</li>
-        <li>For my Linux partition on my laptop (I duoboot both Linux and Windows on my laptop), a startup script backups my laptop to the 2TB HDD via SSH if I haven't done so that day.</li>
+        <li>For my Linux partition on my laptop, a startup script backups my laptop to the 2TB HDD via SSH if I haven't done so that day.</li>
         <li>The 2TB HDD itself then backup to the cloud with SSH via another cronjob to achieve 3-2-1 backup.</li>
     </ul>
 </div>
