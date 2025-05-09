@@ -35,11 +35,6 @@
   align-items: center;
 }
 
-.carousel-inner .carousel-item {
-  max-height: 400px;
-  max-width: 400px;
-}
-
 .title {
   font-size: 60px;
   margin-top: 20px;
@@ -103,6 +98,10 @@
   }
 }
 
+#myCarousel {
+  width: 400px;
+  margin: 0 auto;
+}
 
 .carousel-control-prev, .carousel-control-next {
   transition: background-color 0.3s ease;
