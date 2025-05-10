@@ -96,7 +96,7 @@
 }
 
 #myCarousel {
-  width: 30vw;
+  width: 500px;
   margin: 0 auto;
 }
 
@@ -104,11 +104,11 @@
   transition: background-color 0.3s ease;
 }
 .carousel-control-prev:hover, .carousel-control-next:hover {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.2);
 }
 .fixed-size-container {
-  width: 30vw;
-  height: 50vh;
+  width: 500px;
+  height: 500px;
   display: flex;
   align-items: center;
   justify-content: center;
