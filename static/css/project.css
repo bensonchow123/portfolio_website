@@ -59,6 +59,9 @@
 }
 
 @media only screen and (max-width: 1094px) {
+  .fixed-size-container {
+    margin: 0 auto;
+  }
   .container {
     flex-direction: column;
     align-items: center;
@@ -100,9 +103,6 @@
   margin: 0 auto;
 }
 
-.carousel-control-prev, .carousel-control-next {
-  transition: background-color 0.3s ease;
-}
 .carousel-control-prev:hover, .carousel-control-next:hover {
   background-color: rgba(255, 255, 255, 0.2);
 }
