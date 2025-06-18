@@ -24,16 +24,6 @@ def guestbook():
 def guestbook_redirect():
     return redirect(url_for('guestbook'))
 
-
-@app.route('/🛒shop🛒')
-def shop():
-    return render_template('shop.html')
-
-@app.route('/shop')
-def shop_redirect():
-    return redirect(url_for('shop'))
-
-
 @app.route('/🚧projects🚧')
 def projects():
     data = get_static_json("static/projects/projects.json")['projects']
@@ -118,37 +108,6 @@ def sanitize_input(url):
         return None
     
     return url
-
-@app.route('/guide-exporter', methods=['GET'])
-@limiter.limit("10/minute")
-def chat_exporter():
-    url = request.args.get('url')
-    if url:
-        # Sanitize and validate the input URL
-        sanitized_url = sanitize_input(url)
-        if sanitized_url is None:
-            return "Invalid URL or file type. Only HTTPS URLs with .html or .htm files are allowed."
-        
-        if not url.startswith("https://"):
-            return "Invalid URL. Only HTTPS is allowed."
-        
-        try:
-            # Fetch the content from the URL
-            response = get(sanitized_url)
-        except exceptions.RequestException as e:
-            return f"Error: Unable to connect to the server. Details: {str(e)}"
-        
-        if response.ok:
-            html = response.text
-            return render_template('guide-exporter.html', html=html)
-        else:
-            return f"Error: {response.status_code} {response.reason}"
-    else:
-        return "Error: No URL provided"
-
-@app.route("/hypixel_mining_event", methods=['GET'])
-def hypixel_mining_event():
-    return render_template('hypixel_mining_event.html')
 
 if __name__ == '__main__':
     from livereload import Server
