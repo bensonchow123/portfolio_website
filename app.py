@@ -46,6 +46,10 @@ def order_projects_by_weight(projects):
     except KeyError:
         return 0
 
+@app.route('/ai-lab-website')
+def ai_lab_website():
+    return render_template('ai_lab_website.html')
+
 @app.route('/🚧projects🚧/<title>')
 def project(title):
     projects = get_static_json("static/projects/projects.json")['projects']
