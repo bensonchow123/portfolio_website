@@ -6,7 +6,7 @@
       "date": "December 2022  - december 2023",
       "short": "An interactive map of Malvern College",
       "status": "completed",
-      "weight": 6,
+      "weight": 7,
       "tags": [
         "Multi languages", "Web Development", "Flask"
       ],
@@ -23,7 +23,7 @@
       "date": "January 2025 - May 2025",
       "short": "NAS, media steaming server and general server setup in my Y1 dorm at University of York",
       "status": "completed",
-      "weight": 5,
+      "weight": 6,
       "tags": [
         "Networking", "3D Printing", "Hardware", "Python"
       ],
@@ -47,7 +47,7 @@
       "date": "July 2024  - September 2024",
       "short": "Automated data picking of Hong Kong's Annual Traffic Census",
       "status": "completed",
-      "weight": 4,
+      "weight": 5,
       "tags": [
         "Python", "PyQt", "Pandas", "Pyinstaller"
       ],
@@ -63,7 +63,7 @@
       "date": "October 2024  - April 2025",
       "short": "3D printing setup in my Y1 dorm at University of York",
       "status": "completed",
-      "weight": 3,
+      "weight": 4,
       "tags": [
         "3D Printing"
       ],
@@ -83,7 +83,7 @@
       "date": "June 2021  - January 2024",
       "short": "A Discord bot designed to improve activity within Seraphine and allow for integration of hypixel skyblock within Skyhub",
       "status": "completed",
-      "weight": 2,
+      "weight": 3,
       "tags": [
         "Python","Discord.py", "Asyncio"
       ],
