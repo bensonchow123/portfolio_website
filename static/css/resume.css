@@ -1,3 +1,7 @@
+.contact-info a {
+    text-decoration: none !important;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -73,6 +77,12 @@ body {
     }
 }
 
+.resume-header {
+    text-align: center;
+    border-bottom: 2px solid #34495e;
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+}
 
 /* Header */
 .resume-header {

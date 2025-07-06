@@ -8,15 +8,29 @@
 {% block body %}
 <div class="background"></div>
 <div class="resume-container">
+    <!-- Flash Message -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="flash-message">
+          {{ messages[0] }}
+        </div>
+      {% endif %}
+    {% endwith %}
     <!-- Header Section -->
     <div class="resume-header">
         <h1 class="resume-title">★ BENSON CHOW ★</h1>
         <p class="resume-subtitle">SOFTWARE DEVELOPER & TECHNOLOGY ENTHUSIAST</p>
         <div class="contact-info">
-            <div class="contact-item">✉ bensonistaken@gmail.com</div>
-            <div class="contact-item">☎ +852 6356 4839/ +44 07442 252893</div>
+            <div class="contact-item">
+                <a href="mailto:bensonistaken@gmail.com" class="text-decoration-none" title="Email">✉ bensonistaken@gmail.com</a>
+            </div>
+            <div class="contact-item">
+                <a href="tel:+85263564839" class="text-decoration-none" title="Call HK phone">☎ +852 6356 4839</a>
+                <span class="mx-1">/</span>
+                <a href="tel:+4407442252893" class=" text-decoration-none" title="Call UK phone">+44 07442 252893</a>
+            </div>
             <div class="contact-item">⊕ Hong Kong/ United Kingdom</div>
-            <div class="contact-item">⚡ github.com/bensonchow123</div>
+            <div class="contact-item "><a href="https://github.com/bensonchow123" target="_blank" rel="noopener">⚡ github.com/bensonchow123</a></div>
         </div>
     </div>
 
@@ -196,5 +210,7 @@
         {% endfor %}
     </div>
     <a href="{{ url_for('download_resume') }}" class="download-btn">Generate PDF from HTML & CSS</a>
+</div>
+</script>
 </div>
 {% endblock %}
