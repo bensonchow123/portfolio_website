@@ -1,0 +1,192 @@
+{% extends "base.html" %}
+
+{% block head %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+<link rel="stylesheet" href="static/css/resume.css">
+{% endblock %}
+
+{% block body %}
+<div class="background"></div>
+<div class="resume-container">
+    <!-- Header Section -->
+    <div class="resume-header">
+        <h1 class="resume-title">★ BENSON CHOW ★</h1>
+        <p class="resume-subtitle">SOFTWARE DEVELOPER & TECHNOLOGY ENTHUSIAST</p>
+        <div class="contact-info">
+            <div class="contact-item">✉ bensonistaken@gmail.com</div>
+            <div class="contact-item">☎ +852 6356 4839/ +44 07442 252893</div>
+            <div class="contact-item">⊕ Hong Kong/ United Kingdom</div>
+            <div class="contact-item">⚡ github.com/bensonchow123</div>
+        </div>
+    </div>
+
+    <!-- Mission Statement -->
+    <div class="resume-section">
+        <h2 class="section-title">◊ MISSION SUMMARY ◊</h2>
+        <p class="item-description">
+            Passionate problem solver with a focus in computer science. 
+            Specialising in software development, 3D printing, high-fidelity audio systems, GNU/ Linux and creating innovative technical solutions.
+            Interested in full-stack development with a focus on user-centric applications and system optimization protocols.
+        </p>
+    </div>
+
+    <!-- Experience Section -->
+    <div class="resume-section">
+        <h2 class="section-title">◊ WORK EXPERIENCE LOG ◊</h2>
+        
+        <div class="experience-item">
+            <div class="item-header">
+                <div>
+                    <h3 class="item-title">▶ DATA SCIENCE INTERN</h3>
+                    <p class="item-company">ARUP</p>
+                </div>
+                <span class="item-date">2024, July - September</span>
+            </div>
+            <div class="item-description">
+                <ul>
+                    <li>Automated processing and formatting of Hong Kong Annual Traffic Census data, reducing manual workload and errors.</li>
+                    <li>Developed a PyQt6-based Windows application with a user-friendly interface for data input/ selection and tool execution.</li>
+                    <li>Implemented six specialized tools to convert and validate custom CDL, A/B, COR, and XDT files into standardized Excel reports.</li>
+                    <li>Leveraged multithreading to maintain responsive UI during intensive data processing tasks.</li>
+                    <li>Packaged the application as a standalone .exe using PyInstaller for seamless distribution to non-technical staff.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="experience-item">
+            <div class="item-header">
+                <div>
+                    <h3 class="item-title">▶ SOFTWARE ENGINEERING INTERN</h3>
+                    <p class="item-company">AI Lab Limited</p>
+                </div>
+                <span class="item-date">2025, June - July</span>
+            </div>
+            <div class="item-description">
+                <ul>
+                    <li>Researched the ESP32 micro controller for a teaching curriculum, creating a DIY security camera as a demonstration project.</li>
+                    <li>Developed multiple web applications using Flask, Python, JavaScript, and HTML.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Education Section -->
+    <div class="resume-section">
+        <h2 class="section-title">◊ EDUCATION ◊</h2>
+        
+        <div class="education-item">
+            <div class="item-header">
+                <div>
+                    <h3 class="item-title">▶ A-Level</h3>
+                    <p class="item-company">Malvern College</p>
+                </div>
+                <span class="item-date">2022 - 2024</span>
+            </div>
+            <div class="item-description">
+                <p><strong>Relevant Coursework:</strong> Campus Interactive Map</p>
+               <ul>
+                    <li>Developed an interactive campus map using Leaflet.js and satellite imagery to display paths, entrances, parking, and stairs.</li>
+                    <li>Implemented Dijkstra’s Algorithm for shortest path calculation with filters (e.g., avoiding stairs).</li>
+                    <li>Created an event reporting system with MongoDB, role-based user accounts, and caching for efficient data access.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Skills Section -->
+    <div class="resume-section">
+        <h2 class="section-title">◊ TECHNICAL Knowledge ◊</h2>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h4>▶ PROGRAMMING / MARKDOWN LANGUAGES</h4>
+                <div class="skill-tags">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">Java</span>
+                    <span class="skill-tag">JavaScript</span>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <h4>▶ WEB TECHNOLOGIES</h4>
+                <div class="skill-tags">
+                    <span class="skill-tag">HTML5</span>
+                    <span class="skill-tag">CSS3</span>
+                    <span class="skill-tag">Jinja2</span>
+                    <span class="skill-tag">Flask</span>
+                    <span class="skill-tag">Bootstrap v5.0</span>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <h4>▶ DATABASE TECHNOLOGIES</h4>
+                <div class="skill-tags">
+                    <span class="skill-tag">MongoDB</span>
+                    <span class="skill-tag">SQL</span>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <h4>▶ TOOLS & TECHNOLOGIES</h4>
+                <div class="skill-tags">
+                    <span class="skill-tag">Git</span>
+                    <span class="skill-tag">GNU/ Linux</span>
+                    <span class="skill-tag">AWS</span>
+                    <span class="skill-tag">VS Code</span>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <h4>▶ DESIGN & FABRICATION</h4>
+                <div class="skill-tags">
+                    <span class="skill-tag">Fusion 360</span>
+                    <span class="skill-tag">3D Printing</span>
+                    <span class="skill-tag">Blender</span>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <h4>▶ AUDIO & HARDWARE</h4>
+                <div class="skill-tags">
+                    <span class="skill-tag">Audio Engineering</span>
+                    <span class="skill-tag">Computer Hardware</span>
+                    <span class="skill-tag">Computer System Building</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Projects Section -->
+    <div class="resume-section">
+        <h2 class="section-title">◊ FEATURED PROJECTS ◊</h2>
+        <p class="item-description">
+            See more about the projects at my 
+            <a href="{{ url_for('projects') }}" class="project-link">website's projects page</a>.
+        </p>
+        {% for project in featured_projects %}
+        <div class="project-item">
+            <div class="item-header">
+                <div>
+                    <h3 class="item-title">▶ {{ project.project_name }}</h3>
+                </div>
+                <span class="item-date">{{ project.date }}</span>
+            </div>
+            <div class="item-description">
+                <p>{{ project.short }}</p>
+                {% if project.tags %}
+                    <p>
+                        <strong>Tags:</strong>
+                        {{ project.tags | join(', ') }}
+                    </p>
+                {% endif %}
+                {% if project.github %}
+                    <p>
+                        <a href="{{ project.github }}" target="_blank">GitHub Repo</a>
+                    </p>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <a href="{{ url_for('download_resume') }}" class="download-btn">Generate PDF from HTML & CSS</a>
+</div>
+{% endblock %}

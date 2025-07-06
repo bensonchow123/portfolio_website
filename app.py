@@ -1,12 +1,12 @@
 import io
 import json
 import os
-from requests import get, exceptions
 from urllib.parse import urlparse
 
-from flask import Flask, render_template, request, send_from_directory, redirect, url_for
+from flask import Flask, render_template, request, send_from_directory, redirect, url_for, make_response
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
+import weasyprint
 
 limiter = Limiter(key_func=get_remote_address)
 app = Flask(__name__)
@@ -40,15 +40,52 @@ def projects_redirect():
     return redirect(url_for('projects'))
 
 
+@app.route('/📄resume📄')
+def resume():
+    # Load and sort projects by weight (descending)
+    projects = get_static_json("static/projects/projects.json")['projects']
+    projects.sort(key=order_projects_by_weight, reverse=True)
+    featured_projects = projects[:6]
+    return render_template('resume.html', featured_projects=featured_projects)
+
+
+@app.route('/resume')
+def resume_redirect():
+    return redirect(url_for('resume'))
+
+
+@app.route('/📄resume📄/download')
+def download_resume():
+    """Generate and download resume as PDF"""
+    try:
+        # Load and sort projects by weight (descending)
+        projects = get_static_json("static/projects/projects.json")['projects']
+        projects.sort(key=order_projects_by_weight, reverse=True)
+        featured_projects = projects[:6]
+
+        html = render_template('resume.html', featured_projects=featured_projects)
+        pdf = weasyprint.HTML(string=html, base_url=os.path.abspath(os.path.dirname(__file__))).write_pdf()
+        
+        response = make_response(pdf)
+        response.headers['Content-Type'] = 'application/pdf'
+        response.headers['Content-Disposition'] = 'attachment; filename=Benson_Chow_Resume.pdf'
+        
+        return response
+    except Exception as e:
+        # Fallback - redirect to resume page if PDF generation fails
+        return redirect(url_for('resume'))
+
+
+@app.route('/resume/download')
+def download_resume_redirect():
+    return redirect(url_for('download_resume'))
+
+
 def order_projects_by_weight(projects):
     try:
         return int(projects['weight'])
     except KeyError:
         return 0
-
-@app.route('/ai-lab-website')
-def ai_lab_website():
-    return render_template('ai_lab_website.html')
 
 @app.route('/🚧projects🚧/<title>')
 def project(title):
