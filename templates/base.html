@@ -19,16 +19,18 @@
         <!-- Facebook Meta Tags -->
         <meta property="og:url" content="{{ url_for('index') }}">
         <meta property="og:type" content="website">
-        <meta property="og:title" content="Benson Chow">
-        <meta property="og:description" content="Benson Chow's personal website">
+        {% set page_title = self.page_title() if self.page_title else "Benson Chow" %}
+        {% set page_description = self.page_description() if self.page_description else "Benson Chow's personal website" %}
+        <meta property="og:title" content="{{ page_title }}">
+        <meta property="og:description" content="{{ page_description }}">
         <meta property="og:image" content="{{ url_for('static', filename='images/benson-chow.jpg') }}">
 
         <!-- Twitter Meta Tags -->
         <meta name="twitter:card" content="summary_large_image">
         <meta property="twitter:domain" content="{{ request.host }}">
         <meta property="twitter:url" content="{{ url_for('index') }}">
-        <meta name="twitter:title" content="Benson Chow">
-        <meta name="twitter:description" content="Benson Chow's personal website">
+        <meta name="twitter:title" content="{{ page_title }}">
+        <meta name="twitter:description" content="{{ page_description }}">
         <meta name="twitter:image" content="{{ url_for('static', filename='images/benson-chow.jpg') }}">
 
         <!--Favicons-->
@@ -46,11 +48,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!--fonts-->
-        <link rel='stylesheet'
-              href='https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i|Source+Code+Pro:400,500,600,700'
-              type='text/css' media='screen'/>
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto:900" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&family=Orbitron:wght@400;700;900&family=Roboto:wght@900&family=Source+Code+Pro:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
         <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
 
         {% block head %}
@@ -62,7 +62,6 @@
                 <li><a class="navbar-ref" href="{{ url_for('index') }}"><b>About me</b></a></li>
                 <li><a class="navbar-ref" href="{{ url_for('projects') }}"><b>Projects</b></a></li>
                 <li><a class="navbar-ref" href="{{ url_for('resume') }}"><b>Résumé</b></a></li>
-                <li><a class="navbar-ref" href="{{ url_for('guestbook') }}"><b>Guestbook</b></a></li>
             </ul>
         </div>
         {% block body %}
