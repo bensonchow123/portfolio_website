@@ -10,7 +10,6 @@ import weasyprint
 
 limiter = Limiter(key_func=get_remote_address)
 app = Flask(__name__)
-ALLOWED_EXTENSIONS = {'html', 'htm'}
 
 @app.route('/')
 def index():
@@ -122,33 +121,8 @@ def get_static_file(path):
     site_root = os.path.realpath(os.path.dirname(__file__))
     return os.path.join(site_root, path)
 
-
 def get_static_json(path):
     return json.load(open(get_static_file(path)))
-
-
-
-def allowed_file(filename):
-    """Check if the file has an allowed extension."""
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-def sanitize_input(url):
-    """Validate the URL and ensure it has an allowed file extension."""
-    # Parse the URL
-    parsed_url = urlparse(url)
-    
-    # Ensure the URL has a valid scheme and netloc
-    if not parsed_url.scheme or not parsed_url.netloc:
-        return None
-    
-    # Extract the file name from the URL path
-    file_name = os.path.basename(parsed_url.path)
-    
-    # Check if the file name has an allowed extension
-    if not allowed_file(file_name):
-        return None
-    
-    return url
 
 if __name__ == '__main__':
     from livereload import Server
