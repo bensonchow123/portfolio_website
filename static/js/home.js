@@ -1,5 +1,5 @@
-$(function() {
-  $(".typed").typed({
+document.addEventListener('DOMContentLoaded', function() {
+  new Typed(".typed", {
     strings: [
       "cat benson.txt<br/>" +
       "Hobbies: programming, audiophilia, 3D printing, VR, GNU/ Linux enthusiast, hardware tinkering<br/> ^100" +
@@ -8,8 +8,7 @@ $(function() {
     ],
     showCursor: true,
     cursorChar: '|',
-    autoInsertCss: true,
-    typeSpeed: 0.001,
+    typeSpeed: 20,
     startDelay: 10,
     loop: false,
   });
