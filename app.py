@@ -89,6 +89,32 @@ def download_resume():
 def download_resume_redirect():
     return redirect(url_for('download_resume'))
 
+def order_projects_by_weight(projects):
+    try:
+        return int(projects['weight'])
+    except KeyError:
+        return 0
+
+@app.route('/🚧projects🚧/<title>')
+def project(title):
+    projects = get_static_json("static/projects/projects.json")['projects']
+
+    in_project = next((p for p in projects if p['directory_name'] == title), None)
+
+    if in_project is None:
+        return render_template('404.html'), 404
+
+    selected = in_project
+
+    if 'description' not in selected:
+        selected['description'] = io.open(get_static_file(
+            'static/%s/%s/%s.html' % ("projects", selected['directory_name'], selected['directory_name'])), "r", encoding="utf-8").read()
+    return render_template('project.html', project=selected)
+
+
+@app.route('/projects/<title>')
+def project_redirect(title):
+    return redirect(url_for('project', title=title))
 
 @app.route('/🎵music🎵')
 def music():
@@ -117,34 +143,6 @@ def music():
 @app.route('/music')
 def music_redirect():
     return redirect(url_for('music'))
-
-
-def order_projects_by_weight(projects):
-    try:
-        return int(projects['weight'])
-    except KeyError:
-        return 0
-
-@app.route('/🚧projects🚧/<title>')
-def project(title):
-    projects = get_static_json("static/projects/projects.json")['projects']
-
-    in_project = next((p for p in projects if p['directory_name'] == title), None)
-
-    if in_project is None:
-        return render_template('404.html'), 404
-
-    selected = in_project
-
-    if 'description' not in selected:
-        selected['description'] = io.open(get_static_file(
-            'static/%s/%s/%s.html' % ("projects", selected['directory_name'], selected['directory_name'])), "r", encoding="utf-8").read()
-    return render_template('project.html', project=selected)
-
-
-@app.route('/projects/<title>')
-def project_redirect(title):
-    return redirect(url_for('project', title=title))
 
 def get_recent_tracks(limit=12):
     """Fetch recent tracks from Last.fm API"""
