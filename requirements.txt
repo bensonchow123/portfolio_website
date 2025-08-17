@@ -5,5 +5,5 @@ requests==2.32.3
 DateTime==5.5
 livereload==2.7.1
 weasyprint==65.1
-
+python-dotenv=1.1.1
 
