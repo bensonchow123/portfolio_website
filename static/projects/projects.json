@@ -11,9 +11,9 @@
         "Multi languages", "Web Development", "Flask"
       ],
       "photos": [
-        "/static/projects/malvern_maps/malvern_maps_logo.png",
-        "/static/projects/malvern_maps/malvern_maps_landing.png",
-        "/static/projects/malvern_maps/map.png"
+        "/static/projects/malvern_maps/malvern_maps_logo.jpg",
+        "/static/projects/malvern_maps/malvern_maps_landing.jpg",
+        "/static/projects/malvern_maps/map.jpg"
       ],
       "github": "https://github.com/bensonchow123/malvern-maps"
     },
@@ -28,16 +28,16 @@
         "Networking", "3D Printing", "Hardware", "Python"
       ],
       "photos": [
-        "/static/projects/computy_the_dorm_server/computy_full_setup.png",
+        "/static/projects/computy_the_dorm_server/computy_full_setup.jpg",
         "/static/projects/computy_the_dorm_server/computy_closeup.jpg",
         "/static/projects/computy_the_dorm_server/computy_without_case.jpg",
-        "/static/projects/computy_the_dorm_server/pi5_case.png",
-        "/static/projects/computy_the_dorm_server/ssd_case.png",
+        "/static/projects/computy_the_dorm_server/pi5_case.jpg",
+        "/static/projects/computy_the_dorm_server/ssd_case.jpg",
         "/static/projects/computy_the_dorm_server/feets.jpg",
-        "/static/projects/computy_the_dorm_server/music_library.png",
-        "/static/projects/computy_the_dorm_server/jellyfin.png",
+        "/static/projects/computy_the_dorm_server/music_library.jpg",
+        "/static/projects/computy_the_dorm_server/jellyfin.jpg",
         "/static/projects/computy_the_dorm_server/foobar2k.jpg",
-        "/static/projects/computy_the_dorm_server/deadbeef.png"
+        "/static/projects/computy_the_dorm_server/deadbeef.jpg"
       ],
       "github": "https://github.com/bensonchow123/computy_scripts"
     },
@@ -52,9 +52,9 @@
         "Python", "PyQt", "Pandas", "Pyinstaller"
       ],
       "photos": [
-        "/static/projects/ATC_tools/path_selection_tab.png",
-        "/static/projects/ATC_tools/tools_tab.png",
-        "/static/projects/ATC_tools/picked_data.png"
+        "/static/projects/ATC_tools/path_selection_tab.jpg",
+        "/static/projects/ATC_tools/tools_tab.jpg",
+        "/static/projects/ATC_tools/picked_data.jpg"
       ]
     },
     {
@@ -88,7 +88,7 @@
         "Python","Discord.py", "Asyncio"
       ],
       "photos": [
-        "/static/projects/seraphine/seraphine.png",
+        "/static/projects/seraphine/seraphine.jpg",
         "/static/projects/seraphine/seraphine_chat_bot.jpg"
       ],
       "github": "https://github.com/bensonchow123/seraphine"
@@ -104,15 +104,15 @@
         "Keyboard"
       ],
       "photos": [
-        "/static/projects/modded_keychron_q3/full_keyboard.png",
-        "/static/projects/modded_keychron_q3/case.png",
-        "/static/projects/modded_keychron_q3/poron_cutout.png",
-        "/static/projects/modded_keychron_q3/polyfill.png",
-        "/static/projects/modded_keychron_q3/tape_mod.png",
-        "/static/projects/modded_keychron_q3/pe_foam_pads.png",
-        "/static/projects/modded_keychron_q3/plate.png",
-        "/static/projects/modded_keychron_q3/black_ink_v2.png",
-        "/static/projects/modded_keychron_q3/lube_and_film.png"
+        "/static/projects/modded_keychron_q3/full_keyboard.jpg",
+        "/static/projects/modded_keychron_q3/case.jpg",
+        "/static/projects/modded_keychron_q3/poron_cutout.jpg",
+        "/static/projects/modded_keychron_q3/polyfill.jpg",
+        "/static/projects/modded_keychron_q3/tape_mod.jpg",
+        "/static/projects/modded_keychron_q3/pe_foam_pads.jpg",
+        "/static/projects/modded_keychron_q3/plate.jpg",
+        "/static/projects/modded_keychron_q3/black_ink_v2.jpg",
+        "/static/projects/modded_keychron_q3/lube_and_film.jpg"
       ]
     }
   ]
