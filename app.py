@@ -278,13 +278,13 @@ def get_largest_image(images):
     return images[0].get('#text', '') if images else ''
 
 def format_date(date_str):
-    """Format Last.fm date string to a more readable format"""
+    """Format Last.fm date string to a more readable format with UTC timezone"""
     if not date_str:
         return ''
     
     try:
         dt = datetime.strptime(date_str, "%d %b %Y, %H:%M")
-        return dt.strftime("%b %d, %Y at %H:%M")
+        return dt.strftime("%b %d, %Y at %H:%M UTC")
     except:
         return date_str
 
