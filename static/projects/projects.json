@@ -1,12 +1,38 @@
 {
   "projects": [
     {
+      "project_name": "2025 home 3D printing setup",
+      "directory_name": "2025_home_3d_printing_setup",
+      "date": "July 2025 - September 2025",
+      "short": "A £290 3D printing setup that can be controlled anywhere in the world.",
+      "status": "completed",
+      "weight": 9,
+      "tags": [
+        "3D printing", "Networking"
+      ],
+      "photos": [
+        "/static/projects/2025_home_3d_printing_setup/setup.jpg",
+        "/static/projects/2025_home_3d_printing_setup/no_fan.jpg",
+        "/static/projects/2025_home_3d_printing_setup/fan_cost.jpg",
+        "/static/projects/2025_home_3d_printing_setup/have_fan_dryer.jpg",
+        "/static/projects/2025_home_3d_printing_setup/fan_duct.jpg",
+        "/static/projects/2025_home_3d_printing_setup/filter-no-fan.jpg",
+        "/static/projects/2025_home_3d_printing_setup/filter_with_fan.jpg",
+        "/static/projects/2025_home_3d_printing_setup/clips.jpg",
+        "/static/projects/2025_home_3d_printing_setup/panel_replacement.jpg",
+        "/static/projects/2025_home_3d_printing_setup/printer_lan_port.jpg",
+        "/static/projects/2025_home_3d_printing_setup/router.jpg",
+        "/static/projects/2025_home_3d_printing_setup/fluidd.jpg",
+        "static/projects/2025_home_3d_printing_setup/subnet.jpg"
+      ]
+    },
+    {
       "project_name": "Malvern Maps",
       "directory_name": "malvern_maps",
       "date": "December 2022  - december 2023",
       "short": "An interactive map of Malvern College",
       "status": "completed",
-      "weight": 7,
+      "weight": 8,
       "tags": [
         "Multi languages", "Web Development", "Flask"
       ],
@@ -23,7 +49,7 @@
       "date": "January 2025 - May 2025",
       "short": "NAS, media steaming server and general server setup in my Y1 dorm at University of York",
       "status": "completed",
-      "weight": 6,
+      "weight": 7,
       "tags": [
         "Networking", "3D Printing", "Hardware", "Python"
       ],
@@ -47,7 +73,7 @@
       "date": "July 2024  - September 2024",
       "short": "Automated data picking of Hong Kong's Annual Traffic Census",
       "status": "completed",
-      "weight": 5,
+      "weight": 6,
       "tags": [
         "Python", "PyQt", "Pandas", "Pyinstaller"
       ],
@@ -63,7 +89,7 @@
       "date": "October 2024  - April 2025",
       "short": "3D printing setup in my Y1 dorm at University of York",
       "status": "completed",
-      "weight": 4,
+      "weight": 5,
       "tags": [
         "3D Printing"
       ],
@@ -74,7 +100,6 @@
         "/static/projects/dorm_3d_printing_setup/desiccant.jpg",
         "/static/projects/dorm_3d_printing_setup/PTFE_tubes.jpg",
         "/static/projects/dorm_3d_printing_setup/packed_printer.jpg"
-        
       ]
     },
     {
@@ -83,7 +108,7 @@
       "date": "June 2021  - January 2024",
       "short": "A Discord bot designed to improve activity within Seraphine and allow for integration of hypixel skyblock within Skyhub",
       "status": "completed",
-      "weight": 3,
+      "weight": 4,
       "tags": [
         "Python","Discord.py", "Asyncio"
       ],
@@ -99,7 +124,7 @@
       "date": "September 2022  - June 2023",
       "short": "The details of a custom keyboard build.",
       "status": "completed",
-      "weight": 1,
+      "weight": 3,
       "tags": [
         "Keyboard"
       ],
