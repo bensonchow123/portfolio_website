@@ -1,8 +1,8 @@
 {
   "projects": [
     {
-      "project_name": "2025 home 3D printing setup",
-      "directory_name": "2025_home_3d_printing_setup",
+      "project_name": "home 3D printing setup",
+      "directory_name": "home_3d_printing_setup",
       "date": "July 2025 - September 2025",
       "short": "A £290 3D printing setup that can be controlled anywhere in the world.",
       "status": "completed",
@@ -11,19 +11,19 @@
         "3D printing", "Networking"
       ],
       "photos": [
-        "/static/projects/2025_home_3d_printing_setup/setup.jpg",
-        "/static/projects/2025_home_3d_printing_setup/no_fan.jpg",
-        "/static/projects/2025_home_3d_printing_setup/fan_cost.jpg",
-        "/static/projects/2025_home_3d_printing_setup/have_fan_dryer.jpg",
-        "/static/projects/2025_home_3d_printing_setup/fan_duct.jpg",
-        "/static/projects/2025_home_3d_printing_setup/filter-no-fan.jpg",
-        "/static/projects/2025_home_3d_printing_setup/filter_with_fan.jpg",
-        "/static/projects/2025_home_3d_printing_setup/clips.jpg",
-        "/static/projects/2025_home_3d_printing_setup/panel_replacement.jpg",
-        "/static/projects/2025_home_3d_printing_setup/printer_lan_port.jpg",
-        "/static/projects/2025_home_3d_printing_setup/router.jpg",
-        "/static/projects/2025_home_3d_printing_setup/fluidd.jpg",
-        "/static/projects/2025_home_3d_printing_setup/subnet.jpg"
+        "/static/projects/home_3d_printing_setup/setup.jpg",
+        "/static/projects/home_3d_printing_setup/no_fan.jpg",
+        "/static/projects/home_3d_printing_setup/fan_cost.jpg",
+        "/static/projects/home_3d_printing_setup/have_fan_dryer.jpg",
+        "/static/projects/home_3d_printing_setup/fan_duct.jpg",
+        "/static/projects/home_3d_printing_setup/filter-no-fan.jpg",
+        "/static/projects/home_3d_printing_setup/filter_with_fan.jpg",
+        "/static/projects/home_3d_printing_setup/clips.jpg",
+        "/static/projects/home_3d_printing_setup/panel_replacement.jpg",
+        "/static/projects/home_3d_printing_setup/printer_lan_port.jpg",
+        "/static/projects/home_3d_printing_setup/router.jpg",
+        "/static/projects/home_3d_printing_setup/fluidd.jpg",
+        "/static/projects/home_3d_printing_setup/subnet.jpg"
       ]
     },
     {
