@@ -1,0 +1,101 @@
+<div>
+    <p>This is a documentation of the updates to my home IT equiment and systems in the summer of 2025./p>
+        <p class="lb">The updates consist of:</p>
+    <ul>
+        <li>Rejuvinating a "broken" home NAS (network attached storage)</li>
+        <li>Better networking for the home MESH system,</li>
+        <li>Swarping out parts and software to have better computer systems.</li>
+    </ul>
+    <p>
+    <p class="lb">Home NAS</p>
+    <ul>
+        <li>
+            <p>Hardware (closeup in images 1 & 2):</p>
+            <ul>
+                <li>An old "broken" QNAP TS-251A 2-Bay NAS</li>
+                <li>A 3TB HDD and a 4TB HDD</li>
+                <li>An external 2.5-inch SATA enclosure</li>
+                <li>A 12-year-old 120GB SATA SSD</li>
+                <li>USB 3.0 to USB 3.0 Micro B cable</li>
+                <li>Ethernet cable</li>
+            </ul>
+        </li>
+        <li>
+            <p>Hardware usage:</p>
+            <ul>
+                <li>The NAS is an old QNAP TS-251A 2-Bay NAS from my dad.</li>
+                <li>It has a dual-core Celeron N3060, running at 2.5GHz per core, and has 2GB of DDR3L RAM.</li>
+                <li>The original QNAP OS is installed on the 4GB eMMC storage on the NAS, and it is controlled with a remote.</li>
+                <li>The issue with the NAS is that one drive doesn't even spin, and the other is in pre-fail condition, with the QNAP OS corrupted and unbootable.</li>
+                <li>I opened some of my dad's old external HDD enclosures and reused the HDDs as the main drives.</li>
+                <li>The 2.5-inch SATA enclosure from my dad originally had a 256GB HDD in it, which is perfect for use as the OS drive, as 4GB of eMMC is not enough for Debian Bookworm.</li>
+                <li>The 120GB SSD is salvaged from an Acer Aspire office PC with a Core 2 Duo, and is plugged into the 2.5-inch SATA enclosure.</li>
+            </ul>
+        </li>
+        <li>
+            <p>Software usage:</p>
+            <ul>
+                <li>Debian 12 (Bookworm) minimal is used to minimize RAM usage (about 100MB of RAM on idle).</li>
+                <li>The fact that the NAS has an HDMI port makes the OS installation significantly easier.</li>
+                <li>Connected to the router via the Ethernet cable, I installed SSHD to control the server through SSH.</li>
+                <li>The HDDs are formatted as ext4 filesystems.</li>
+                <li>Through SSH, I edited <code>/etc/fstab</code> to mount the 3TB and 4TB HDDs on boot.</li>
+                <li>I then installed and configured SAMBA and WSDD so the 3TB HDD is exposed as a network share, and WSDD allows it to be visible in Windows network discovery.</li>
+                <li>Borg is used to do compressed, deduplicated, and periodic backups from the 3TB HDD to the 4TB HDD.</li>
+                <li>Tailscale VPN is installed, allowing remote connectivity to the NAS.</li>
+                <li>The NAS also acts as a subnet router, sharing the subnet to my Tailscale network so I can control my 3D printer anywhere in the world.</li>
+                <li>A separate tailnet is created, where the NAS is shared, so my family can access the NAS without interfering with my tailnet at all.</li>
+            </ul>
+        </li>
+    </ul>
+
+
+    </ul>
+
+    <p class="lb">The Kingroon filament dryer</p>
+    <ul>
+        <li>I bought it because it is the cheapest dryer that advertises a 70 °C drying temperature at £10, but it actually only reaches 45 °C initially.</li>
+        <li>This is because they forgot to include a 24V fan in my unit, as seen in image 2.</li>
+        <li>They refunded me £1.50, which was enough to buy two 24V 4010 fans, seen in image 3.</li>
+        <li>I installed the fans, lubricating them with some WD40 PTFE lubricant, as seen in image 4.</li>
+        <li>It can then reach about 55 °C-60 °C, but not the advertised 70 °C. Still, it is usable.</li>
+    </ul>
+
+    <p class="lb">3D printed parts</p>
+    <ul>
+        <li>
+            <p>Parts included in the setup:</p>
+            <ul>
+                <li>Activated carbon & HEPA filter filtration system</li>
+                <li>PTFE tube clips</li>
+            </ul>
+        </li>
+        <li>
+            <p>Activated carbon & HEPA filter filtration system (seen in images 5, 6, 7)</p>
+            <ul>
+                <li>The system consists of a chamber fan duct, filter container mount, two filter containers, and a 5V 8025 fan.</li>
+                <li>The chamber fan duct, filter container mount, and the filter containers are printed out of ABS to resist high temperatures.</li>
+                <li>I bought the fan, activated carbon, and HEPA filter for about £3.</li>
+                <li>The fan draws power from a 5V USB port designed for gcode transfer, which is otherwise unused since the printer is networked.</li>
+                <li>The models were downloaded from <a href="https://www.printables.com/model/1098764-qidi-q1-pro-bs-03-hepacarbon-filter-setup">here</a>.</li>
+            </ul>
+        </li>
+        <li>
+            <p>PTFE tube clips (seen in image 8)</p>
+            <ul>
+                <li>Without these ABS clips, the PTFE tubes would rub against the top polycarbonate panel and cause deep scratches.</li>
+                <li>I received a replacement top panel under warranty due to the original being scratched by the tubes, as seen in image 9.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <p class="lb">Custom networking (seen in images 10, 11, 12, 13)</p>
+    <ul>
+        <li>As I have the revised Qidi Q1 Pro, my unit has an LAN port, allowing me to clip a correct length ethernet cable, and connect it to a network switch.</li>
+        <li>The switch is then connected to my router, a switch is used cause I ran out of LAN ports on my router.</li>
+        <li>The Klipper firmware is controlled through the Fluidd web server running on port 10088, which communicates with Klipper via the Moonraker API.</li>
+        <li>A VPN like Tailscale is then needed, to allow me to access the web server on the printer from anywhere in the world.</li>
+        <li>I tried to install Tailscale natively on the printer's onboard computer, but after SSHing into the device, the specific Klipper version supported by Qidi and the Tailscale client had dependency version conflicts.</li>
+        <li>I therefore exposed my home network as a Tailscale subnet via my home NAS, allowing me to connect to my printer remotely as long as my home NAS is online.</li>
+    </ul>
+</div>
