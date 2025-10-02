@@ -43,7 +43,7 @@
                 <li>I then installed and configured SAMBA and WSDD so the 3TB HDD is exposed as a network share, and WSDD allows it to be visible in Windows network discovery.</li>
                 <li>Borg is used to do compressed, deduplicated, and periodic backups from the 3TB HDD to the 4TB HDD.</li>
                 <li>Tailscale VPN is installed, allowing remote connectivity to the NAS.</li>
-                <li>The NAS also acts as a subnet router, sharing the subnet to my Tailscale network so I can control my 3D printer anywhere in the world.</li>
+                <li>The NAS also acts as a subnet router, sharing the home LAN to my Tailscale network so I can control my 3D printer anywhere in the world.</li>
                 <li>A separate tailnet is created, where the NAS is shared, so my family can access the NAS without interfering with my tailnet at all.</li>
             </ul>
         </li>
@@ -51,48 +51,32 @@
 
     <p class="lb">Improved home networking</p>
     <ul>
-        <li>My home network consist of 4 Xiaomi AX3000NE routers, creating a mesh network completely wirelessly initially.</li>
-        <li>This is because they forgot to include a 24V fan in my unit, as seen in image 2.</li>
-        <li>They refunded me £1.50, which was enough to buy two 24V 4010 fans, seen in image 3.</li>
-        <li>I installed the fans, lubricating them with some WD40 PTFE lubricant, as seen in image 4.</li>
-        <li>It can then reach about 55 °C-60 °C, but not the advertised 70 °C. Still, it is usable.</li>
+        <li>My home network consists of 4 Xiaomi AX3000NE routers configured as mesh nodes, initially creating a completely wireless mesh topology.</li>
+        <li>However, I discovered an unused wired connection between two of the routers through existing RJ45 wall ports.</li>
+        <li>I therefore established a wired backhaul connection between these two nodes by crimping custom-length Ethernet cables to connect each router to its respective wall port.</li>
+        <li>The firmware version for the routers is also updated to allow for a mix of wired and wireless connections in the mesh topology.</li>
     </ul>
 
-    <p class="lb">3D printed parts</p>
+    <p class="lb">Better computer systems</p>
     <ul>
+        <li>During the course of my summer vaccation, I was given old laptops and desktops, which I dissassembled an grouped them to form better systems.</Li>
         <li>
-            <p>Parts included in the setup:</p>
+            <p>Laptops that are upgraded:</p>
             <ul>
-                <li>Activated carbon & HEPA filter filtration system</li>
-                <li>PTFE tube clips</li>
+                <li>
+                    <p>1 ASUS R455L</p>
+                    <ul>
+                        <li>Initially have 4GB DDR3L RAM, Intel i5-4210u, 500GB HDD </li>
+                        <li>Brought a second hand stick of 4GB DDR3L RAM to upgrade to 8GB RAM</li>
+                        <li>Replaced the 500GB HDD with the 120GB SATA SSD from the Acer aspire with faulty power supply.</li>
+                        <li>Replaced windows 7 with a LUKS encrypted Arch linux system using the Hyprland compositor</li>
+                    </ul>
+                </li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
             </ul>
         </li>
-        <li>
-            <p>Activated carbon & HEPA filter filtration system (seen in images 5, 6, 7)</p>
-            <ul>
-                <li>The system consists of a chamber fan duct, filter container mount, two filter containers, and a 5V 8025 fan.</li>
-                <li>The chamber fan duct, filter container mount, and the filter containers are printed out of ABS to resist high temperatures.</li>
-                <li>I bought the fan, activated carbon, and HEPA filter for about £3.</li>
-                <li>The fan draws power from a 5V USB port designed for gcode transfer, which is otherwise unused since the printer is networked.</li>
-                <li>The models were downloaded from <a href="https://www.printables.com/model/1098764-qidi-q1-pro-bs-03-hepacarbon-filter-setup">here</a>.</li>
-            </ul>
-        </li>
-        <li>
-            <p>PTFE tube clips (seen in image 8)</p>
-            <ul>
-                <li>Without these ABS clips, the PTFE tubes would rub against the top polycarbonate panel and cause deep scratches.</li>
-                <li>I received a replacement top panel under warranty due to the original being scratched by the tubes, as seen in image 9.</li>
-            </ul>
-        </li>
-    </ul>
-
-    <p class="lb">Custom networking (seen in images 10, 11, 12, 13)</p>
-    <ul>
-        <li>As I have the revised Qidi Q1 Pro, my unit has an LAN port, allowing me to clip a correct length ethernet cable, and connect it to a network switch.</li>
-        <li>The switch is then connected to my router, a switch is used cause I ran out of LAN ports on my router.</li>
-        <li>The Klipper firmware is controlled through the Fluidd web server running on port 10088, which communicates with Klipper via the Moonraker API.</li>
-        <li>A VPN like Tailscale is then needed, to allow me to access the web server on the printer from anywhere in the world.</li>
-        <li>I tried to install Tailscale natively on the printer's onboard computer, but after SSHing into the device, the specific Klipper version supported by Qidi and the Tailscale client had dependency version conflicts.</li>
-        <li>I therefore exposed my home network as a Tailscale subnet via my home NAS, allowing me to connect to my printer remotely as long as my home NAS is online.</li>
     </ul>
 </div>
