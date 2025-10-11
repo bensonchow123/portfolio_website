@@ -1,6 +1,26 @@
 {
   "projects": [
     {
+      "project_name": "home IT upgrade",
+      "directory_name": "home_it_upgrade",
+      "date": "June 2025 - September 2025",
+      "short": "Upgrades to my home IT equipment and systems in the summer of 2025",
+      "status": "completed",
+      "weight": 10,
+      "tags": [
+        "Hardware", "Networking"
+      ],
+      "photos": [
+        "/static/projects/home_it_upgrade/qnap_nas.jpg",
+        "/static/projects/home_it_upgrade/qnap_os_drive.jpg",
+        "/static/projects/home_it_upgrade/qnap_nas_lsblk.jpg",
+        "/static/projects/home_it_upgrade/xiao_mi_network.jpg",
+        "/static/projects/home_it_upgrade/wired_router_1.jpg",
+        "/static/projects/home_it_upgrade/wired_router_2.jpg",
+        "/static/projects/home_it_upgrade/asus_r455l.jpg"
+      ]
+    },
+    {
       "project_name": "home 3D printing setup",
       "directory_name": "home_3d_printing_setup",
       "date": "July 2025 - September 2025",
