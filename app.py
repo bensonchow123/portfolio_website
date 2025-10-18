@@ -1,11 +1,11 @@
 import io
 import json
 import os
-from urllib.parse import urlparse
+from urllib.parse import urlparse, urlunparse
 import requests
 from datetime import datetime
 
-from flask import Flask, render_template, request, send_from_directory, redirect, url_for, make_response
+from flask import Flask, render_template, request, redirect, url_for, make_response
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 import weasyprint
@@ -16,6 +16,16 @@ load_dotenv()
 limiter = Limiter(key_func=get_remote_address)
 app = Flask(__name__)
 
+# If the app runs behind a reverse proxy (nginx, Cloudflare, etc.), ProxyFix
+# makes `request.host`, `request.scheme`, and related headers reflect the
+# original client request instead of the proxy's.
+try:
+    from werkzeug.middleware.proxy_fix import ProxyFix
+    app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_port=1)
+except Exception:
+    # ProxyFix may not be available in some environments; fail gracefully.
+    pass
+
 # Last.fm API configuration
 LASTFM_API_KEY = os.getenv('LASTFM_API_KEY')
 LASTFM_USERNAME = 'Benson_'  # Replace with your actual username
@@ -23,9 +33,21 @@ LASTFM_BASE_URL = 'http://ws.audioscrobbler.com/2.0/'
 
 @app.before_request
 def redirect_to_new_domain():
-    if request.host in ['bensonchow.cf', 'www.bensonchow.cf']:
-        # Construct new URL with old path and query
-        new_url = request.url.replace(request.host, 'bensonc.how')
+    # Normalize host (strip port) and lowercase for robust comparison
+    host = (request.host or '').split(':')[0].lower()
+    old_hosts = {'bensonchow.cf', 'www.bensonchow.cf', '127.0.0.1', 'localhost'}
+    target_host = 'bensonc.how'
+
+    # Only redirect when on an old host and not already on the target host
+    if host in old_hosts and host != target_host:
+        parsed = urlparse(request.url)
+        # Build a new netloc using the target host (no explicit port)
+        new_parsed = parsed._replace(netloc=target_host)
+        try:
+            new_url = urlunparse(new_parsed)
+        except Exception:
+            # Fallback to a simple replacement if urlunparse fails
+            new_url = request.url.replace(request.host, target_host)
         return redirect(new_url, code=301)
 
 @app.route('/')
