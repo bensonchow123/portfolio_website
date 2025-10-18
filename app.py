@@ -35,7 +35,7 @@ LASTFM_BASE_URL = 'http://ws.audioscrobbler.com/2.0/'
 def redirect_to_new_domain():
     # Normalize host (strip port) and lowercase for robust comparison
     host = (request.host or '').split(':')[0].lower()
-    old_hosts = {'bensonchow.cf', 'www.bensonchow.cf', '127.0.0.1', 'localhost'}
+    old_hosts = {'bensonchow.cf', 'www.bensonchow.cf'}
     target_host = 'bensonc.how'
 
     # Only redirect when on an old host and not already on the target host
