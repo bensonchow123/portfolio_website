@@ -21,6 +21,13 @@ LASTFM_API_KEY = os.getenv('LASTFM_API_KEY')
 LASTFM_USERNAME = 'Benson_'  # Replace with your actual username
 LASTFM_BASE_URL = 'http://ws.audioscrobbler.com/2.0/'
 
+@app.before_request
+def redirect_to_new_domain():
+    if request.host in ['bensonchow.cf', 'www.bensonchow.cf']:
+        # Construct new URL with old path and query
+        new_url = request.url.replace(request.host, 'bensonc.how')
+        return redirect(new_url, code=301)
+
 @app.route('/')
 def index():
     return render_template('home.html')
