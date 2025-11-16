@@ -328,6 +328,11 @@ def get_static_file(path):
 def get_static_json(path):
     return json.load(open(get_static_file(path)))
 
+@app.route('/keys')
+def keys():
+    return render_template('keys.html')
+
+
 if __name__ == '__main__':
     from livereload import Server
     server = Server(app.wsgi_app)
