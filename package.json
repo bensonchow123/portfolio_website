@@ -1,0 +1,14 @@
+{
+  "name": "profolio-website",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Tailwind build for the Flask portfolio. The Flask runtime never needs Node: static/css/tailwind.css is committed.",
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/app.css -o ./static/css/tailwind.css --minify",
+    "watch:css": "tailwindcss -i ./src/app.css -o ./static/css/tailwind.css --watch"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "tailwindcss": "^4.3.3"
+  }
+}

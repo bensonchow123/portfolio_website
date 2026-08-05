@@ -1,0 +1,48 @@
+/*
+ * Tailwind v4 entry point. Build with `npm run build:css`.
+ *
+ * This file must only ever contain @import, @source and @theme. The site has no
+ * custom CSS: if a @layer or @utility block shows up here, something that should
+ * have been a utility class wasn't, and it's worth working out why first.
+ *
+ * The one stylesheet outside Tailwind is static/css/resume.css, which exists
+ * because WeasyPrint renders the PDF and can't be trusted with Tailwind's
+ * oklch() / @property / color-mix() output.
+ */
+@import "tailwindcss" source(none);
+
+/* Explicit source globs, resolved relative to this file. 
+ * Basicly tells Tailwind which files to write CSS into it
+ */
+@source "../templates/**/*.html";
+@source "../static/js/**/*.js";
+
+@theme {
+  /* Breakpoints, for desktop and mobile. */
+  --breakpoint-split: 1094px;
+  --breakpoint-tiny: 600px;
+
+  /* Type. Overriding --font-sans rewires preflight's document default, which is
+     what the old base.css body { font-family } rule did. */
+  --font-sans: "Open Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Roboto", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Source Code Pro", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* The home page terminal */
+  --color-term-panel: #232627; /* Background */
+  --color-breeze-fg: #fcfcfc; /* Foreground, and Color7, the Tux belly */
+  --color-breeze-green: #11d116; /* Color2, the prompt's user@host */
+  --color-breeze-blue: #3daee9; /* Color4Intense, the prompt's path */
+  --color-breeze-mint: #1cdc9a; /* Color2Intense, the fetch labels */
+  --color-breeze-grey: #7f8c8d; /* Color0Intense, the Tux outline */
+  --color-breeze-yellow: #fdbc4b; /* Color3Intense, the Tux beak and feet */
+
+  /* Per-page accent, rebound on <body> in base.html from request.endpoint. One
+     token, no scale — see base.html for why. This default is what unlisted
+     routes (404) fall back to. */
+  --color-accent: #1d99f3; /* Color4 */
+
+  /* The two colours that deliberately DON'T follow the page accent. */
+  --color-link: #3daee9; /* Color4Intense */
+  --color-meta: #7f8c8d; /* Color0Intense */
+}
