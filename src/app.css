@@ -28,6 +28,15 @@
   --font-display: "Roboto", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Source Code Pro", ui-monospace, SFMono-Regular, Menlo, monospace;
 
+  /* Terminal cursor blink. Tailwind's own animate-pulse is a fade to
+     50% opacity, so need define custom one. */
+  --animate-blink: blink 1.06s steps(1, end) infinite;
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+
   /* The home page terminal */
   --color-term-panel: #232627; /* Background */
   --color-breeze-fg: #fcfcfc; /* Foreground, and Color7, the Tux belly */
