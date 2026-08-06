@@ -1,5 +1,17 @@
-.contact-info a {
-    text-decoration: none !important;
+/* The project's one hand-written stylesheet, loaded only by resume_pdf.html.
+   WeasyPrint 65.1 can't render what Tailwind v4 emits, so this sticks to what
+   it handles reliably: tables over flex gap, column-count over grid, pt over vw. */
+
+@page {
+    size: A4;
+    margin: 14mm 15mm;
+
+    @bottom-right {
+        content: counter(page) " / " counter(pages);
+        font-family: "Source Sans 3", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 8pt;
+        color: #7f8c8d;
+    }
 }
 
 * {
@@ -8,327 +20,172 @@
     padding: 0;
 }
 
-/* Base responsive font sizing */
-html {
-    font-size: 16px; /* Base font size for rem calculations */
-}
-
 body {
-    font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-    color: #2c3e50;
-    background-color: #ffffff;
-    font-size: 1rem; /* 8px, responsive to user preferences */
+    font-family: "Source Sans 3", "Helvetica Neue", Helvetica, Arial, "Liberation Sans", sans-serif;
+    font-size: 9.5pt;
+    line-height: 1.45;
+    color: #232627;
+    orphans: 2;
+    widows: 2;
 }
 
-/* Default: laptops/desktops */
-.resume-container {
-    max-width: 50vw;
-    margin: 1rem auto;
-    padding: 0.25rem clamp(0.5rem, 5vw, 1rem);
-    background-color: white;
-    border-radius: 8px;
-}
-
-/* iPads (portrait & landscape, and similar tablets) */
-@media (max-width: 1024px) {
-    .resume-container {
-        max-width: 85vw;
-        padding: 1rem 0.75rem;
-    }
-}
-
-/* Mobile optimizations */
-@media (max-width: 768px) {
-    .resume-container {
-        max-width: 90vw;
-        padding: 1rem 0.75rem;
-    }
-    .contact-info {
-        flex-direction: column;
-        align-items: center;
-        gap: 0.5rem;
-    }
-    .item-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    .item-date {
-        align-self: flex-start;
-        margin-top: 0.25rem;
-    }
-    .skills-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-}
-
-/* Small mobile devices */
-@media (max-width: 480px) {
-    .resume-container {
-        max-width: 95vw;
-        padding: 0.75rem 0.5rem;
-    }
-    .resume-title {
-        font-size: 1.5rem;
-    }
-    .section-title {
-        font-size: 1.1rem;
-    }
-}
-
-.resume-header {
-    text-align: center;
-    border-bottom: 2px solid #34495e;
-    padding-bottom: 1rem;
-    margin-bottom: 1.5rem;
-}
-
-/* Header */
-.resume-header {
-    text-align: center;
-    border-bottom: 2px solid #34495e;
-    padding-bottom: 1rem;
-    margin-bottom: 1.5rem;
-}
-
-.resume-title {
-    font-size: clamp(1.5rem, 4vw, 2.5rem); /* Responsive title */
-    font-weight: bold;
-    color: #2c3e50;
-    margin-bottom: 0.5rem;
-}
-
-.resume-subtitle {
-    font-size: clamp(0.9rem, 2.5vw, 1.2rem);
-    color: #7f8c8d;
-    margin-bottom: 1rem;
-}
-
-.contact-info {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: clamp(0.5rem, 2vw, 1rem);
-    font-size: clamp(0.8rem, 2vw, 1rem);
-}
-
-.contact-item {
-    color: #34495e;
-    padding: 0.25rem 0.5rem;
-}
-
-/* Sections */
-.resume-section {
-    margin-bottom: clamp(1rem, 3vw, 1.5rem);
-    page-break-inside: avoid;
-}
-
-.section-title {
-    font-size: clamp(1rem, 2.5vw, 1.3rem);
-    font-weight: bold;
-    color: #2c3e50;
-    border-bottom: 1px solid #bdc3c7;
-    padding-bottom: 0.5rem;
-    margin-bottom: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-/* Experience Items */
-.experience-item,
-.education-item,
-.project-item {
-    margin-bottom: 1.2rem;
-    page-break-inside: avoid;
-}
-
-.item-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 0.5rem;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-}
-
-.item-title {
-    font-size: clamp(0.9rem, 2vw, 1.1rem);
-    font-weight: bold;
-    color: #2c3e50;
-    margin-bottom: 0.25rem;
-}
-
-.item-company {
-    font-size: clamp(0.8rem, 1.8vw, 1rem);
-    color: #7f8c8d;
-    font-style: italic;
-}
-
-.item-date {
-    font-size: clamp(0.75rem, 1.5vw, 0.9rem);
-    color: #95a5a6;
-    font-weight: bold;
-    white-space: nowrap;
-}
-
-.item-description {
-    font-size: clamp(0.85rem, 1.8vw, 1rem);
-    color: #34495e;
-    margin-top: 0.5rem;
-    line-height: 1.6;
-}
-
-.item-description ul {
-    margin-left: 1rem;
-    margin-top: 0.5rem;
-}
-
-.item-description li {
-    margin-bottom: 0.4rem;
-}
-
-.item-description p {
-    margin-bottom: 0.5rem;
-}
-
-/* Skills */
-.skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1rem;
-}
-
-.skill-category h4 {
-    font-size: clamp(0.9rem, 2vw, 1rem);
-    font-weight: bold;
-    color: #2c3e50;
-    margin-bottom: 0.5rem;
-}
-
-.skill-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-}
-
-.skill-tag {
-    font-size: clamp(0.75rem, 1.5vw, 0.85rem);
-    padding: 0.3rem 0.6rem;
-    background-color: #ecf0f1;
-    color: #2c3e50;
-    border: 1px solid #bdc3c7;
-    border-radius: 3px;
-    display: inline-block;
-}
-
-/* Achievements */
-.achievements-list {
-    margin-left: 1rem;
-}
-
-.achievements-list li {
-    margin-bottom: 0.6rem;
-    font-size: clamp(0.85rem, 1.8vw, 1rem);
-    color: #34495e;
-    line-height: 1.5;
-}
-
-/* Professional Summary */
-.resume-section p.item-description {
-    font-size: clamp(0.9rem, 2vw, 1rem);
-    line-height: 1.6;
-    text-align: justify;
-}
-
-/* Download button */
-.download-btn {
-    display: inline-block;
-    margin: 0 auto 1.5rem auto;
-    padding: 0.6rem 1.2rem;
-    font-size: clamp(0.9rem, 2vw, 1rem);
-    background: #34495e;
-    color: #fff;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
+a {
+    color: #ed1515;
     text-decoration: none;
+}
+
+/* Dashed fillers are screen-only. Section numbers are shared, see below. */
+[data-screen-only] {
+    display: none;
+}
+
+/* Sparing red accents. Body text stays near-black for print and ATS parsing. */
+[data-accent-num] {
+    color: #ed1515;
+    margin-right: 2pt;
+}
+
+[data-accent-num-sep] {
+    color: #7f8c8d;
+    margin-right: 4pt;
+}
+
+[data-entry] li::marker {
+    color: #ed1515;
+}
+
+/* ---- Header ---- */
+
+[data-resume-header] {
     text-align: center;
-    transition: background 0.2s;
+    border-bottom: 1.5pt solid #ed1515;
+    padding-bottom: 8pt;
+    margin-bottom: 12pt;
 }
 
-.download-btn:hover, .download-btn:focus {
-    background: #2c3e50;
+[data-resume-header] h1 {
+    font-size: 22pt;
+    font-weight: 700;
+    letter-spacing: 0.5pt;
+    color: #232627;
+    margin-bottom: 2pt;
 }
 
-/* Background Image */
-.background {
-    background-image: url('../images/resume-background.jpg'); /* Use your galaxy image path */
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: -1;
+[data-resume-header] p {
+    font-size: 10.5pt;
+    color: #7f8c8d;
+    margin-bottom: 4pt;
 }
 
-.background::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
+[data-contact] {
+    font-size: 9pt;
+    color: #232627;
+}
+
+/* ---- Sections ---- */
+
+[data-section] {
+    margin-bottom: 11pt;
+}
+
+[data-section] > h2 {
+    font-size: 11pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8pt;
+    color: #232627;
+    border-bottom: 0.5pt solid #ed1515;
+    padding-bottom: 3pt;
+    margin-bottom: 7pt;
+}
+
+/* ---- Entries ---- */
+
+[data-entry] {
+    margin-bottom: 8pt;
+    break-inside: avoid;
+    page-break-inside: avoid;
+}
+
+/* Table, not flex + gap, which is exactly what WeasyPrint collapses silently. */
+[data-entry-head] {
+    display: table;
     width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.2); /* Optional overlay */
-    z-index: -1;
+    margin-bottom: 2pt;
 }
 
-/* Print styles */
-@media print {
-    .download-btn,
-    .navbar-ul {
-        display: none !important;
-    }
-    
-    html {
-        font-size: 12px;
-    }
-    
-    body {
-        font-size: 1rem;
-        line-height: 1.4;
-    }
-    
-    .resume-container {
-        max-width: none;
-        padding: 0.4in;
-    }
-    
-    .resume-section {
-        margin-bottom: 1rem;
-    }
-    
-    .contact-info {
-        font-size: 0.8rem;
-    }
-    
-    .item-description {
-        font-size: 0.85rem;
-    }
-    
-    .skill-tag {
-        font-size: 0.7rem;
-        padding: 0.2rem 0.4rem;
-    }
-    
-    .resume-title {
-        font-size: 1.8rem;
-    }
-    
-    .section-title {
-        font-size: 1rem;
-    }
+[data-entry-title] {
+    display: table-cell;
+    text-align: left;
+    vertical-align: top;
+}
+
+[data-entry-head] [data-date] {
+    display: table-cell;
+    text-align: right;
+    vertical-align: top;
+    white-space: nowrap;
+    font-size: 8.5pt;
+    font-weight: 700;
+    color: #7f8c8d;
+}
+
+[data-entry] h3 {
+    font-size: 10pt;
+    font-weight: 700;
+    color: #232627;
+}
+
+[data-entry-title] p {
+    font-size: 9pt;
+    font-style: italic;
+    color: #7f8c8d;
+}
+
+[data-entry] p {
+    margin-top: 2pt;
+}
+
+/* Explicit so markers survive whatever WeasyPrint's UA defaults are. */
+[data-entry] ul {
+    list-style: disc outside;
+    margin: 3pt 0 0 12pt;
+    padding: 0;
+}
+
+[data-entry] li {
+    margin-bottom: 1.5pt;
+}
+
+/* ---- Skills ---- */
+
+/* Multicol, not grid, which WeasyPrint handles badly. break-inside stops a
+   category splitting across columns. */
+[data-skills] {
+    column-count: 2;
+    column-gap: 8mm;
+}
+
+[data-skill-group] {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    margin-bottom: 6pt;
+}
+
+[data-skill-group] h3 {
+    font-size: 9.5pt;
+    font-weight: 700;
+    color: #232627;
+    margin-bottom: 2pt;
+}
+
+/* inline-block + margins, never flex gap */
+[data-skill] {
+    display: inline-block;
+    font-size: 8pt;
+    padding: 0.5pt 3pt;
+    margin: 0 2pt 2pt 0;
+    background-color: #fcfcfc;
+    border: 0.5pt solid #7f8c8d;
+    color: #232627;
 }

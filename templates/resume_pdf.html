@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+{# Does not extend base.html, WeasyPrint 65.1 chokes on Tailwind's oklch and
+   color-mix. The href stays relative, base_url resolves it off disk. #}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Benson Chow — Résumé</title>
+    <meta name="author" content="Benson Chow">
+    <meta name="description" content="Benson Chow's résumé">
+    <link rel="stylesheet" href="static/css/resume.css">
+</head>
+<body>
+{% include "resume_body.html" %}
+</body>
+</html>

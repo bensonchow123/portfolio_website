@@ -1,0 +1,172 @@
+{# Shared by resume.html (screen) and resume_pdf.html (WeasyPrint), so everything
+   here has to survive into the PDF. Anything that shouldn't print lives upstream. #}
+<header data-resume-header class="mb-6 border-b border-breeze-grey pb-4 text-center">
+    <h1 class="mb-2 font-mono text-3xl font-bold tracking-widest text-white">BENSON CHOW</h1>
+    <p class="mb-3 font-mono text-xs tracking-widest text-accent uppercase">Software Developer &amp; Technology Enthusiast</p>
+    <p data-contact class="text-sm text-breeze-grey">
+        <a href="mailto:email@bensonc.how" class="text-breeze-fg no-underline hover:text-white hover:underline">email@bensonc.how</a>
+        <span aria-hidden="true" class="text-breeze-grey"> · </span>
+        <a href="https://bensonc.how" target="_blank" rel="noopener noreferrer" class="text-breeze-fg no-underline hover:text-white hover:underline">bensonc.how</a>
+        <span aria-hidden="true" class="text-breeze-grey"> · </span>
+        <a href="https://github.com/bensonchow123" target="_blank" rel="noopener noreferrer" class="text-breeze-fg no-underline hover:text-white hover:underline">github.com/bensonchow123</a>
+        <span aria-hidden="true" class="text-breeze-grey"> · </span>
+        <span>Hong Kong / United Kingdom</span>
+    </p>
+</header>
+
+<section data-section class="mb-6">
+    <h2 class="mb-3 flex items-center gap-2 font-mono text-sm font-bold tracking-widest text-white uppercase"><span data-accent-num class="text-accent">01</span><span data-accent-num-sep class="text-breeze-grey">/</span><span>Summary</span><span data-screen-only class="min-w-8 flex-1 border-t border-dashed border-breeze-grey"></span></h2>
+    <p class="text-breeze-fg">
+        Passionate problem solver with a focus in computer science.
+        Interested in 3D printing and high-fidelity audio systems.
+        Specialising in system administration, backend development and local LLM.
+    </p>
+</section>
+
+<section data-section class="mb-6">
+    <h2 class="mb-3 flex items-center gap-2 font-mono text-sm font-bold tracking-widest text-white uppercase"><span data-accent-num class="text-accent">02</span><span data-accent-num-sep class="text-breeze-grey">/</span><span>Work Experience</span><span data-screen-only class="min-w-8 flex-1 border-t border-dashed border-breeze-grey"></span></h2>
+
+    <div data-entry class="mb-5 break-inside-avoid">
+        <div data-entry-head class="mb-1 flex flex-wrap items-start justify-between gap-2">
+            <div data-entry-title>
+                <h3 class="font-bold text-white">Data Science Intern</h3>
+                <p class="text-sm italic text-breeze-grey">Arup</p>
+            </div>
+            <span data-date class="font-mono text-xs font-bold whitespace-nowrap text-breeze-grey">Jul – Sep 2024</span>
+        </div>
+        <ul class="ms-4 list-disc list-outside text-breeze-fg marker:text-accent">
+            <li class="mb-1">Automated processing and formatting of Hong Kong Annual Traffic Census data, reducing manual workload and errors.</li>
+            <li class="mb-1">Developed a PyQt6-based Windows application with a user-friendly interface for data input/ selection and tool execution.</li>
+            <li class="mb-1">Implemented six specialized tools to convert and validate custom CDL, A/B, COR, and XDT files into standardized Excel reports.</li>
+            <li class="mb-1">Leveraged multithreading to maintain responsive UI during intensive data processing tasks.</li>
+            <li class="mb-1">Packaged the application as a standalone .exe using PyInstaller for seamless distribution to non-technical staff.</li>
+        </ul>
+    </div>
+
+    <div data-entry class="mb-5 break-inside-avoid">
+        <div data-entry-head class="mb-1 flex flex-wrap items-start justify-between gap-2">
+            <div data-entry-title>
+                <h3 class="font-bold text-white">Software Engineering Intern</h3>
+                <p class="text-sm italic text-breeze-grey">AI Lab Limited</p>
+            </div>
+            <span data-date class="font-mono text-xs font-bold whitespace-nowrap text-breeze-grey">Jun – Jul 2025</span>
+        </div>
+        <ul class="ms-4 list-disc list-outside text-breeze-fg marker:text-accent">
+            <li class="mb-1">Researched the ESP32 micro controller for a teaching curriculum, creating a DIY security camera as a demonstration project.</li>
+            <li class="mb-1">Developed multiple web applications using Flask, Python, JavaScript, and HTML.</li>
+        </ul>
+    </div>
+
+    <div data-entry class="mb-5 break-inside-avoid">
+        <div data-entry-head class="mb-1 flex flex-wrap items-start justify-between gap-2">
+            <div data-entry-title>
+                <h3 class="font-bold text-white">Software Engineering Intern</h3>
+                <p class="text-sm italic text-breeze-grey">drow.cloud</p>
+            </div>
+            <span data-date class="font-mono text-xs font-bold whitespace-nowrap text-breeze-grey">Jul – Sep 2025</span>
+        </div>
+        <ul class="ms-4 list-disc list-outside text-breeze-fg marker:text-accent">
+            <li class="mb-1">Researched the finetuning of an AI powered optical character recognition (OCR) program for document scanning.</li>
+            <li class="mb-1">Developed a document management system that utilizes OCR, vector databases for search, and local AI-driven document analysis, utilizing a GNU/ Linux system with three RTX Ada 5880 GPUs.</li>
+        </ul>
+        <p class="mt-1 text-sm">
+            <a href="{{ url_for('static', filename='documents/drow_intern.pdf', _external=True) }}"
+               target="_blank" rel="noopener noreferrer" class="text-accent underline">Internship certificate</a>
+        </p>
+    </div>
+
+    <div data-entry class="mb-5 break-inside-avoid">
+        <div data-entry-head class="mb-1 flex flex-wrap items-start justify-between gap-2">
+            <div data-entry-title>
+                <h3 class="font-bold text-white">Remote Software Engineer</h3>
+                <p class="text-sm italic text-breeze-grey">drow.cloud</p>
+            </div>
+            <span data-date class="font-mono text-xs font-bold whitespace-nowrap text-breeze-grey">Sep 2025 – present</span>
+        </div>
+        <ul class="ms-4 list-disc list-outside text-breeze-fg marker:text-accent">
+            <li class="mb-1">Migrated the document management system to a Windows system with a GTX 5070ti, utilising WSL2, and delivered the application to a paying user.</li>
+            <li class="mb-1">Working remotely, I installed an OpenSSH server on the Windows system, development is through an SSH connection through a WireGuard VPN.</li>
+            <li class="mb-1">Added features like syncing the vector database to a Windows directory, AJAX requests to the backend for local AI document analysis and ability to select different LLM models for analysis.</li>
+            <li class="mb-1">On a Apple Mac Studio M3 Ultra with 512GB of unified memory, I set up Surfsense via manual installation.</li>
+            <li class="mb-1">I first set up the OpenSSH server on macOS, installing a VPN solution, configuring Redis, PostgreSQL, Docling and other backend services.</li>
+            <li class="mb-1">Setting up different .plist files to make the services start automatically on boot with correct environment variables.</li>
+        </ul>
+    </div>
+</section>
+
+<section data-section class="mb-6">
+    <h2 class="mb-3 flex items-center gap-2 font-mono text-sm font-bold tracking-widest text-white uppercase"><span data-accent-num class="text-accent">03</span><span data-accent-num-sep class="text-breeze-grey">/</span><span>Education</span><span data-screen-only class="min-w-8 flex-1 border-t border-dashed border-breeze-grey"></span></h2>
+
+    <div data-entry class="mb-5 break-inside-avoid">
+        <div data-entry-head class="mb-1 flex flex-wrap items-start justify-between gap-2">
+            <div data-entry-title>
+                <h3 class="font-bold text-white">Computer Science Bachelor</h3>
+                <p class="text-sm italic text-breeze-grey">University of York</p>
+            </div>
+            <span data-date class="font-mono text-xs font-bold whitespace-nowrap text-breeze-grey">2024 – present</span>
+        </div>
+    </div>
+
+    <div data-entry class="mb-5 break-inside-avoid">
+        <div data-entry-head class="mb-1 flex flex-wrap items-start justify-between gap-2">
+            <div data-entry-title>
+                <h3 class="font-bold text-white">A-Level</h3>
+                <p class="text-sm italic text-breeze-grey">Malvern College</p>
+            </div>
+            <span data-date class="font-mono text-xs font-bold whitespace-nowrap text-breeze-grey">2022 – 2024</span>
+        </div>
+        <p class="text-breeze-fg"><strong>Relevant coursework:</strong> Campus Interactive Map</p>
+        <ul class="ms-4 list-disc list-outside text-breeze-fg marker:text-accent">
+            <li class="mb-1">Developed an interactive campus map using Leaflet.js and satellite imagery to display paths, entrances, parking, and stairs.</li>
+            <li class="mb-1">Implemented Dijkstra's Algorithm for shortest path calculation with filters (e.g., avoiding stairs).</li>
+            <li class="mb-1">Created an event reporting system with MongoDB, role-based user accounts, and caching for efficient data access.</li>
+        </ul>
+    </div>
+</section>
+
+<section data-section class="mb-6">
+    <h2 class="mb-3 flex items-center gap-2 font-mono text-sm font-bold tracking-widest text-white uppercase"><span data-accent-num class="text-accent">04</span><span data-accent-num-sep class="text-breeze-grey">/</span><span>Technical Skills</span><span data-screen-only class="min-w-8 flex-1 border-t border-dashed border-breeze-grey"></span></h2>
+    <div data-skills class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        {% for category, skills in [
+            ('Programming languages', ['Python', 'Bash', 'Java', 'JavaScript', 'C']),
+            ('Web technologies', ['HTML5', 'CSS3', 'Jinja2', 'Flask', 'Bootstrap', 'Tailwind']),
+            ('Database technologies', ['MongoDB', 'Qdrant', 'SQLite']),
+            ('DevOps', ['Git', 'Docker', 'GitHub Actions', 'GNU/ Linux', 'macOS', 'Windows', 'AWS']),
+            ('Design & fabrication', ['Fusion 360', '3D Printing', 'FreeCAD']),
+            ('AI tools', ['PPOCR', 'Ollama', 'IBM Docling'])
+        ] %}
+        <div data-skill-group class="break-inside-avoid">
+            <h3 class="mb-1 font-mono text-[11px] font-bold tracking-wider text-breeze-grey uppercase">{{ category }}</h3>
+            <p class="text-sm">
+                {%- for skill in skills %}<span data-skill class="mr-1 mb-1 inline-block border border-breeze-grey bg-term-panel/40 px-2 py-0.5 font-mono text-[10px] tracking-wider text-breeze-fg uppercase">{{ skill }}</span>{% endfor -%}
+            </p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section data-section>
+    <h2 class="mb-3 flex items-center gap-2 font-mono text-sm font-bold tracking-widest text-white uppercase"><span data-accent-num class="text-accent">05</span><span data-accent-num-sep class="text-breeze-grey">/</span><span>Featured Projects</span><span data-screen-only class="min-w-8 flex-1 border-t border-dashed border-breeze-grey"></span></h2>
+    <p class="mb-3 text-breeze-fg">
+        {# The ASCII alias, the emoji route percent-encodes into noise in the PDF. #}
+        More detail on each of these at
+        <a href="{{ url_for('projects_redirect', _external=True) }}" class="text-accent underline">{{ url_for('projects_redirect', _external=True) | replace('http://', '') | replace('https://', '') }}</a>.
+    </p>
+    {% for project in featured_projects %}
+    <div data-entry class="mb-4 break-inside-avoid">
+        <div data-entry-head class="mb-1 flex flex-wrap items-start justify-between gap-2">
+            <div data-entry-title>
+                <h3 class="font-bold text-white">{{ project.project_name }}</h3>
+            </div>
+            <span data-date class="font-mono text-xs font-bold whitespace-nowrap text-breeze-grey">{{ project.date }}</span>
+        </div>
+        <p class="text-breeze-fg">{{ project.short }}</p>
+        {% if project.tags %}
+        <p class="font-mono text-xs text-breeze-grey"><strong>Tags:</strong> {{ project.tags | join(', ') }}</p>
+        {% endif %}
+        {% if project.github %}
+        <p class="text-sm"><a href="{{ project.github }}" target="_blank" rel="noopener noreferrer" class="text-accent underline">{{ project.github }}</a></p>
+        {% endif %}
+    </div>
+    {% endfor %}
+</section>
