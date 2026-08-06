@@ -1,0 +1,123 @@
+{# Only the genuinely reused pieces live here, rank_chart runs six times and
+   bar_chart twice. One-off sections stay inline in music.html. #}
+
+{% macro section_title(num, text, sub=None) -%}
+<div class="flex items-center gap-2 font-mono text-sm tracking-widest text-white uppercase">
+    <span class="text-accent">{{ num }}</span><span class="text-breeze-grey">/</span>
+    <span>{{ text }}</span>
+    <span class="min-w-8 flex-1 border-t border-dashed border-breeze-grey"></span>
+</div>
+{%- if sub %}
+<p class="mt-1 font-mono text-xs text-breeze-grey">{{ sub }}</p>
+{%- endif %}
+{%- endmacro %}
+
+{% macro divider() -%}
+<hr class="my-5 border-t border-dashed border-breeze-grey">
+{%- endmacro %}
+
+{# Artwork, or the first letter when Last.fm has no image. referrerpolicy is
+   mandatory, the Last.fm CDN 403s without it. #}
+{% macro artwork(src, name, size) -%}
+{% if src -%}
+<img src="{{ src }}" alt="" referrerpolicy="no-referrer" loading="lazy" decoding="async"
+     class="{{ size }} shrink-0 rounded-none object-cover">
+{%- else -%}
+<div aria-hidden="true"
+     class="{{ size }} flex shrink-0 items-center justify-center rounded-none bg-term-panel font-mono text-sm font-medium text-accent">{{ (name or '?')[0] | upper }}</div>
+{%- endif %}
+{%- endmacro %}
+
+{# Ranked list with a play-count bar. Rows arrive sorted, so row 0 sets the scale. #}
+{% macro rank_chart(rows) -%}
+{% set max_plays = rows[0].plays if rows and rows[0].plays else 1 %}
+{% for row in rows %}
+<div class="relative flex items-center gap-3 py-3">
+    <span class="w-4 shrink-0 text-right font-mono text-xs {{ 'text-accent' if loop.index0 < 3 else 'text-breeze-grey' }}">{{ loop.index }}</span>
+    {{ artwork(row.image, row.name, 'h-9 w-9') }}
+    <div class="min-w-0 flex-1">
+        <p class="truncate text-sm text-white">{{ row.name }}</p>
+        {%- if row.subname or row.sublabel %}
+        <p class="truncate text-xs text-breeze-grey">{{ [row.subname, row.sublabel] | select | join(' · ') }}</p>
+        {%- endif %}
+    </div>
+    <span class="shrink-0 font-mono text-[10px] text-breeze-grey">{{ row.plays | comma }} plays</span>
+    <div class="absolute inset-x-0 bottom-0 h-px bg-term-panel">
+        <div class="h-full bg-accent" style="width:{{ (row.plays / max_plays * 100) | round(2) }}%"></div>
+    </div>
+</div>
+{% endfor %}
+{%- endmacro %}
+
+{# Pure-div bar chart. Heights and ticks are computed in music.py. #}
+{% macro bar_chart(chart, caption) -%}
+<p class="mt-4 mb-4 font-mono text-xs tracking-wider text-breeze-grey uppercase">{{ caption }}</p>
+{% if chart -%}
+<div class="relative pl-7">
+    <div class="pointer-events-none absolute inset-x-0 top-0 bottom-5 flex flex-col-reverse justify-between pl-7">
+        {% for tick in chart.y_ticks %}
+        <div class="relative w-full">
+            <span class="absolute -left-7 w-6 -translate-y-1/2 text-right font-mono text-[10px] leading-none text-breeze-grey">{{ tick }}</span>
+            <div class="w-full border-t border-breeze-grey"></div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="flex h-32 items-end gap-px">
+        {% for bar in chart.bars %}
+        <div class="flex-1 rounded-none {{ 'bg-accent' if bar.is_peak else 'bg-breeze-grey' }}"
+             style="height:{{ bar.height_pct | round(2) }}%"
+             title="{{ bar.label }}{% if bar.sublabel %}: {{ bar.sublabel }}{% endif %}"></div>
+        {% endfor %}
+    </div>
+    <div class="relative h-5">
+        {% for label in chart.x_labels %}
+        <span class="absolute top-1 -translate-x-1/2 font-mono text-[10px] text-breeze-grey"
+              style="left:{{ label.left_pct | round(2) }}%">{{ label.text }}</span>
+        {% endfor %}
+    </div>
+</div>
+{%- else -%}
+<p class="text-base text-breeze-grey">&mdash;</p>
+{%- endif %}
+{%- endmacro %}
+
+{# The invisible third line keeps every card the same height without a sub-label. #}
+{% macro stat_card(label, value, sub=None, icon=None) -%}
+<div class="relative rounded-none border border-breeze-grey bg-term-panel/60 backdrop-blur-[10px] p-3 before:pointer-events-none before:absolute before:top-0 before:left-0 before:z-20 before:h-2 before:w-2 before:border-t before:border-l before:border-accent before:content-[''] after:pointer-events-none after:absolute after:right-0 after:bottom-0 after:z-20 after:h-2 after:w-2 after:border-r after:border-b after:border-accent after:content-['']">
+    {%- if icon %}
+    <div class="text-base text-accent">{{ icon }}</div>
+    {%- endif %}
+    <p class="font-mono text-[11px] tracking-wider text-breeze-grey uppercase {{ 'mt-1' if icon }}">{{ label }}</p>
+    {% if value %}
+    <p class="mt-1 font-mono text-base text-white">{{ value }}</p>
+    <p class="font-mono text-[10px] text-breeze-grey">{{ sub if sub }}{% if not sub %}&nbsp;{% endif %}</p>
+    {%- else %}
+    <p class="mt-1 font-mono text-base text-breeze-grey">&mdash;</p>
+    <p class="invisible text-xs">.</p>
+    {%- endif %}
+</div>
+{%- endmacro %}
+
+{% macro track_row(index, track) -%}
+<div class="flex items-center gap-3 relative rounded-none border border-breeze-grey bg-term-panel/60 backdrop-blur-[10px] p-3">
+    <span class="w-4 shrink-0 text-right font-mono text-xs {{ 'text-accent' if index < 3 else 'text-breeze-grey' }}">{{ index + 1 }}</span>
+    {{ artwork(track.image, track.name, 'h-10 w-10') }}
+    <div class="min-w-0 flex-1">
+        <p class="truncate text-sm text-white">{{ track.name }}</p>
+        <p class="truncate text-xs text-breeze-grey">{{ track.artist }}</p>
+        <p class="truncate font-mono text-[10px] text-breeze-grey">{{ track.listened_at }}</p>
+    </div>
+</div>
+{%- endmacro %}
+
+{# Plain links, not buttons. A period switch is a page load, so tabs stay bookmarkable. #}
+{% macro period_tabs(periods, selected) -%}
+<nav aria-label="Time period" class="flex flex-wrap gap-2">
+    {% for period in periods %}
+    <a href="{{ url_for('music', period=period.id) }}"
+       {% if period.id == selected %}aria-current="page"{% endif %}
+       class="rounded-none border px-3.5 py-2 font-mono text-xs tracking-wider uppercase transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent motion-reduce:transition-none
+              {{ 'border-accent bg-accent font-bold text-term-panel' if period.id == selected else 'border-breeze-grey bg-term-panel/40 text-breeze-grey hover:border-breeze-grey hover:text-white' }}">{{ period.label }}</a>
+    {% endfor %}
+</nav>
+{%- endmacro %}

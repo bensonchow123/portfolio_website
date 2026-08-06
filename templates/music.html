@@ -1,153 +1,117 @@
 {% extends "base.html" %}
+{% from "_macros.html" import backdrop, icon with context %}
+{% from "_music.html" import section_title, divider, rank_chart, bar_chart, stat_card, track_row, period_tabs with context %}
 
-{% block head %}
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename = 'css/music.css') }}">
-{% endblock %}
+{% block page_title %}Music stats | Benson Chow{% endblock %}
+{% block page_description %}Listening statistics from every track Benson Chow plays, across a personal music server, Amazon Music, Spotify and YouTube.{% endblock %}
 
 {% block body %}
-<div class="background"></div>
-<div class="container-fluid py-4">
-    <div class="row justify-content-center">
-        <div class="col-12 col-lg-10 col-xl-8">
-            <div class="text-center mb-5">
-                <h1 class="display-4 fw-bold text-white mb-3">🎵 Music stats</h1>
-                <p class="lead text-light">I'm a bit obsessive about tracking my music - every single track played from my music server, Amazon music, Spotify, Youtube... gets recorded, for discovering music and analysis, here is a visualisation of the data.</p>
-            </div>
-            
-            {% if error %}
-            <div class="alert alert-danger" role="alert">
-                <h4 class="alert-heading">Error!</h4>
-                <p class="mb-0">{{ error }}</p>
-            </div>
-            {% else %}
-            
-            <!-- Recent Tracks Section -->
-            <div class="mb-5">
-                <h2 class="h3 mb-4 text-white">
-                    🕒 Recently Played
-                </h2>
-                <div class="row g-2">
-                    {% for track in recent_tracks %}
-                    <div class="col-12 col-md-6">
-                        <div class="card music-card compact-card h-100 {% if track.nowplaying %}now-playing{% endif %}">
-                            <div class="card-body p-2">
-                                <div class="d-flex align-items-center">
-                                    {% if track.image %}
-                                    <img src="{{ track.image }}" alt="{{ track.album }}" class="compact-image rounded me-2 flex-shrink-0">
-                                    {% else %}
-                                    <div class="compact-image bg-secondary rounded me-2 d-flex align-items-center justify-content-center flex-shrink-0">
-                                        <span class="text-white">🎵</span>
-                                    </div>
-                                    {% endif %}
-                                    
-                                    <div class="flex-grow-1 min-w-0">
-                                        <div class="text-white text-truncate mb-1">
-                                            {% if track.url %}
-                                            <a href="{{ track.url }}" target="_blank" class="text-white text-decoration-none text-truncate d-block">
-                                                {{ track.name }}
-                                            </a>
-                                            {% else %}
-                                            {{ track.name }}
-                                            {% endif %}
-                                        </div>
-                                        <div class="text-white small text-truncate mb-1">{{ track.artist }}</div>
-                                        <small class="text-white text-truncate d-block">
-                                            {% if track.nowplaying %}
-                                            <span class="text-spotify fw-bold">🎵 Now playing</span>
-                                            {% else %}
-                                            {{ track.date }}
-                                            {% endif %}
-                                        </small>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
+{{ backdrop('music-background.jpg', 'bg-term-panel/50') }}
+<main id="main" class="mx-auto w-[85%] py-8 max-split:w-[92%]">
 
-            <!-- Top Albums Section -->
-            <div class="mb-5">
-                <h2 class="h3 mb-4 text-white">
-                    🏆 Top Albums This Month
-                </h2>
-                <div class="row g-3">
-                    {% for album in top_albums %}
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="card music-card h-100">
-                            <div class="card-body p-3">
-                                <div class="d-flex align-items-center">
-                                    {% if album.image %}
-                                    <img src="{{ album.image }}" alt="{{ album.name }}" class="music-image rounded me-3 flex-shrink-0">
-                                    {% else %}
-                                    <div class="music-image bg-secondary rounded me-3 d-flex align-items-center justify-content-center flex-shrink-0">
-                                        <span class="text-white">💿</span>
-                                    </div>
-                                    {% endif %}
-                                    
-                                    <div class="flex-grow-1 min-w-0">
-                                        <div class="text-white text-truncate mb-1">
-                                            {% if album.url %}
-                                            <a href="{{ album.url }}" target="_blank" class="text-white text-decoration-none text-truncate d-block">
-                                                {{ album.name }}
-                                            </a>
-                                            {% else %}
-                                            {{ album.name }}
-                                            {% endif %}
-                                        </div>
-                                        <div class="text-white small text-truncate mb-2">{{ album.artist }}</div>
-                                        <span class="badge bg-success">{{ album.playcount }} plays</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
+    <header class="mb-6">
+        {# -mt-1 drops the space above the capitals so the heading lines up with
+           the card borders on the other pages. #}
+        <h1 class="-mt-1 font-mono text-2xl leading-none tracking-wide text-white uppercase"><span class="text-accent">//</span> Music stats</h1>
+        <p class="mt-2 text-sm text-breeze-fg">
+            I'm a bit obsessive about tracking my music, every single track played from any source get recorded, for discovering music and analysis, using a tool I made called <b>Last Analysis</b>.<br>
+            Here is a visualisation of the data.
+        </p>
+        {% if view and view.last_synced %}
+        <p class="mt-2 flex items-center gap-1.5 font-mono text-xs text-breeze-grey"><span class="h-1.5 w-1.5 bg-accent"></span>last synced {{ view.last_synced }}</p>
+        {% endif %}
+    </header>
 
-            <!-- Top Artists Section -->
-            <div class="mb-5">
-                <h2 class="h3 mb-4 text-white">
-                    🎤 Top Artists This Month
-                </h2>
-                <div class="row g-3">
-                    {% for artist in top_artists %}
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="card music-card h-100">
-                            <div class="card-body p-3">
-                                <div class="d-flex align-items-center">
-                                    <div class="music-image bg-gradient rounded me-3 d-flex align-items-center justify-content-center flex-shrink-0">
-                                        <span class="text-white fw-bold fs-4">{{ loop.index }}</span>
-                                    </div>
-                                    
-                                    <div class="flex-grow-1 min-w-0">
-                                        <div class="text-white text-truncate mb-2">
-                                            {% if artist.url %}
-                                            <a href="{{ artist.url }}" target="_blank" class="text-white text-decoration-none text-truncate d-block">
-                                                {{ artist.name }}
-                                            </a>
-                                            {% else %}
-                                            {{ artist.name }}
-                                            {% endif %}
-                                        </div>
-                                        <span class="badge bg-primary">{{ artist.playcount }} plays</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-            
-            {% endif %}
-        </div>
+    {% if error %}
+    <div role="status" class="relative rounded-none border border-breeze-grey bg-term-panel/60 backdrop-blur-[10px] p-6 before:pointer-events-none before:absolute before:top-0 before:left-0 before:z-20 before:h-2 before:w-2 before:border-t before:border-l before:border-accent before:content-[''] after:pointer-events-none after:absolute after:right-0 after:bottom-0 after:z-20 after:h-2 after:w-2 after:border-r after:border-b after:border-accent after:content-['']">
+        <p class="text-base text-white">Listening stats are temporarily unavailable.</p>
+        <p class="mt-2 text-sm text-breeze-grey">The scrobble vault isn't responding right now. Try again in a minute.</p>
     </div>
-</div>
+    {% else %}
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    {# The 15 most recent overall, not tied to the period, so they sit above the tabs. #}
+    <section>
+        {{ section_title('01', 'RECENT TRACKS') }}
+        {% if view.recent %}
+        <div class="mt-2 grid grid-cols-1 gap-2 md:grid-cols-3 2xl:grid-cols-5">
+            {% for track in view.recent %}
+            {{ track_row(loop.index0, track) }}
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="mt-2 text-sm text-breeze-grey">No recent tracks</p>
+        {% endif %}
+    </section>
+
+    {{ divider() }}
+
+    {{ period_tabs(view.periods, view.selected) }}
+
+    <section class="mt-4">
+        {{ section_title('02', 'OVERVIEW') }}
+        <div class="mt-2 grid grid-cols-2 gap-2 md:grid-cols-4">
+            {% for card in view.stats_cards %}
+            {{ stat_card(card.label, card.value, card.sub) }}
+            {% endfor %}
+        </div>
+        <div class="mt-2 grid grid-cols-1 gap-2 sm:grid-cols-3">
+            {{ stat_card('Average peak hour', view.highlights.peak_hour.value, view.highlights.peak_hour.sub, icon('clock')) }}
+            {{ stat_card('Average peak weekday', view.highlights.peak_day.value, view.highlights.peak_day.sub, icon('calendar')) }}
+            {{ stat_card('New discoveries', view.highlights.discoveries.value, view.highlights.discoveries.sub, icon('bulb')) }}
+        </div>
+    </section>
+
+    {{ divider() }}
+
+    <section>
+        {{ section_title('03', 'TOP CHARTS') }}
+        <div class="mt-2 grid grid-cols-1 gap-4 md:grid-cols-3">
+            {% for column in view.top_charts %}
+            <div class="relative rounded-none border border-breeze-grey bg-term-panel/60 backdrop-blur-[10px] px-4 py-3 before:pointer-events-none before:absolute before:top-0 before:left-0 before:z-20 before:h-2 before:w-2 before:border-t before:border-l before:border-accent before:content-[''] after:pointer-events-none after:absolute after:right-0 after:bottom-0 after:z-20 after:h-2 after:w-2 after:border-r after:border-b after:border-accent after:content-['']">
+                <p class="font-mono text-xs tracking-wider text-breeze-grey uppercase">{{ column.label }}</p>
+                {{ rank_chart(column.rows) }}
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    {# Absent for the all-time period: nothing is a "new" discovery over all time. #}
+    {% if view.discoveries %}
+    {{ divider() }}
+    <section>
+        {{ section_title('04', 'NEW DISCOVERIES', 'First-time listens in ' ~ view.period_label | lower) }}
+        <div class="mt-2 grid grid-cols-1 gap-4 md:grid-cols-3">
+            {% for column in view.discoveries %}
+            <div class="relative rounded-none border border-breeze-grey bg-term-panel/60 backdrop-blur-[10px] px-4 py-3 before:pointer-events-none before:absolute before:top-0 before:left-0 before:z-20 before:h-2 before:w-2 before:border-t before:border-l before:border-accent before:content-[''] after:pointer-events-none after:absolute after:right-0 after:bottom-0 after:z-20 after:h-2 after:w-2 after:border-r after:border-b after:border-accent after:content-['']">
+                <p class="font-mono text-xs tracking-wider text-breeze-grey uppercase">
+                    {{ column.label }}
+                    {%- if column.truncated %}
+                    <span class="text-breeze-grey">· showing 10 of {{ column.count | comma }}</span>
+                    {%- endif %}
+                </p>
+                {% if column.rows %}
+                {{ rank_chart(column.rows) }}
+                {% else %}
+                <p class="mt-3 text-sm text-breeze-grey">{{ column.empty_label }}</p>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+
+    {{ divider() }}
+
+    <section>
+        {{ section_title('05', 'LISTENING PATTERNS') }}
+        <div class="mt-2 relative rounded-none border border-breeze-grey bg-term-panel/60 backdrop-blur-[10px] px-4 pt-1 pb-4 before:pointer-events-none before:absolute before:top-0 before:left-0 before:z-20 before:h-2 before:w-2 before:border-t before:border-l before:border-accent before:content-[''] after:pointer-events-none after:absolute after:right-0 after:bottom-0 after:z-20 after:h-2 after:w-2 after:border-r after:border-b after:border-accent after:content-['']">
+            {# UTC because the server can't know the viewer's timezone and this
+               page ships no JavaScript. #}
+            {{ bar_chart(view.clock, 'Hour of day (avg tracks per hour, times in UTC)') }}
+            {{ bar_chart(view.weekday, 'Day of week (avg tracks per weekday)') }}
+        </div>
+    </section>
+
+    {% endif %}
+</main>
 {% endblock %}
