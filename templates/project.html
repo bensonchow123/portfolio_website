@@ -1,87 +1,106 @@
 {% extends "base.html" %}
+{% from "_macros.html" import backdrop, chip, icon with context %}
 
-{% block head %}
-<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename = 'css/project.css') }}">
-<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename = 'css/chip.css') }}">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-{% endblock %}
+{% block page_title %}{{ project['project_name'] }} | Benson Chow{% endblock %}
+{% block page_description %}{{ project['short'] }}{% endblock %}
 
 {% block body %}
-<div class="background"></div>
-<div class="container">
-    <div class="wrapper fixed-wrapper">
-        {% if 'photos' in project or 'videos' in project %}
-        <div id="myCarousel" class="carousel slide" data-bs-interval="false">
-            <!-- Indicators -->
-            <div class="carousel-indicators">
-                {% for video in project['videos'] %}
-                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="{{ loop.index0 }}"
-                    class="{{'active' if loop.index0 == 0}}" aria-current="true" aria-label="Slide {{ loop.index0 + 1 }}"></button>
-                {% endfor %}
-                {% for photo in project['photos'] %}
-                <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="{{ loop.index0 }}"
-                    class="{{'active' if ((loop.index0 == 0) and (not 'videos' in project)) }}" aria-current="true" aria-label="Slide {{ loop.index0 + 1 }}"></button>
-                {% endfor %}
-            </div>
+{{ backdrop('project-background.jpg', 'bg-term-panel/70') }}
 
-            <!-- Wrapper for slides -->
-            <div class="carousel-inner">
-                {% for video in project['videos'] %}
-                <div class="carousel-item {{'active' if loop.index0 == 0}}">
-                    <div class="fixed-size-container">
-                    {{ project['videos'][loop.index0] | safe }}
-                    </div>
-                </div>
-                {% endfor %}
-                {% for photo in project['photos'] %}
-                <div class="carousel-item {{'active' if ((loop.index0 == 0) and (not 'videos' in project)) }}">
-                    <div class="fixed-size-container">
-                        <img src="{{photo}}" alt="project-photo" class="d-block w-100">
-                    </div>
+{# Split screen: the media column is fixed and doesn't scroll, the text column
+   does. Collapses to a single stacked column below the split breakpoint. #}
+<main id="main" class="flex h-[calc(100vh-64px)] items-center justify-end max-split:h-auto max-split:flex-col max-split:items-center">
+
+    {# Desktop: fixed beside the text. Mobile: sticky under the nav so the images
+       stay on screen while you read. #}
+    <div class="fixed right-1/2 flex w-1/2 items-center justify-center max-split:sticky max-split:top-16 max-split:z-20 max-split:right-auto max-split:w-full max-split:border-b max-split:border-breeze-grey max-split:bg-term-panel/85 max-split:py-2 max-split:backdrop-blur-[10px]">
+        {% set slides = (project['videos'] | list if project.get('videos') else []) + (project['photos'] | list if project.get('photos') else []) %}
+        {% if slides %}
+        <div class="relative mx-auto w-[500px] max-w-[90vw]">
+            {# Scroll-snap pages it, so swipe works with JS off. Arrows are real
+               buttons, shipped hidden so no-JS never gets dead controls. #}
+            <div id="carousel" data-carousel
+                 class="flex snap-x snap-mandatory scroll-smooth overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                {% for slide in slides %}
+                <div id="slide-{{ loop.index }}"
+                     class="flex h-[500px] w-full shrink-0 snap-center items-center justify-center max-md:h-[26vh] md:max-split:h-[30vh]">
+                    {% if slide is string and slide.startswith('<') %}
+                    {{ slide | safe }}
+                    {% else %}
+                    <img src="{{ slide }}" alt="{{ project['project_name'] }} photo {{ loop.index }}"
+                         loading="{{ 'eager' if loop.first else 'lazy' }}" decoding="async"
+                         class="max-h-full max-w-full object-contain">
+                    {% endif %}
                 </div>
                 {% endfor %}
             </div>
 
-            <!-- Left and right controls -->
-            {% if ((project['videos'] | length) + (project['photos'] | length)) > 1 %}
-            <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
+            {% if slides | length > 1 %}
+            {# A strip, not overlaid arrows: object-contain leaves a wide gutter
+               beside portrait photos. Paging wraps, so neither arrow disables. #}
+            <div class="mt-2 flex items-center justify-center gap-3">
+                <button data-carousel-prev hidden type="button" aria-label="Previous image"
+                        class="inline-flex cursor-pointer items-center justify-center rounded-none border border-accent bg-term-panel/60 px-3 py-1 text-accent transition-colors duration-200 hover:bg-accent hover:text-term-panel focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent split:px-4 split:py-1.5 text-lg split:text-2xl motion-reduce:transition-none">{{ icon('chevron_left') }}</button>
+                <span data-carousel-count
+                      class="font-mono text-[10px] tracking-widest text-breeze-grey tabular-nums split:text-xs">01 / {{ '%02d' | format(slides | length) }}</span>
+                <button data-carousel-next hidden type="button" aria-label="Next image"
+                        class="inline-flex cursor-pointer items-center justify-center rounded-none border border-accent bg-term-panel/60 px-3 py-1 text-accent transition-colors duration-200 hover:bg-accent hover:text-term-panel focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent split:px-4 split:py-1.5 text-lg split:text-2xl motion-reduce:transition-none">{{ icon('chevron_right') }}</button>
+            </div>
+            {# Dots are desktop-only: 16 of them on a phone reads as a barcode,
+               and the counter already answers "which image am I on". #}
+            <div class="mt-2 hidden flex-wrap justify-center gap-1.5 split:flex">
+                {% for slide in slides %}
+                <a href="#slide-{{ loop.index }}" data-carousel-dot
+                   aria-label="Go to image {{ loop.index }} of {{ slides | length }}"
+                   {% if loop.first %}aria-current="true"{% endif %}
+                   class="h-1.5 w-4 rounded-none bg-breeze-grey transition-all duration-200 hover:bg-breeze-fg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent aria-[current=true]:w-7 aria-[current=true]:bg-accent motion-reduce:transition-none"></a>
+                {% endfor %}
+            </div>
             {% endif %}
         </div>
         {% endif %}
     </div>
 
-    <div class="wrapper scroll-wrapper">
-        <div class="heading">
-            <div class="title">{{ project['project_name'] }}</div>
+    <div class="flex h-full w-1/2 flex-col overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden max-split:h-auto max-split:w-full max-split:overflow-visible max-split:px-5">
+        <header>
+            <h1 class="mt-5 font-display text-[60px] leading-tight font-extrabold text-white max-split:mt-2.5 max-split:text-[40px]">{{ project['project_name'] }}</h1>
+            <p class="mr-[100px] mb-5 text-meta max-split:mr-5 max-split:mb-2.5">{{ project['date'] }}</p>
 
-            <div class="date">{{ project['date'] }}</div>
-
-            <div class="md-chips">
+            <div class="flex flex-wrap gap-1">
                 {% for tag in project['tags'] %}
-                <div class="md-chip md-chip-clickable"><a class="md-chip-link" href="/🚧projects🚧?tags={{tag}}">{{tag}}</a>
-                </div>
+                {{ chip(tag, href=url_for('projects', tags=tag)) }}
                 {% endfor %}
             </div>
 
-            <div class="links">
-                {% if 'github' in project %}
-                  <div><a class="outgoing-links" href="{{ project['github'] }}">Find on Github</a></div>
+            <div class="mt-5 mb-2.5 flex flex-col gap-1">
+                {% if project.get('github') %}
+                <a href="{{ project['github'] }}" target="_blank" rel="noopener noreferrer"
+                   class="w-fit text-link underline-offset-2 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">Find on GitHub</a>
                 {% endif %}
-                {% if 'website' in project %}
-                  <div><a class="outgoing-links" href="{{ project['website'] }}">View Website</a></div>
+                {% if project.get('website') %}
+                <a href="{{ project['website'] }}" target="_blank" rel="noopener noreferrer"
+                   class="w-fit text-link underline-offset-2 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">View website</a>
                 {% endif %}
             </div>
-        </div>
-        <div class="content">{{ project['description'] | safe }}</div>
-    </div>
-</div>
+        </header>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        {# The stored description is bare classless HTML, and preflight strips
+           list markers, so these variants style the tags directly. #}
+        <div class="pb-10 text-white
+                    [&_p]:my-3 [&_ul]:my-3 [&_ol]:my-3
+                    [&_ul]:list-disc [&_ul]:list-outside [&_ul]:ps-6
+                    [&_ol]:list-decimal [&_ol]:list-outside [&_ol]:ps-6
+                    [&_ul_ul]:my-1 [&_ul_ul]:list-[circle]
+                    [&_li]:my-1
+                    [&_h2]:mt-5 [&_h2]:mb-2 [&_h2]:text-2xl
+                    [&_h3]:mt-4 [&_h3]:mb-2 [&_h3]:text-xl
+                    [&_a]:text-link [&_a]:underline [&_a]:underline-offset-2
+                    [&_code]:rounded-sm [&_code]:bg-term-panel [&_code]:px-1 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-sm
+                    [&_pre]:overflow-x-auto [&_pre]:rounded-md [&_pre]:bg-term-panel/50 [&_pre]:p-3
+                    [&_img]:h-auto [&_img]:max-w-full [&_img]:rounded-md
+                    [&_.lb]:italic">{{ project['description'] | safe }}</div>
+    </div>
+</main>
+
+<script src="{{ url_for('static', filename='js/carousel.js') }}" defer></script>
 {% endblock %}

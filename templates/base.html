@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+{# Reserve the scrollbar gutter always, or the right nav shifts between short and long pages. #}
+<html lang="en" class="[scrollbar-gutter:stable]">
     <head>
         <!-- Title and regular tags -->
-        <title>Benson Chow</title>
-        <meta name="title" content="Benson Chow">
-        <meta name="description" content="Benson Chow's personal website">
+        <title>{% block page_title %}Benson Chow{% endblock %}</title>
+        <meta name="title" content="{{ self.page_title() }}">
+        <meta name="description" content="{% block page_description %}Benson Chow's personal website{% endblock %}">
         <meta name="keywords" content="benson chow,bensonchow,benson">
         <meta name="robots" content="index, follow">
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -17,55 +18,76 @@
         <meta name="darkreader-lock">
 
         <!-- Facebook Meta Tags -->
-        <meta property="og:url" content="{{ url_for('index') }}">
+        <meta property="og:url" content="{{ url_for('index', _external=True) }}">
         <meta property="og:type" content="website">
-        {% set page_title = self.page_title() if self.page_title else "Benson Chow" %}
-        {% set page_description = self.page_description() if self.page_description else "Benson Chow's personal website" %}
-        <meta property="og:title" content="{{ page_title }}">
-        <meta property="og:description" content="{{ page_description }}">
-        <meta property="og:image" content="{{ url_for('static', filename='images/benson-chow.jpg') }}">
+        <meta property="og:title" content="{{ self.page_title() }}">
+        <meta property="og:description" content="{{ self.page_description() }}">
+        <meta property="og:image" content="{{ url_for('static', filename='images/benson-chow.jpg', _external=True) }}">
 
         <!-- Twitter Meta Tags -->
         <meta name="twitter:card" content="summary_large_image">
         <meta property="twitter:domain" content="{{ request.host }}">
-        <meta property="twitter:url" content="{{ url_for('index') }}">
-        <meta name="twitter:title" content="{{ page_title }}">
-        <meta name="twitter:description" content="{{ page_description }}">
-        <meta name="twitter:image" content="{{ url_for('static', filename='images/benson-chow.jpg') }}">
+        <meta property="twitter:url" content="{{ url_for('index', _external=True) }}">
+        <meta name="twitter:title" content="{{ self.page_title() }}">
+        <meta name="twitter:description" content="{{ self.page_description() }}">
+        <meta name="twitter:image" content="{{ url_for('static', filename='images/benson-chow.jpg', _external=True) }}">
 
         <!--Favicons-->
         <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='favicons/apple-touch-icon.png') }}">
         <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='favicons/favicon-32x32.png') }}">
         <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='favicons/favicon-16x16.png') }}">
         <link rel="manifest" href="{{ url_for('static', filename='favicons/site.webmanifest') }}">
-        <link rel="mask-icon" href="{{ url_for('static', filename='favicons/safari-pinned-tab.svg') }}" color="#5bbad5">
+        <link rel="mask-icon" href="{{ url_for('static', filename='favicons/safari-pinned-tab.svg') }}" color="#3daee9">
         <link rel="shortcut icon" href="{{ url_for('static', filename='favicons/favicon.ico') }}">
-        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="msapplication-TileColor" content="#3daee9">
         <meta name="msapplication-config" content="{{ url_for('static', filename='favicons/browserconfig.xml') }}">
-        <meta name="theme-color" content="#f79862">
+        {# theme colour is the breeze background colour. #}
+        <meta name="theme-color" content="#232627">
 
         <!-- Viewport declaration -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!--fonts-->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&family=Orbitron:wght@400;700;900&family=Roboto:wght@900&family=Source+Code+Pro:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-        <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+        {# Preloaded: the stylesheet has to parse before the browser finds these.
+           The icon font is font-display:block, so icons are invisible until it lands. #}
+        <link rel="preload" as="font" type="font/woff2" crossorigin
+              href="{{ url_for('static', filename='fonts/jetbrains-mono.woff2') }}">
+        <link rel="preload" as="font" type="font/woff2" crossorigin
+              href="{{ url_for('static', filename='fonts/nerd-icons.woff2') }}">
+        <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}">
 
         {% block head %}
         {% endblock %}
     </head>
-    <body>
-        <div class="navbar-ul">
-            <ul id="navbar-list" class="list-inline">
-                <li><a class="navbar-ref" href="{{ url_for('index') }}"><b>About me</b></a></li>
-                <li><a class="navbar-ref" href="{{ url_for('projects') }}"><b>Projects</b></a></li>
-                <li><a class="navbar-ref" href="{{ url_for('music') }}"><b>Music</b></a></li>
-                <li><a class="navbar-ref" href="{{ url_for('resume') }}"><b>Résumé</b></a></li>
-                <li><a class="navbar-ref" href="{{ url_for('keys') }}"><b>Keys</b></a></li>
+    {# One Breeze colour per page 404 falls back to src/app.css default. #}
+    {% set accents = {
+        'index':    '#11d116',
+        'projects': '#1d99f3',
+        'project':  '#1d99f3',
+        'music':    '#fdbc4b',
+        'resume':   '#ed1515'
+    } %}
+    {# Backdrops are fixed and paint one viewport #}
+    <body class="min-h-screen bg-term-panel selection:bg-[#3daee9] selection:text-[#fcfcfc]"
+          {%- if accents.get(request.endpoint) %}
+          style="--color-accent:{{ accents[request.endpoint] }}"
+          {%- endif %}>
+        <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-100 focus:bg-white focus:px-4 focus:py-2 focus:text-term-panel">Skip to content</a>
+        {# h-16 is pinned: layouts below do calc(100vh - 64px). #}
+        <nav class="sticky top-0 z-50 flex h-16 w-full items-center justify-end bg-term-panel/50 backdrop-blur-md">
+            <ul class="flex w-1/2 list-none justify-around max-split:w-full max-split:pl-0">
+                {% for endpoint, label in [
+                    ('index', 'About me'), ('projects', 'Projects'), ('music', 'Music'),
+                    ('resume', 'Résumé')
+                ] %}
+                {# Each link carries its OWN page's Breeze colour. #}
+                <li><a href="{{ url_for(endpoint) }}"
+                       style="--nav-accent:{{ accents[endpoint] }}"
+                       {% if request.endpoint == endpoint %}aria-current="page"{% endif %}
+                       class="rounded-none px-3 py-1.5 font-mono text-sm tracking-widest uppercase no-underline transition-colors duration-200 hover:bg-[var(--nav-accent)] hover:text-term-panel focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent max-split:px-2 max-split:text-xs motion-reduce:transition-none {{ 'text-accent' if request.endpoint == endpoint else 'text-breeze-fg' }}">{{ label }}</a></li>
+                {% endfor %}
             </ul>
-        </div>
+        </nav>
         {% block body %}
         {% endblock %}
     </body>

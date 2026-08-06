@@ -1,64 +1,127 @@
 {% extends "base.html" %}
+{% from "_macros.html" import backdrop, icon with context %}
 
-{% block head %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
-{% endblock %}
+{% block page_title %}Benson Chow{% endblock %}
+{% block page_description %}Benson Chow's personal website — projects, 3D printing, hi-fi audio, mechanical keyboards and self-hosted infrastructure.{% endblock %}
 
 {% block body %}
-<div class="background"></div>
-<div class="body-container">
-    <div class="wrapper fixed-wrapper">
-        <section id="terminal">
-            <div id="terminal-container">
-                <div class="terminal">
-                    <div class="window-title">
-                        <span class="title">benson@my-computer:~</span>
-                    </div>
-                    <div class="message">
-                            <span class='user'>benson</span><span class="at">@</span><span class="path">my-computer</span><span class="caret">:~$</span>
-                        <span class="typed"></span>
-                    </div>
+{{ backdrop('home-background.jpg', 'bg-term-panel/50') }}
+
+{# Terminal left, text right, terminal drops below the breakpoint. Nothing is
+   fixed: only the right column scrolls, and pt-[28.2vh] lines the two tops up. #}
+<div class="flex h-[calc(100vh-64px)] items-start justify-center max-split:h-auto max-split:flex-col">
+
+    <div class="w-1/2 pt-[28.2vh] max-split:hidden">
+        <section aria-label="Terminal">
+            {# Fixed height so the panel doesn't grow as the output prints.
+               Raise it if the bottom swatch row looks clipped. #}
+            <div class="relative mx-auto h-[clamp(336px,42vh,496px)] w-[94%] max-w-[820px] overflow-hidden rounded-none border border-breeze-grey bg-term-panel/95 px-5 py-4 font-mono shadow-[0_1px_10px_rgba(35,38,39,0.55)] before:pointer-events-none before:absolute before:top-0 before:left-0 before:z-20 before:h-2 before:w-2 before:border-t before:border-l before:border-accent before:content-[''] after:pointer-events-none after:absolute after:right-0 after:bottom-0 after:z-20 after:h-2 after:w-2 after:border-r after:border-b after:border-accent after:content-['']">
+                {# Real markup, not a JS string, so it survives JS being off.
+                   type.js hides it and reveals it character by character. #}
+                <div class="relative z-[999] text-[length:clamp(12px,0.82vw,17px)] text-breeze-fg">
+                    {# Every colour here is a real Konsole Breeze entry. The ANSI
+                       slots are listed in src/app.css. #}
+                    <span class="font-bold text-breeze-green">benson@my-computer</span>:<span class="font-bold text-breeze-blue">~</span>$
+                    <span data-type>
+                        fastfetch<br>
+                        {# data-instant prints it as a block, data-delay holds it back.
+                           Tux outline is Color0Intense because Color0 is the panel bg. #}
+                        <span data-instant data-delay="1000" class="my-2 flex items-start gap-4">
+                            <pre aria-hidden="true" class="shrink-0 text-[length:clamp(10px,0.85vw,17px)] leading-[1.15] max-tiny:hidden"><span class="text-breeze-fg">        </span><span class="text-breeze-grey">#####</span>
+<span class="text-breeze-grey">       </span><span class="text-breeze-grey">#######</span>
+<span class="text-breeze-grey">       </span><span class="text-breeze-grey">##</span><span class="text-breeze-fg">O</span><span class="text-breeze-grey">#</span><span class="text-breeze-fg">O</span><span class="text-breeze-grey">##</span>
+<span class="text-breeze-grey">       </span><span class="text-breeze-grey">#</span><span class="text-breeze-yellow">#####</span><span class="text-breeze-grey">#</span>
+<span class="text-breeze-grey">     </span><span class="text-breeze-grey">##</span><span class="text-breeze-fg">##</span><span class="text-breeze-yellow">###</span><span class="text-breeze-fg">##</span><span class="text-breeze-grey">##</span>
+<span class="text-breeze-grey">    </span><span class="text-breeze-grey">#</span><span class="text-breeze-fg">##########</span><span class="text-breeze-grey">##</span>
+<span class="text-breeze-grey">   </span><span class="text-breeze-grey">#</span><span class="text-breeze-fg">############</span><span class="text-breeze-grey">##</span>
+<span class="text-breeze-grey">   </span><span class="text-breeze-grey">#</span><span class="text-breeze-fg">############</span><span class="text-breeze-grey">###</span>
+<span class="text-breeze-grey">  </span><span class="text-breeze-yellow">##</span><span class="text-breeze-grey">#</span><span class="text-breeze-fg">###########</span><span class="text-breeze-grey">##</span><span class="text-breeze-yellow">#</span>
+<span class="text-breeze-yellow">######</span><span class="text-breeze-grey">#</span><span class="text-breeze-fg">#######</span><span class="text-breeze-grey">#</span><span class="text-breeze-yellow">######</span>
+<span class="text-breeze-yellow">#######</span><span class="text-breeze-grey">#</span><span class="text-breeze-fg">#####</span><span class="text-breeze-grey">#</span><span class="text-breeze-yellow">#######</span>
+<span class="text-breeze-yellow">  </span><span class="text-breeze-yellow">#####</span><span class="text-breeze-grey">#######</span><span class="text-breeze-yellow">#####</span></pre>
+
+                            <span class="min-w-0 flex-1 text-[length:clamp(11px,0.72vw,15px)] leading-[1.55]">
+                                <span class="font-bold text-breeze-mint">benson@my-computer</span><br>
+                                <span class="text-breeze-grey">------------------</span><br>
+                                <span class="font-bold text-breeze-mint">Hobbies</span>: programming, audiophilia, 3D printing,<br>
+                                <span class="invisible">Hobbies</span>&nbsp; VR, GNU/ Linux enthusiast, hardware tinkering<br>
+                                <span class="font-bold text-breeze-mint">Organisation</span>: Year 2 at <a href="https://www.york.ac.uk/" target="_blank" rel="noopener noreferrer" class="border-b border-dotted border-breeze-grey text-breeze-grey no-underline hover:border-breeze-fg hover:text-breeze-fg">University of York</a><br>
+                                {# Real fastfetch says "WM Theme" and "Terminal Font".
+                                   Both answers are honest either way. #}
+                                <span class="font-bold text-breeze-mint">Website Palette</span>: KDE Breeze inspired palette<br>
+                                <span class="font-bold text-breeze-mint">Website Font</span>: JetBrains Mono <span class="text-breeze-grey">[OFL-1.1]</span><br>
+                                <span class="font-bold text-breeze-mint">Website Icons</span>: Nerd Fonts <span class="text-breeze-grey">[MIT]</span><br>
+
+                                {# All 16 Breeze colours, normal row then intense.
+                                   Color0 ghosts because it is the panel bg. #}
+                                <span class="mt-1 flex flex-col">
+                                    {% for row in [
+                                        ['#232627','#ed1515','#11d116','#f67400','#1d99f3','#9b59b6','#1abc9c','#fcfcfc'],
+                                        ['#7f8c8d','#c0392b','#1cdc9a','#fdbc4b','#3daee9','#8e44ad','#16a085','#ffffff']
+                                    ] %}
+                                    <span class="flex">
+                                        {% for c in row %}
+                                        <span class="h-3 w-4" style="background-color:{{ c }}"></span>
+                                        {% endfor %}
+                                    </span>
+                                    {% endfor %}
+                                </span>
+                            </span>
+                        </span>
+                        {# A real shell prints the next prompt the instant the
+                           command returns, so this is never typed out. #}
+                        <span data-instant><span class="font-bold text-breeze-green">benson@my-computer</span>:<span class="font-bold text-breeze-blue">~</span>$</span>
+                    </span><span data-caret hidden aria-hidden="true" class="inline-block h-[1.05em] w-[0.55em] translate-y-[0.15em] animate-blink bg-breeze-fg motion-reduce:animate-none"></span>
                 </div>
             </div>
         </section>
     </div>
-    <div class="wrapper scroll-wrapper">
-        <div class="top-text">
-            <p class="text-title desktop-view">Benson</p>
-            <p class="text-title desktop-view">Chow</p>
-            <p class="text-title mobile-view">Benson chow</p>
-            <div class="social-icons">
-                <a  target="_blank" href="https://github.com/bensonchow123">
-                    <img class="title-logo" src="{{ url_for('static', filename='images/github-icon.svg') }}"
-                         alt="github icon"></a>
-                <a target="_blank" href="https://open.spotify.com/user/31wfzod4x3udnenb4k562jhihiyu?si=342a4d15ec754519">
-                    <img class="title-logo" src="{{ url_for('static', filename='images/spotify-logo.svg') }}"
-                         alt="twitter icon"></a>
-                <a target="_blank" href="https://discordapp.com/users/736933464292589568">
-                    <img class="title-logo" src="{{ url_for('static', filename='images/discord_icon.svg') }}"
-                         alt="discord icon"></a> <!-- if newline after /a tag, it adds an underscore for some reason -->
+
+    {# Same pt-[28.2vh] as the left column. This is the only scroll container. #}
+    <main id="main" class="flex h-full w-1/2 flex-col overflow-y-auto pt-[28.2vh] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden max-split:h-auto max-split:w-full max-split:items-center max-split:overflow-visible max-split:pt-[15vh]">
+        <div class="flex flex-col justify-center">
+            {# Drops the empty space above the caps so the B meets the terminal
+               border. 0.13em from JetBrains Mono's metrics, em so it scales. #}
+            <h1 class="m-0 -mt-[0.13em] font-display text-[80px] leading-none font-extrabold text-white max-split:text-[70px] max-tiny:text-[40px]">
+                <span class="block max-split:hidden">Benson</span>
+                <span class="block max-split:hidden">Chow</span>
+                <span class="hidden max-split:block">Benson chow</span>
+            </h1>
+            <div class="flex max-split:justify-center">
+                {% for href, name, label in [
+                    ('https://github.com/bensonchow123', 'github', 'GitHub'),
+                    ('https://codeberg.org/Benson_Chow', 'codeberg', 'Codeberg'),
+                    ('https://open.spotify.com/user/31wfzod4x3udnenb4k562jhihiyu?si=342a4d15ec754519', 'spotify', 'Spotify')
+                ] %}
+                <a href="{{ href }}" target="_blank" rel="noopener noreferrer" aria-label="{{ label }}"
+                   class="mr-3 ml-0.5 text-2xl text-breeze-fg opacity-60 transition-opacity duration-200 hover:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent max-split:opacity-100 motion-reduce:transition-none">{{ icon(name) }}</a>
+                {% endfor %}
+            </div>
+
+            {# Sits with the other identity links, one download doesn't earn a route. #}
+            <a href="{{ url_for('static', filename='keys/bensonchow_gpg.asc') }}" download
+               class="group mt-5 inline-flex w-fit items-center gap-2.5 rounded-none border border-accent bg-term-panel/60 py-2 pr-4 pl-3.5 font-mono text-xs tracking-wider text-breeze-fg uppercase backdrop-blur-[10px] transition duration-200 hover:bg-term-panel/75 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent max-split:mx-auto motion-reduce:transition-none">
+                {# accent, not a lighter step: the border next to it is accent. #}
+                {{ icon('key', 'text-base text-accent') }}
+                GPG public key
+                <span aria-hidden="true"
+                      class="text-breeze-grey transition-transform duration-200 group-hover:translate-y-0.5 motion-reduce:transition-none">&darr;</span>
+            </a>
+        </div>
+
+        <div class="mt-[5vh] mr-2.5 max-split:mx-5 max-tiny:mx-2.5">
+            <div class="my-[5px] flex flex-col gap-4 pl-[5px] pb-10 text-white">
+                <p>Hi there! I'm Benson Chow. This site is where I share my projects and hobbies.</p>
+                <p>I love 3D printing and learning CAD, mostly using my QIDI Q1 Pro coreXY printer and Kingroon filament dryer to make custom parts for my other interests.</p>
+                <p>I'm also into high-fidelity audio and collect FLAC music. To manage my library, I built a personal streaming service on a Raspberry Pi, and I even track every track I play, you can see the stats on the <a href="{{ url_for('music') }}" class="text-link underline underline-offset-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">Music page</a>.</p>
+                <p>Another hobby is building and modding mechanical keyboards, my favorite build so far is a customized Keychron Q3.</p>
+                <p>Programming ties all these interests together. I daily-drive an Arch Linux system (LUKS-encrypted BTRFS with KDE Plasma), and uses various GNU/ Linux, MacOS, windows server systems to run my applications.</p>
+                <p>This site is built with Python Flask, hosted on a fasthost VPS (also used for Wireguard port forward), through Gunicorn and Nginx, accessable through my .how domain.</p>
+                <p>You can read more about projects mentioned in the <a href="{{ url_for('projects') }}" class="text-link underline underline-offset-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">Projects page</a>!</p>
             </div>
         </div>
-        <div class="middle-text">
-           <div class="text-content">
-                Hi there! I'm Benson Chow. This site is where I share my projects and hobbies.<br><br>
-
-                I love 3D printing and learning CAD, mostly using my QIDI Q1 Pro coreXY printer and Kingroon filament dryer to make custom parts for my other interests.<br><br>
-
-                I'm also into high-fidelity audio and collect FLAC music. To manage my library, I built a personal streaming service on a Raspberry Pi, and I even track every track I play, you can see the stats on the Music page.<br><br>
-
-                Another hobby is building and modding mechanical keyboards, my favorite build so far is a customized Keychron Q3.<br><br>
-
-                Programming ties all these interests together. I daily-drive an Arch Linux system (LUKS-encrypted BTRFS with KDE Plasma), and uses various GNU/ Linux, MacOS, windows server systems to run my applications.<br><br>
-
-                This site is built with Python Flask, hosted on a fasthost VPS (also used for Wireguard port forward), through Gunicorn and Nginx, accessable through my .how domain.<br><br>
-                
-                You can read more about projects mentioned in the Projects page!<br><br>
-            </div>
-        </div>
-    </div>
+    </main>
 </div>
 
-<script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
-<script src="{{ url_for('static', filename='js/home.js') }}"></script>
+<script src="{{ url_for('static', filename='js/type.js') }}" defer></script>
 {% endblock %}

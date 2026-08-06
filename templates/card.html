@@ -1,46 +1,46 @@
-<div class="col s12 m4 l4">
-    <div class="card hoverable">
-        <div class="card-image waves-effect waves-block waves-light">
-            {% if 'photos' in project %}
-            <img class="card-image activator" src={{project['photos'][0]}}/>
-            {% else %}
-            <img class="card-image activator" src="/static/images/project_default.png/">
+{# Included in a loop by projects.html, so `project` comes from that scope.
+   Stretched link over the whole card, no hover-reveal panel (touch never sees it). #}
+<article class="group relative flex h-[380px] w-full max-w-[320px] min-w-[300px] flex-col overflow-hidden rounded-none border border-breeze-grey bg-term-panel/60 backdrop-blur-[10px] transition duration-200 hover:-translate-y-1 hover:border-accent motion-reduce:transition-none before:pointer-events-none before:absolute before:top-0 before:left-0 before:z-20 before:h-2 before:w-2 before:border-t before:border-l before:border-accent before:content-[''] after:pointer-events-none after:absolute after:right-0 after:bottom-0 after:z-20 after:h-2 after:w-2 after:border-r after:border-b after:border-accent after:content-['']">
+
+    <div class="relative h-[150px] shrink-0 overflow-hidden border-b border-breeze-grey bg-term-panel">
+        <img src="{{ project['photos'][0] if project.get('photos') else url_for('static', filename='images/project_default.png') }}"
+             alt="{{ project['project_name'] }}" loading="lazy" decoding="async"
+             class="h-full w-full object-contain p-2 transition-transform duration-300 group-hover:scale-[1.03] motion-reduce:transition-none">
+        {# Fades the image into the card body instead of ending on a hard edge. #}
+        <div aria-hidden="true" class="pointer-events-none absolute inset-x-0 bottom-0 h-12 bg-linear-to-t from-black/70 to-transparent"></div>
+    </div>
+
+    <div class="flex min-h-0 flex-1 flex-col p-4">
+        {# Two reserved rows so titles line up across a row. Chips are h-6 with a
+           4px gap, so 52px clips a third row instead of half-showing it. #}
+        <div class="flex h-[52px] flex-wrap content-start gap-1 overflow-hidden">
+            {% for tag in project['tags'] %}
+            {{ chip(tag, href=url_for('projects', tags=tag)) }}
+            {% endfor %}
+        </div>
+
+        <h3 class="mt-1 truncate text-base text-white transition-colors duration-200 group-hover:text-accent motion-reduce:transition-none"
+            title="{{ project['project_name'] }}">{{ project['project_name'] }}</h3>
+        <p class="font-mono text-[10px] tracking-wider text-breeze-grey uppercase">{{ project['date'] }}</p>
+        <p class="mt-2 line-clamp-3 text-sm text-breeze-fg">{{ project['short'] }}</p>
+
+        <div class="mt-auto flex items-center gap-3 pt-2 text-xs">
+            {# relative + z-20 lifts these clear of the stretched link below. #}
+            {% if project.get('github') %}
+            <a href="{{ project['github'] }}" target="_blank" rel="noopener noreferrer"
+               class="relative z-20 font-mono text-[10px] tracking-wider text-breeze-grey uppercase underline-offset-2 transition-colors duration-200 hover:text-white hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent motion-reduce:transition-none">GitHub</a>
             {% endif %}
-        </div>
-        <div class="card-content activator">
-            <div class="container-outer">
-                <div class="md-chips container-inner">
-                    {% for tag in project['tags'] %}
-                    <div class="md-chip md-chip-clickable"><a class="md-chip-link" href="/🚧projects🚧?tags={{tag}}">{{tag}}</a>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-            <div>
-                <span class="title" title="{{project['project_name']}}">
-                  {{project['project_name']}}
-                </span>
-                <i class="material-icons right icon-white">more_vert</i>
-            </div>
-            <div>
-                <span class="status" style="font-size: 0.95rem; color: #888;">{{project['date']}}</span>
-            </div>
-            <div>
-                <span><a href="/🚧projects🚧/{{project['directory_name']}}">Read More</a></span>
-                {% if 'website' in project %}
-                    <span><a href={{project['website']}}> | Website</a></span>
-                {% endif %}
-                {% if 'github' in project %}
-                    <span><a href={{project['github']}}> | Github</a></span>
-                {% endif %}
-            </div>
-        </div>
-        <div class="card-reveal">
-            <span class="card-title">{{project['project_name']}}<i
-                    class="material-icons right icon-white">close</i></span>
-            <div><span class="status">{{project['date']}}</span></div>
-            <p class="class-content">{{project['short']}}</p>
-            <span><a href="/🚧projects🚧/{{project['directory_name']}}">Read More</a></span>
+            {% if project.get('website') %}
+            <a href="{{ project['website'] }}" target="_blank" rel="noopener noreferrer"
+               class="relative z-20 font-mono text-[10px] tracking-wider text-breeze-grey uppercase underline-offset-2 transition-colors duration-200 hover:text-white hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent motion-reduce:transition-none">Website</a>
+            {% endif %}
+            <span class="ml-auto font-mono text-[10px] tracking-wider text-accent uppercase transition-transform duration-200 group-hover:translate-x-0.5 motion-reduce:transition-none" aria-hidden="true">Read more &rarr;</span>
         </div>
     </div>
-</div>
+
+    {# z-10 keeps this under the chips and outbound links at z-20. #}
+    <a href="{{ url_for('project', title=project['directory_name']) }}"
+       class="absolute inset-0 z-10 rounded-none focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
+        <span class="sr-only">Read more about {{ project['project_name'] }}</span>
+    </a>
+</article>

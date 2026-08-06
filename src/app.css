@@ -1,9 +1,11 @@
 /*
  * Tailwind v4 entry point. Build with `npm run build:css`.
  *
- * This file must only ever contain @import, @source and @theme. The site has no
- * custom CSS: if a @layer or @utility block shows up here, something that should
- * have been a utility class wasn't, and it's worth working out why first.
+ * This file must only ever contain @import, @source, @font-face and @theme. The
+ * site has no custom CSS: if a @layer or @utility block shows up here, something
+ * that should have been a utility class wasn't, and it's worth working out why
+ * first. @font-face is the one exception, since self-hosted fonts have nowhere
+ * else to be declared without adding a second stylesheet.
  *
  * The one stylesheet outside Tailwind is static/css/resume.css, which exists
  * because WeasyPrint renders the PDF and can't be trusted with Tailwind's
@@ -17,16 +19,66 @@
 @source "../templates/**/*.html";
 @source "../static/js/**/*.js";
 
+/* The site's one typeface, self-hosted from static/fonts so no third-party
+   origin is involved. */
+
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url("/static/fonts/jetbrains-mono.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url("/static/fonts/jetbrains-mono-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: italic;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url("/static/fonts/jetbrains-mono-italic.woff2") format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: italic;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url("/static/fonts/jetbrains-mono-italic-ext.woff2") format("woff2");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* Nerd Fonts symbols, subset to the nine glyphs the site uses. block, not swap:
+   a fallback has nothing at these codepoints, so swapping shows tofu first. */
+@font-face {
+  font-family: "Nerd Icons";
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url("/static/fonts/nerd-icons.woff2") format("woff2");
+  unicode-range: U+F017, U+F053, U+F054, U+F073, U+F084, U+F09B, U+F0EB, U+F1BC, U+F330;
+}
+
 @theme {
   /* Breakpoints, for desktop and mobile. */
   --breakpoint-split: 1094px;
   --breakpoint-tiny: 600px;
 
-  /* Type. Overriding --font-sans rewires preflight's document default, which is
-     what the old base.css body { font-family } rule did. */
-  --font-sans: "Open Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Roboto", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "Source Code Pro", ui-monospace, SFMono-Regular, Menlo, monospace;
+  /* One family sitewide. Overriding --font-sans sets preflight's default. */
+  --font-sans: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-display: var(--font-sans);
+  --font-mono: var(--font-sans);
+  --font-icon: "Nerd Icons";
 
   /* Terminal cursor blink. Tailwind's own animate-pulse is a fade to
      50% opacity, so need define custom one. */
@@ -47,7 +99,7 @@
   --color-breeze-yellow: #fdbc4b; /* Color3Intense, the Tux beak and feet */
 
   /* Per-page accent, rebound on <body> in base.html from request.endpoint. One
-     token, no scale — see base.html for why. This default is what unlisted
+     token, no scale, see base.html for why. This default is what unlisted
      routes (404) fall back to. */
   --color-accent: #1d99f3; /* Color4 */
 
