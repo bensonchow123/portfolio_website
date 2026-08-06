@@ -1,14 +1,10 @@
 """View-model builder for the music page.
 
-Data comes from the scrobble_vault service (FastAPI + Postgres), which lives in
-the separate last-analysis project and is consumed here over HTTP only. This
-module never talks to its database and does not depend on its internals beyond
+Data comes from the scrobble_vault, which lives in the separate last-analysis project. 
+This module never talks to its database and does not depend on its internals beyond
 the shape of the /music-summary response.
 
-Everything the template needs is computed here rather than in Jinja or the
-browser: bar heights, axis ticks, image fallbacks and relative times are all
-resolved server-side so music.html stays a straight rendering of a dict, and so
-the page needs no JavaScript at all.
+Everything the template needs is computed here, and seperated into sections.
 """
 
 import math
@@ -35,8 +31,7 @@ DEFAULT_PERIOD = "7d"
 DISCOVERY_LIMIT = 10
 
 # gunicorn serves this with threads, so two requests can miss the cache at the
-# same instant. The lock costs nothing on the hit path and stops a thundering
-# herd of 1.8MB fetches when the TTL expires.
+# same instant. The lock costs nothing on the hit path and stops 1.8MB fetches when the TTL expires.
 _cache = {"fetched_at": 0.0, "payload": None}
 _cache_lock = threading.Lock()
 
@@ -49,7 +44,7 @@ def fetch_summary(force=False):
     """Return the /music-summary payload, cached for CACHE_TTL_SECONDS.
 
     If the vault is unreachable but a previous payload is cached, the stale one
-    is served rather than failing the page — a slightly out-of-date chart beats
+    is served rather than failing the page, a slightly out-of-date chart beats
     an error card.
     """
     now = time.monotonic()
@@ -124,7 +119,7 @@ def format_utc(unix_seconds, with_time=True):
 
 
 def comma(value):
-    """Thousands separator; the Jinja equivalent of JS toLocaleString()."""
+    """Thousands separator, the Jinja equivalent of JS toLocaleString()."""
     try:
         return f"{int(value):,}"
     except (TypeError, ValueError):
@@ -234,7 +229,7 @@ def weekday_chart(weekday):
 def pick_image(item, *prefixes):
     """First non-null artwork URL, largest first, trying each prefix in order.
 
-    Any of these keys can be null — recent tracks in particular often have no
+    Any of these keys can be null, recent tracks in particular often have no
     album art and fall back to the artist image.
     """
     for prefix in prefixes:
@@ -290,7 +285,7 @@ def _discovery_column(discoveries, key, kind, empty_label):
 
 def recent_rows(tracks):
     """The 15 most recent tracks. Always read off the 7d period, never the
-    selected one — these are 'what I just played', not a per-period statistic."""
+    selected one, these are 'what I just played', not a per-period statistic."""
     rows = []
     for track in tracks or []:
         name = track.get("track_name") or "Unknown"
@@ -384,7 +379,7 @@ def build_view(summary, period_id):
             {"label": "Albums", "rows": rank_rows(stats.get("top_albums"), "albums")},
             {"label": "Tracks", "rows": rank_rows(stats.get("top_tracks"), "tracks")},
         ],
-        # Absent for all_time — the section is skipped entirely in that case.
+        # Absent for all_time, the section is skipped entirely in that case.
         "discoveries": [
             _discovery_column(discoveries, "Artists", "artists", "No new artists this period"),
             _discovery_column(discoveries, "Albums", "albums", "No new albums this period"),
