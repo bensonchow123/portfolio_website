@@ -5,3 +5,5 @@ __pycache__/
 .vscode/
 .idea/
 .envrc
+# Build artefact, written by build_pdf.py during the image build
+static/resume/

@@ -1,0 +1,3 @@
+# Build only. WeasyPrint renders the resume PDF during docker build.
+-r requirements.txt
+weasyprint==69.0

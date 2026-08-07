@@ -2,10 +2,9 @@ import io
 import json
 import os
 from urllib.parse import urlparse, urlunparse
-from flask import Flask, render_template, request, redirect, url_for, make_response
+from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
-import weasyprint
 from dotenv import load_dotenv
 
 import music as music_data
@@ -34,14 +33,26 @@ app.get_send_file_max_age = (
     lambda filename: 31536000 if filename and filename.lower().endswith(_IMMUTABLE) else None
 )
 
+# Where build_pdf.py writes the resume, and where the download route reads it.
+PDF_DIR = 'static/resume'
+PDF_NAME = 'Benson_Chow_Resume.pdf'
+
 # Thousands separators in templates: {{ 1234 | comma }} -> 1,234
 app.jinja_env.filters['comma'] = music_data.comma
 
 # Behind nginx or Cloudflare, makes request.host and request.scheme reflect the
-# original client rather than the proxy.
+# original client rather than the proxy. One hop per proxy in front, so raise it
+# if anything else is chained ahead of the reverse proxy. Too low and every
+# client looks like the nearest proxy, which breaks rate limiting by address.
+_proxy_hops = int(os.getenv("PROXY_FIX_HOPS", "1"))
+
 try:
     from werkzeug.middleware.proxy_fix import ProxyFix
-    app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_port=1)
+    # Only X-Forwarded-For accumulates a value per hop. Proto, host and port are
+    # overwritten by each proxy, so counting hops on those finds nothing and
+    # falls back to the scheme of the last connection, which is always http here.
+    app.wsgi_app = ProxyFix(app.wsgi_app, x_for=_proxy_hops, x_proto=1,
+                            x_host=1, x_port=1)
 except Exception:
     pass
 
@@ -96,24 +107,13 @@ def resume_redirect():
 
 @app.route('/📄resume📄/download')
 def download_resume():
-    """Generate and download resume as PDF"""
-    try:
-        projects = get_static_json("static/projects/projects.json")['projects']
-        projects.sort(key=order_projects_by_weight, reverse=True)
-        featured_projects = projects[:6]
+    """Serve the PDF built by build_pdf.py"""
+    pdf_path = get_static_file(os.path.join(PDF_DIR, PDF_NAME))
+    if not os.path.exists(pdf_path):
+        app.logger.error("Resume PDF missing, run build_pdf.py")
+        return render_template('404.html'), 404
 
-        # The standalone template, so WeasyPrint never sees Tailwind's output.
-        html = render_template('resume_pdf.html', featured_projects=featured_projects)
-        pdf = weasyprint.HTML(string=html, base_url=os.path.abspath(os.path.dirname(__file__))).write_pdf()
-
-        response = make_response(pdf)
-        response.headers['Content-Type'] = 'application/pdf'
-        response.headers['Content-Disposition'] = 'attachment; filename=Benson_Chow_Resume.pdf'
-
-        return response
-    except Exception:
-        app.logger.exception("Resume PDF generation failed")
-        return redirect(url_for('resume'))
+    return send_from_directory(get_static_file(PDF_DIR), PDF_NAME, as_attachment=True)
 
 
 @app.route('/resume/download')
@@ -192,4 +192,7 @@ if __name__ == '__main__':
     server = Server(app.wsgi_app)
     server.watch('templates/')
     server.watch('static/')
-    server.serve()
+    # Loopback locally. In a container that would be unreachable from the host,
+    # so docker-compose.dev.yaml sets this to 0.0.0.0.
+    server.serve(host=os.getenv('DEV_HOST', '127.0.0.1'),
+                 port=int(os.getenv('DEV_PORT', '5500')))
