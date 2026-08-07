@@ -1,0 +1,25 @@
+# Production-like setup for running the published image locally or on a server.
+services:
+  web:
+    image: ghcr.io/bensonchow123/portfolio_website:${SITE_TAG:-latest}
+    # Keep this so the image can also be built from a checkout.
+    build:
+      context: .
+      target: runtime
+    restart: unless-stopped
+    environment:
+      # Music data source.
+      - SCROBBLE_VAULT_URL=${SCROBBLE_VAULT_URL:-http://127.0.0.1:8000}
+      # Number of trusted proxies in front of the app.
+      - PROXY_FIX_HOPS=${PROXY_FIX_HOPS:-1}
+      # Leave empty to disable rate limiting.
+      - RATELIMIT_STORAGE_URI=${RATELIMIT_STORAGE_URI:-}
+    ports:
+      # Localhost only; put a reverse proxy in front in production.
+      - "127.0.0.1:8080:8080"
+    mem_limit: 384m
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: "3"

@@ -1,0 +1,3 @@
+# Local development dependencies.
+-r requirements-build.txt
+livereload==2.7.1

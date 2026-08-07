@@ -1,0 +1,44 @@
+# Local development with live reload and a CSS watcher.
+services:
+  web:
+    # Includes the tools needed for live reload and PDF generation.
+    build:
+      context: .
+      target: dev
+    image: portfolio_web:dev
+    # Match the host user so bind mounted files stay writable.
+    user: "${UID:-1000}:${GID:-1000}"
+    environment:
+      # No proxy in development.
+      - PROXY_FIX_HOPS=0
+      # Listen on the container network.
+      - DEV_HOST=0.0.0.0
+      # Use a vault running on the host by default.
+      - SCROBBLE_VAULT_URL=${SCROBBLE_VAULT_URL:-http://host.docker.internal:8000}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      # App and livereload share this port.
+      - "127.0.0.1:5500:5500"
+    command: ["sh", "-c", "python build_pdf.py && python app.py"]
+    volumes:
+      # Mount the source so edits appear without rebuilding.
+      - .:/app
+
+  # Rebuild CSS when source files change.
+  css:
+    build:
+      context: .
+      target: css
+    image: portfolio_css:dev
+    command: ["npm", "run", "watch:css"]
+    # Keep generated CSS owned by the host user.
+    user: "${UID:-1000}:${GID:-1000}"
+    stdin_open: true
+    tty: true
+    volumes:
+      # CSS inputs and output.
+      - ./src:/app/src
+      - ./templates:/app/templates
+      - ./static/js:/app/static/js
+      - ./static/css:/app/static/css
