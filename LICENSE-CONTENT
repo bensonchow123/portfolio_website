@@ -1,0 +1,28 @@
+Site content licence
+====================
+
+Copyright (c) 2026 Benson Chow. All rights reserved.
+
+This covers the writing and personal media on this site, as distinct from the
+code that renders it:
+
+    the prose on every page, including project write-ups and descriptions
+    the resume, in both its HTML and PDF forms
+    photographs of the author and of the author's own projects and hardware
+    static/images/benson-chow.jpg and static/images/project_default.png
+
+These are not open source and no licence is granted to reuse them. The code is
+MIT and deliberately reusable, see LICENSE. This content is not.
+
+You may read it, link to it, and quote short passages with attribution as fair
+dealing or fair use allows. Republishing it, in whole or in substantial part,
+or presenting it as your own work, is not permitted.
+
+The resume is called out deliberately. It carries a name, education history
+and employment history, and a document like that being freely redistributable
+serves no purpose for me and makes impersonation easier. If you want to use
+something here, ask.
+
+Third party assets under static/fonts, static/cursors, static/palette and the
+Webb imagery in static/images are covered neither by this file nor by LICENSE.
+They are under their own terms, recorded in those directories.

@@ -1,0 +1,24 @@
+NASA media usage
+================
+
+The page backdrops are James Webb Space Telescope images.
+
+    Credit:  NASA, ESA, CSA, STScI
+    Source:  https://webbtelescope.org/images
+    Terms:   https://webbtelescope.org/copyright
+
+Works produced by the US federal government are not subject to copyright, so
+NASA imagery is public domain and free to reuse. Material credited to STScI is
+created under NASA contract and STScI asserts no copyright over it either.
+Credit is requested rather than legally required, and is given above.
+
+NASA's name, insignia and logos are protected separately and are not used
+here, since that could imply the agency endorses this site.
+
+ESA republishes some of the same Webb images under CC BY 4.0 through
+esawebb.org, which is a licence rather than a dedication. These were taken
+from webbtelescope.org, so the public domain terms above are the ones that
+apply.
+
+Photographs of the site author are not NASA material and are not covered by
+any of this.

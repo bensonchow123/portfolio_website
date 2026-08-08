@@ -1,0 +1,57 @@
+MIT License
+
+Copyright (c) 2026 Benson Chow
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+
+===============================================================================
+
+The note below is not part of the MIT License. It records which parts of this
+repository the licence above applies to.
+
+What the MIT License covers
+---------------------------
+
+The source code of this site, written by Benson Chow:
+
+    app.py, music.py, build_pdf.py
+    templates/
+    src/
+    static/js/
+    static/css/
+    Dockerfile, docker-compose*.yaml, and the build configuration
+
+What it does not cover
+----------------------
+
+Written content, photographs and the resume are not open source. Their terms
+are in LICENSE-CONTENT.
+
+Third party assets are under their own licences and are not mine to relicense.
+Each directory carries the full text and a note on provenance:
+
+    static/fonts/       JetBrains Mono, Source Sans 3   OFL-1.1
+                        Nerd Fonts symbols              MIT
+    static/cursors/     KDE Breeze Light cursors        LGPL-2.0-or-later
+    static/palette/     KDE Konsole Breeze ANSI values  GPL-2.0-or-later
+    static/images/      James Webb Space Telescope      public domain
+
+Nothing in the MIT grant above extends to any of those. The OFL in particular
+forbids relicensing, so treat the font files as governed only by static/fonts.
