@@ -59,16 +59,24 @@
         {% block head %}
         {% endblock %}
     </head>
-    {# One Breeze colour per page 404 falls back to src/app.css default. #}
+    {# One Breeze colour per page 404 falls back to src/app.css default. Named
+       slots rather than hex, so these cannot drift from the palette. #}
     {% set accents = {
-        'index':    '#11d116',
-        'projects': '#1d99f3',
-        'project':  '#1d99f3',
-        'music':    '#fdbc4b',
-        'resume':   '#ed1515'
+        'index':    'var(--color-breeze-green-intense)',
+        'projects': 'var(--color-breeze-blue)',
+        'project':  'var(--color-breeze-blue)',
+        'music':    'var(--color-breeze-yellow-intense)',
+        'resume':   'var(--color-breeze-red)'
     } %}
     {# Backdrops are fixed and paint one viewport #}
-    <body class="min-h-screen bg-term-panel selection:bg-[#3daee9] selection:text-[#fcfcfc]"
+    {# Breeze Light, the pale variant, because every page is dark. Each pair of
+       numbers is that cursor's own hotspot and auto is the required fallback.
+       The descendant variants outrank a plain cursor-pointer on the element. #}
+    <body class="min-h-screen bg-term-panel selection:bg-[#3daee9] selection:text-[#fcfcfc]
+                 cursor-[image-set(url('/static/cursors/breeze-light-32.png')_1x,url('/static/cursors/breeze-light-64.png')_2x)_4_4,auto]
+                 [&_a]:cursor-[image-set(url('/static/cursors/breeze-light-pointer-32.png')_1x,url('/static/cursors/breeze-light-pointer-64.png')_2x)_16_4,pointer]
+                 [&_button]:cursor-[image-set(url('/static/cursors/breeze-light-pointer-32.png')_1x,url('/static/cursors/breeze-light-pointer-64.png')_2x)_16_4,pointer]
+                 forced-colors:cursor-auto"
           {%- if accents.get(request.endpoint) %}
           style="--color-accent:{{ accents[request.endpoint] }}"
           {%- endif %}>

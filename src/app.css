@@ -1,26 +1,11 @@
-/*
- * Tailwind v4 entry point. Build with `npm run build:css`.
- *
- * This file must only ever contain @import, @source, @font-face and @theme. The
- * site has no custom CSS: if a @layer or @utility block shows up here, something
- * that should have been a utility class wasn't, and it's worth working out why
- * first. @font-face is the one exception, since self-hosted fonts have nowhere
- * else to be declared without adding a second stylesheet.
- *
- * The one stylesheet outside Tailwind is static/css/resume.css, which exists
- * because WeasyPrint renders the PDF and can't be trusted with Tailwind's
- * oklch() / @property / color-mix() output.
- */
+/* Tailwind entry point. Build with `npm run build:css`. */
 @import "tailwindcss" source(none);
 
-/* Explicit source globs, resolved relative to this file. 
- * Basicly tells Tailwind which files to write CSS into it
- */
+/* Files Tailwind scans for class names. */
 @source "../templates/**/*.html";
 @source "../static/js/**/*.js";
 
-/* The site's one typeface, self-hosted from static/fonts so no third-party
-   origin is involved. */
+/* Self-hosted site font. */
 
 @font-face {
   font-family: "JetBrains Mono";
@@ -58,30 +43,49 @@
   unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
-/* Nerd Fonts symbols, subset to the nine glyphs the site uses. block, not swap:
-   a fallback has nothing at these codepoints, so swapping shows tofu first. */
+/* Nerd Fonts symbols. */
 @font-face {
   font-family: "Nerd Icons";
   font-style: normal;
   font-weight: 400;
   font-display: block;
   src: url("/static/fonts/nerd-icons.woff2") format("woff2");
-  unicode-range: U+F017, U+F053, U+F054, U+F073, U+F084, U+F09B, U+F0EB, U+F1BC, U+F330;
+}
+
+/* Konsole Breeze palette. Keep all values because the home-page swatches use
+   them through inline styles. */
+@theme static {
+  --color-breeze-black: #232627;
+  --color-breeze-red: #ed1515;
+  --color-breeze-green: #11d116;
+  --color-breeze-yellow: #f67400;
+  --color-breeze-blue: #1d99f3;
+  --color-breeze-magenta: #9b59b6;
+  --color-breeze-cyan: #1abc9c;
+  --color-breeze-white: #fcfcfc;
+
+  --color-breeze-black-intense: #7f8c8d;
+  --color-breeze-red-intense: #c0392b;
+  --color-breeze-green-intense: #1cdc9a;
+  --color-breeze-yellow-intense: #fdbc4b;
+  --color-breeze-blue-intense: #3daee9;
+  --color-breeze-magenta-intense: #8e44ad;
+  --color-breeze-cyan-intense: #16a085;
+  --color-breeze-white-intense: #ffffff;
 }
 
 @theme {
-  /* Breakpoints, for desktop and mobile. */
+  /* Site breakpoints. */
   --breakpoint-split: 1094px;
   --breakpoint-tiny: 600px;
 
-  /* One family sitewide. Overriding --font-sans sets preflight's default. */
+  /* Use one font family throughout the site. */
   --font-sans: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
   --font-display: var(--font-sans);
   --font-mono: var(--font-sans);
   --font-icon: "Nerd Icons";
 
-  /* Terminal cursor blink. Tailwind's own animate-pulse is a fade to
-     50% opacity, so need define custom one. */
+  /* Terminal cursor animation. */
   --animate-blink: blink 1.06s steps(1, end) infinite;
   @keyframes blink {
     50% {
@@ -89,21 +93,15 @@
     }
   }
 
-  /* The home page terminal */
-  --color-term-panel: #232627; /* Background */
-  --color-breeze-fg: #fcfcfc; /* Foreground, and Color7, the Tux belly */
-  --color-breeze-green: #11d116; /* Color2, the prompt's user@host */
-  --color-breeze-blue: #3daee9; /* Color4Intense, the prompt's path */
-  --color-breeze-mint: #1cdc9a; /* Color2Intense, the fetch labels */
-  --color-breeze-grey: #7f8c8d; /* Color0Intense, the Tux outline */
-  --color-breeze-yellow: #fdbc4b; /* Color3Intense, the Tux beak and feet */
+  /* Home-page terminal colors. */
+  --color-term-panel: var(--color-breeze-black); /* Background */
+  --color-breeze-fg: var(--color-breeze-white); /* Foreground, the Tux belly */
+  --color-breeze-grey: var(--color-breeze-black-intense); /* The Tux outline */
 
-  /* Per-page accent, rebound on <body> in base.html from request.endpoint. One
-     token, no scale, see base.html for why. This default is what unlisted
-     routes (404) fall back to. */
-  --color-accent: #1d99f3; /* Color4 */
+  /* Page accent, changed on <body> by route. */
+  --color-accent: var(--color-breeze-blue);
 
-  /* The two colours that deliberately DON'T follow the page accent. */
-  --color-link: #3daee9; /* Color4Intense */
-  --color-meta: #7f8c8d; /* Color0Intense */
+  /* These colors stay the same on every page. */
+  --color-link: var(--color-breeze-blue-intense);
+  --color-meta: var(--color-breeze-black-intense);
 }
