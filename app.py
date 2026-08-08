@@ -1,6 +1,8 @@
+import functools
 import io
 import json
 import os
+import re
 from urllib.parse import urlparse, urlunparse
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 from flask_limiter import Limiter
@@ -43,6 +45,41 @@ LICENCES = {'code': 'LICENSE', 'content': 'LICENSE-CONTENT'}
 
 # Thousands separators in templates: {{ 1234 | comma }} -> 1,234
 app.jinja_env.filters['comma'] = music_data.comma
+
+
+@functools.lru_cache(maxsize=None)
+def srcset(url):
+    """Width descriptors for the `name-<width>.avif` variants sitting next to
+    `url`, so templates do not have to track which widths each photo has."""
+    base, _, _ = url.rpartition('.avif')
+    if not base:
+        return url
+
+    directory = get_static_file(os.path.dirname(base.lstrip('/')))
+    stem = os.path.basename(base)
+    # The full size file wins its width, so a variant of the same size drops out.
+    entries = {_image_width(get_static_file(base.lstrip('/')) + '.avif'): url}
+    for name in os.listdir(directory) if os.path.isdir(directory) else []:
+        match = re.fullmatch(re.escape(stem) + r'-(\d+)\.avif', name)
+        if match:
+            entries.setdefault(int(match.group(1)), os.path.dirname(url) + '/' + name)
+
+    return ', '.join('%s %dw' % (entries[width], width) for width in sorted(entries) if width)
+
+
+def _image_width(path):
+    """Pixel width straight out of the AVIF ispe box, no image library needed."""
+    try:
+        with open(path, 'rb') as handle:
+            data = handle.read(4096)
+    except OSError:
+        return 0
+    index = data.find(b'ispe')
+    # 'ispe' then a 4 byte version and flags, then the width.
+    return int.from_bytes(data[index + 8:index + 12], 'big') if index != -1 else 0
+
+
+app.jinja_env.globals['srcset'] = srcset
 
 # Behind nginx or Cloudflare, makes request.host and request.scheme reflect the
 # original client rather than the proxy. One hop per proxy in front, so raise it

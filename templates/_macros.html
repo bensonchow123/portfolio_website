@@ -1,22 +1,22 @@
-{# Site wide Jinja 2 macros. Import `with context` or url_for breaks.
-   Tailwind scans raw text: never build a class name by concatenation,
-   pass the finished string in, `scrim` is the example. #}
+{# Shared Jinja macros. Keep Tailwind class names as complete strings. #}
 
-{# Full-viewport background photo. `scrim` is a whole class, e.g.
-   bg-term-panel/50. #}
-{% macro backdrop(image, scrim) -%}
-<div class="fixed inset-0 -z-10 bg-cover bg-center bg-no-repeat"
-     style="background-image:url('{{ url_for('static', filename='images/' ~ image) }}')">
+{# Full-page background image with an optional overlay. An <img> is used instead
+   of a CSS background so the browser can pick a width from the srcset. #}
+{% macro backdrop(name, scrim='bg-term-panel/70') -%}
+{% set src = url_for('static', filename='images/' ~ name ~ '.avif') -%}
+<div class="fixed inset-0 -z-10">
+  <img src="{{ src }}" srcset="{{ srcset(src) }}" sizes="100vw" alt=""
+       fetchpriority="high" decoding="async"
+       class="h-full w-full object-cover object-center">
   <div class="absolute inset-0 {{ scrim }}"></div>
 </div>
 {%- endmacro %}
 
-{# Tag pill. href filters the list, remove_href adds an x to clear it.
-   h-6 is fixed because cards reserve an exact two-row band. #}
+{# Tag pill. `href` filters; `remove_href` clears the filter. #}
 {% macro chip(label, href=None, remove_href=None) -%}
 {% if href -%}
 <a href="{{ href }}"
-   {# z-20 clears the card's stretched link. #}
+   {# Keep the chip above the card's stretched link. #}
    class="relative z-20 inline-flex h-6 shrink-0 items-center rounded-none border border-breeze-grey bg-term-panel/40 px-2 font-mono text-[10px] tracking-wider whitespace-nowrap text-breeze-fg uppercase transition-colors duration-200 hover:border-accent hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent motion-reduce:transition-none">{{ label }}</a>
 {%- else -%}
 <span class="inline-flex h-6 shrink-0 items-center gap-1.5 rounded-none border border-accent bg-term-panel px-2 font-mono text-[10px] tracking-wider whitespace-nowrap text-white uppercase">
@@ -29,13 +29,12 @@
 {%- endif %}
 {%- endmacro %}
 
-{# External link. Exists so rel="noopener noreferrer" can't be forgotten. #}
+{# External link with safe target-blank attributes. #}
 {% macro ext_link(href, label, classes='') -%}
 <a href="{{ href }}" target="_blank" rel="noopener noreferrer" class="{{ classes }}">{{ label }}</a>
 {%- endmacro %}
 
-{# Nerd Fonts glyphs from the subset in static/fonts. Entities, not the literal
-   characters, so the codepoint is readable and the file stays ASCII. #}
+{# Nerd Fonts glyphs kept as HTML entities so this file stays ASCII. #}
 {% macro icon(name, classes='') -%}
 {% set glyphs = {
     'clock': '&#xF017;', 'calendar': '&#xF073;', 'key': '&#xF084;',

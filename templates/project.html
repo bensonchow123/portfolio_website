@@ -5,20 +5,17 @@
 {% block page_description %}{{ project['short'] }}{% endblock %}
 
 {% block body %}
-{{ backdrop('project-background.jpg', 'bg-term-panel/70') }}
+{{ backdrop('project-background') }}
 
-{# Split screen: the media column is fixed and doesn't scroll, the text column
-   does. Collapses to a single stacked column below the split breakpoint. #}
+{# Split layout on desktop; stacked layout on smaller screens. #}
 <main id="main" class="flex h-[calc(100vh-64px)] items-center justify-end max-split:h-auto max-split:flex-col max-split:items-center">
 
-    {# Desktop: fixed beside the text. Mobile: sticky under the nav so the images
-       stay on screen while you read. #}
+    {# Keep the media visible while reading. #}
     <div class="fixed right-1/2 flex w-1/2 items-center justify-center max-split:sticky max-split:top-16 max-split:z-20 max-split:right-auto max-split:w-full max-split:border-b max-split:border-breeze-grey max-split:bg-term-panel/85 max-split:py-2 max-split:backdrop-blur-[10px]">
         {% set slides = (project['videos'] | list if project.get('videos') else []) + (project['photos'] | list if project.get('photos') else []) %}
         {% if slides %}
         <div class="relative mx-auto w-[500px] max-w-[90vw]">
-            {# Scroll-snap pages it, so swipe works with JS off. Arrows are real
-               buttons, shipped hidden so no-JS never gets dead controls. #}
+            {# Scroll-snap keeps swiping useful even without JavaScript. #}
             <div id="carousel" data-carousel
                  class="flex snap-x snap-mandatory scroll-smooth overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                 {% for slide in slides %}
@@ -27,7 +24,9 @@
                     {% if slide is string and slide.startswith('<') %}
                     {{ slide | safe }}
                     {% else %}
-                    <img src="{{ slide }}" alt="{{ project['project_name'] }} photo {{ loop.index }}"
+                    {# The carousel box is 500px wide, and 90vw takes over below 556px. #}
+                    <img src="{{ slide }}" srcset="{{ srcset(slide) }}" sizes="(min-width: 556px) 500px, 90vw"
+                         alt="{{ project['project_name'] }} photo {{ loop.index }}"
                          loading="{{ 'eager' if loop.first else 'lazy' }}" decoding="async"
                          class="max-h-full max-w-full object-contain">
                     {% endif %}
@@ -36,8 +35,7 @@
             </div>
 
             {% if slides | length > 1 %}
-            {# A strip, not overlaid arrows: object-contain leaves a wide gutter
-               beside portrait photos. Paging wraps, so neither arrow disables. #}
+            {# Keep the controls below the image so portrait photos have room. #}
             <div class="mt-2 flex items-center justify-center gap-3">
                 <button data-carousel-prev hidden type="button" aria-label="Previous image"
                         class="inline-flex cursor-pointer items-center justify-center rounded-none border border-accent bg-term-panel/60 px-3 py-1 text-accent transition-colors duration-200 hover:bg-accent hover:text-term-panel focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent split:px-4 split:py-1.5 text-lg split:text-2xl motion-reduce:transition-none">{{ icon('chevron_left') }}</button>
@@ -46,8 +44,7 @@
                 <button data-carousel-next hidden type="button" aria-label="Next image"
                         class="inline-flex cursor-pointer items-center justify-center rounded-none border border-accent bg-term-panel/60 px-3 py-1 text-accent transition-colors duration-200 hover:bg-accent hover:text-term-panel focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent split:px-4 split:py-1.5 text-lg split:text-2xl motion-reduce:transition-none">{{ icon('chevron_right') }}</button>
             </div>
-            {# Dots are desktop-only: 16 of them on a phone reads as a barcode,
-               and the counter already answers "which image am I on". #}
+            {# Hide the dots on small screens; the counter is enough there. #}
             <div class="mt-2 hidden flex-wrap justify-center gap-1.5 split:flex">
                 {% for slide in slides %}
                 <a href="#slide-{{ loop.index }}" data-carousel-dot
@@ -84,8 +81,7 @@
             </div>
         </header>
 
-        {# The stored description is bare classless HTML, and preflight strips
-           list markers, so these variants style the tags directly. #}
+{# Style the stored description because it has no classes of its own. #}
         <div class="pb-10 text-white
                     [&_p]:my-3 [&_ul]:my-3 [&_ol]:my-3
                     [&_ul]:list-disc [&_ul]:list-outside [&_ul]:ps-6

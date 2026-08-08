@@ -5,7 +5,7 @@
 {% block page_description %}Projects Benson Chow has built: home IT and 3D printing setups, dorm servers, maps and tooling.{% endblock %}
 
 {% block body %}
-{{ backdrop('projects-background.jpg', 'bg-term-panel/20') }}
+{{ backdrop('projects-background') }}
 <main id="main" class="py-8">
     {% if tag is not none %}
     <div class="flex justify-center pb-5">
@@ -13,7 +13,9 @@
     </div>
     {% endif %}
 
-    <div class="mx-auto grid w-[85%] grid-cols-[repeat(auto-fill,minmax(280px,1fr))] justify-center justify-items-center gap-5 max-split:w-[92%]">
+    {# Fixed column counts, not auto-fill: the tracks are all 1fr so the only
+       space between cards is gap-5, and the row spans the full 85%. #}
+    <div class="mx-auto grid w-[85%] grid-cols-2 gap-5 max-tiny:grid-cols-1 split:grid-cols-4 max-split:w-[92%]">
         {% for project in projects %}
         {% include "card.html" %}
         {% endfor %}

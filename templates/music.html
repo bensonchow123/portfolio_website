@@ -1,20 +1,19 @@
 {% extends "base.html" %}
-{% from "_macros.html" import backdrop, icon with context %}
+{% from "_macros.html" import backdrop, ext_link, icon with context %}
 {% from "_music.html" import section_title, divider, rank_chart, bar_chart, stat_card, track_row, period_tabs with context %}
 
 {% block page_title %}Music stats | Benson Chow{% endblock %}
 {% block page_description %}Listening statistics from every track Benson Chow plays, across a personal music server, Amazon Music, Spotify and YouTube.{% endblock %}
 
 {% block body %}
-{{ backdrop('music-background.jpg', 'bg-term-panel/50') }}
+{{ backdrop('music-background') }}
 <main id="main" class="mx-auto w-[85%] py-8 max-split:w-[92%]">
 
     <header class="mb-6">
-        {# -mt-1 drops the space above the capitals so the heading lines up with
-           the card borders on the other pages. #}
+        {# Align the heading with the card borders. #}
         <h1 class="-mt-1 font-mono text-2xl leading-none tracking-wide text-white uppercase"><span class="text-accent">//</span> Music stats</h1>
         <p class="mt-2 text-sm text-breeze-fg">
-            I'm a bit obsessive about tracking my music, every single track played from any source get recorded, for discovering music and analysis, using a tool I made called <b>Last Analysis</b>.<br>
+            I'm a bit obsessive about tracking my music, every single track played from any source get recorded, for discovering music and analysis, using a tool I made called {{ ext_link('https://github.com/bensonchow123/last-analyzer', 'Last Analysis', 'font-bold text-accent underline decoration-from-font underline-offset-2 transition-colors duration-200 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent motion-reduce:transition-none') }}.<br>
             Here is a visualisation of the data.
         </p>
         {% if view and view.last_synced %}
@@ -29,7 +28,7 @@
     </div>
     {% else %}
 
-    {# The 15 most recent overall, not tied to the period, so they sit above the tabs. #}
+    {# Recent tracks stay above the period tabs. #}
     <section>
         {{ section_title('01', 'RECENT TRACKS') }}
         {% if view.recent %}
@@ -75,7 +74,7 @@
         </div>
     </section>
 
-    {# Absent for the all-time period: nothing is a "new" discovery over all time. #}
+    {# All-time has no meaningful "new discoveries" section. #}
     {% if view.discoveries %}
     {{ divider() }}
     <section>
@@ -105,8 +104,7 @@
     <section>
         {{ section_title('05', 'LISTENING PATTERNS') }}
         <div class="mt-2 relative rounded-none border border-breeze-grey bg-term-panel/60 backdrop-blur-[10px] px-4 pt-1 pb-4 before:pointer-events-none before:absolute before:top-0 before:left-0 before:z-20 before:h-2 before:w-2 before:border-t before:border-l before:border-accent before:content-[''] after:pointer-events-none after:absolute after:right-0 after:bottom-0 after:z-20 after:h-2 after:w-2 after:border-r after:border-b after:border-accent after:content-['']">
-            {# UTC because the server can't know the viewer's timezone and this
-               page ships no JavaScript. #}
+            {# Times are UTC because the server does not know the viewer's timezone. #}
             {{ bar_chart(view.clock, 'Hour of day (avg tracks per hour, times in UTC)') }}
             {{ bar_chart(view.weekday, 'Day of week (avg tracks per weekday)') }}
         </div>
