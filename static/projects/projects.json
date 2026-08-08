@@ -11,22 +11,22 @@
         "Hardware", "Networking"
       ],
       "photos": [
-        "/static/projects/home_it_upgrade/qnap_nas.jpg",
-        "/static/projects/home_it_upgrade/qnap_os_drive.jpg",
-        "/static/projects/home_it_upgrade/qnap_nas_lsblk.jpg",
-        "/static/projects/home_it_upgrade/xiao_mi_network.jpg",
-        "/static/projects/home_it_upgrade/wired_router_1.jpg",
-        "/static/projects/home_it_upgrade/wired_router_2.jpg",
-        "/static/projects/home_it_upgrade/lenovo_yoga.jpg",
-        "/static/projects/home_it_upgrade/lenovo_yoga_battery.jpg",
-        "/static/projects/home_it_upgrade/asus_r455l.jpg",
-        "/static/projects/home_it_upgrade/r455l_ram.jpg",
-        "/static/projects/home_it_upgrade/trace.jpg",
-        "/static/projects/home_it_upgrade/mac_air.jpg",
-        "/static/projects/home_it_upgrade/mac_air_battery.jpg",
-        "/static/projects/home_it_upgrade/r_power_supply.jpg",
-        "/static/projects/home_it_upgrade/b_optiplex.jpg",
-        "/static/projects/home_it_upgrade/f_optiplex.jpg"
+        "/static/projects/home_it_upgrade/qnap_nas.avif",
+        "/static/projects/home_it_upgrade/qnap_os_drive.avif",
+        "/static/projects/home_it_upgrade/qnap_nas_lsblk.avif",
+        "/static/projects/home_it_upgrade/xiao_mi_network.avif",
+        "/static/projects/home_it_upgrade/wired_router_1.avif",
+        "/static/projects/home_it_upgrade/wired_router_2.avif",
+        "/static/projects/home_it_upgrade/lenovo_yoga.avif",
+        "/static/projects/home_it_upgrade/lenovo_yoga_battery.avif",
+        "/static/projects/home_it_upgrade/asus_r455l.avif",
+        "/static/projects/home_it_upgrade/r455l_ram.avif",
+        "/static/projects/home_it_upgrade/trace.avif",
+        "/static/projects/home_it_upgrade/mac_air.avif",
+        "/static/projects/home_it_upgrade/mac_air_battery.avif",
+        "/static/projects/home_it_upgrade/r_power_supply.avif",
+        "/static/projects/home_it_upgrade/b_optiplex.avif",
+        "/static/projects/home_it_upgrade/f_optiplex.avif"
       ]
     },
     {
@@ -40,19 +40,19 @@
         "3D printing", "Networking"
       ],
       "photos": [
-        "/static/projects/home_3d_printing_setup/setup.jpg",
-        "/static/projects/home_3d_printing_setup/no_fan.jpg",
-        "/static/projects/home_3d_printing_setup/fan_cost.jpg",
-        "/static/projects/home_3d_printing_setup/have_fan_dryer.jpg",
-        "/static/projects/home_3d_printing_setup/fan_duct.jpg",
-        "/static/projects/home_3d_printing_setup/filter-no-fan.jpg",
-        "/static/projects/home_3d_printing_setup/filter_with_fan.jpg",
-        "/static/projects/home_3d_printing_setup/clips.jpg",
-        "/static/projects/home_3d_printing_setup/panel_replacement.jpg",
-        "/static/projects/home_3d_printing_setup/printer_lan_port.jpg",
-        "/static/projects/home_3d_printing_setup/router.jpg",
-        "/static/projects/home_3d_printing_setup/fluidd.jpg",
-        "/static/projects/home_3d_printing_setup/subnet.jpg"
+        "/static/projects/home_3d_printing_setup/setup.avif",
+        "/static/projects/home_3d_printing_setup/no_fan.avif",
+        "/static/projects/home_3d_printing_setup/fan_cost.avif",
+        "/static/projects/home_3d_printing_setup/have_fan_dryer.avif",
+        "/static/projects/home_3d_printing_setup/fan_duct.avif",
+        "/static/projects/home_3d_printing_setup/filter-no-fan.avif",
+        "/static/projects/home_3d_printing_setup/filter_with_fan.avif",
+        "/static/projects/home_3d_printing_setup/clips.avif",
+        "/static/projects/home_3d_printing_setup/panel_replacement.avif",
+        "/static/projects/home_3d_printing_setup/printer_lan_port.avif",
+        "/static/projects/home_3d_printing_setup/router.avif",
+        "/static/projects/home_3d_printing_setup/fluidd.avif",
+        "/static/projects/home_3d_printing_setup/subnet.avif"
       ]
     },
     {
@@ -66,9 +66,9 @@
         "Multi languages", "Web Development", "Flask"
       ],
       "photos": [
-        "/static/projects/malvern_maps/malvern_maps_logo.jpg",
-        "/static/projects/malvern_maps/malvern_maps_landing.jpg",
-        "/static/projects/malvern_maps/map.jpg"
+        "/static/projects/malvern_maps/malvern_maps_logo.avif",
+        "/static/projects/malvern_maps/malvern_maps_landing.avif",
+        "/static/projects/malvern_maps/map.avif"
       ],
       "github": "https://github.com/bensonchow123/malvern-maps"
     },
@@ -83,16 +83,16 @@
         "Networking", "3D Printing", "Hardware", "Python"
       ],
       "photos": [
-        "/static/projects/computy_the_dorm_server/computy_full_setup.jpg",
-        "/static/projects/computy_the_dorm_server/computy_closeup.jpg",
-        "/static/projects/computy_the_dorm_server/computy_without_case.jpg",
-        "/static/projects/computy_the_dorm_server/pi5_case.jpg",
-        "/static/projects/computy_the_dorm_server/ssd_case.jpg",
-        "/static/projects/computy_the_dorm_server/feets.jpg",
-        "/static/projects/computy_the_dorm_server/music_library.jpg",
-        "/static/projects/computy_the_dorm_server/jellyfin.jpg",
-        "/static/projects/computy_the_dorm_server/foobar2k.jpg",
-        "/static/projects/computy_the_dorm_server/deadbeef.jpg"
+        "/static/projects/computy_the_dorm_server/computy_full_setup.avif",
+        "/static/projects/computy_the_dorm_server/computy_closeup.avif",
+        "/static/projects/computy_the_dorm_server/computy_without_case.avif",
+        "/static/projects/computy_the_dorm_server/pi5_case.avif",
+        "/static/projects/computy_the_dorm_server/ssd_case.avif",
+        "/static/projects/computy_the_dorm_server/feets.avif",
+        "/static/projects/computy_the_dorm_server/music_library.avif",
+        "/static/projects/computy_the_dorm_server/jellyfin.avif",
+        "/static/projects/computy_the_dorm_server/foobar2k.avif",
+        "/static/projects/computy_the_dorm_server/deadbeef.avif"
       ],
       "github": "https://github.com/bensonchow123/computy_scripts"
     },
@@ -107,9 +107,9 @@
         "Python", "PyQt", "Pandas", "Pyinstaller"
       ],
       "photos": [
-        "/static/projects/ATC_tools/path_selection_tab.jpg",
-        "/static/projects/ATC_tools/tools_tab.jpg",
-        "/static/projects/ATC_tools/picked_data.jpg"
+        "/static/projects/ATC_tools/path_selection_tab.avif",
+        "/static/projects/ATC_tools/tools_tab.avif",
+        "/static/projects/ATC_tools/picked_data.avif"
       ]
     },
     {
@@ -123,12 +123,12 @@
         "3D Printing"
       ],
       "photos": [
-        "/static/projects/dorm_3d_printing_setup/printer.jpg",
-        "/static/projects/dorm_3d_printing_setup/in_closet.jpg",
-        "/static/projects/dorm_3d_printing_setup/dryer.jpg",
-        "/static/projects/dorm_3d_printing_setup/desiccant.jpg",
-        "/static/projects/dorm_3d_printing_setup/PTFE_tubes.jpg",
-        "/static/projects/dorm_3d_printing_setup/packed_printer.jpg"
+        "/static/projects/dorm_3d_printing_setup/printer.avif",
+        "/static/projects/dorm_3d_printing_setup/in_closet.avif",
+        "/static/projects/dorm_3d_printing_setup/dryer.avif",
+        "/static/projects/dorm_3d_printing_setup/desiccant.avif",
+        "/static/projects/dorm_3d_printing_setup/PTFE_tubes.avif",
+        "/static/projects/dorm_3d_printing_setup/packed_printer.avif"
       ]
     },
     {
@@ -142,8 +142,8 @@
         "Python","Discord.py", "Asyncio"
       ],
       "photos": [
-        "/static/projects/seraphine/seraphine.jpg",
-        "/static/projects/seraphine/seraphine_chat_bot.jpg"
+        "/static/projects/seraphine/seraphine.avif",
+        "/static/projects/seraphine/seraphine_chat_bot.avif"
       ],
       "github": "https://github.com/bensonchow123/seraphine"
     },
@@ -158,15 +158,15 @@
         "Keyboard"
       ],
       "photos": [
-        "/static/projects/modded_keychron_q3/full_keyboard.jpg",
-        "/static/projects/modded_keychron_q3/case.jpg",
-        "/static/projects/modded_keychron_q3/poron_cutout.jpg",
-        "/static/projects/modded_keychron_q3/polyfill.jpg",
-        "/static/projects/modded_keychron_q3/tape_mod.jpg",
-        "/static/projects/modded_keychron_q3/pe_foam_pads.jpg",
-        "/static/projects/modded_keychron_q3/plate.jpg",
-        "/static/projects/modded_keychron_q3/black_ink_v2.jpg",
-        "/static/projects/modded_keychron_q3/lube_and_film.jpg"
+        "/static/projects/modded_keychron_q3/full_keyboard.avif",
+        "/static/projects/modded_keychron_q3/case.avif",
+        "/static/projects/modded_keychron_q3/poron_cutout.avif",
+        "/static/projects/modded_keychron_q3/polyfill.avif",
+        "/static/projects/modded_keychron_q3/tape_mod.avif",
+        "/static/projects/modded_keychron_q3/pe_foam_pads.avif",
+        "/static/projects/modded_keychron_q3/plate.avif",
+        "/static/projects/modded_keychron_q3/black_ink_v2.avif",
+        "/static/projects/modded_keychron_q3/lube_and_film.avif"
       ]
     }
   ]
