@@ -11,15 +11,13 @@ services:
     environment:
       # No proxy in development.
       - PROXY_FIX_HOPS=0
-      # Listen on the container network.
-      - DEV_HOST=0.0.0.0
-      # Use a vault running on the host by default.
-      - SCROBBLE_VAULT_URL=${SCROBBLE_VAULT_URL:-http://host.docker.internal:8000}
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
-    ports:
-      # App and livereload share this port.
-      - "127.0.0.1:5500:5500"
+      # Host networking, so this is the host's loopback for connecting to the vault.
+      - DEV_HOST=127.0.0.1
+      # The vault publishes 8000 on the same loopback.
+      - SCROBBLE_VAULT_URL=${SCROBBLE_VAULT_URL:-http://127.0.0.1:8000}
+    # Share the host's network stack, so loopback is the one loopback.
+    # App and livereload listen on 5500 directly, no port mapping needed.
+    network_mode: host
     command: ["sh", "-c", "python build_pdf.py && python app.py"]
     volumes:
       # Mount the source so edits appear without rebuilding.

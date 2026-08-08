@@ -14,9 +14,9 @@ services:
       - PROXY_FIX_HOPS=${PROXY_FIX_HOPS:-1}
       # Leave empty to disable rate limiting.
       - RATELIMIT_STORAGE_URI=${RATELIMIT_STORAGE_URI:-}
-    ports:
-      # Localhost only; put a reverse proxy in front in production.
-      - "127.0.0.1:8080:8080"
+    expose:
+      # Reachable only from the compose network, via a reverse proxy.
+      - "8080"
     mem_limit: 384m
     logging:
       driver: json-file
