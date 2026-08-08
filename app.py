@@ -37,6 +37,10 @@ app.get_send_file_max_age = (
 PDF_DIR = 'static/resume'
 PDF_NAME = 'Benson_Chow_Resume.pdf'
 
+# Both licences live at the repo root so GitHub picks them up. The home page
+# links to them, so serve those same files rather than keeping a second copy.
+LICENCES = {'code': 'LICENSE', 'content': 'LICENSE-CONTENT'}
+
 # Thousands separators in templates: {{ 1234 | comma }} -> 1,234
 app.jinja_env.filters['comma'] = music_data.comma
 
@@ -103,6 +107,15 @@ def resume():
 @app.route('/resume')
 def resume_redirect():
     return redirect(url_for('resume'))
+
+
+@app.route('/licence/<which>')
+def licence(which):
+    """Serve LICENSE and LICENSE-CONTENT from the repo root as plain text."""
+    name = LICENCES.get(which)
+    if name is None:
+        return render_template('404.html'), 404
+    return send_from_directory(app.root_path, name, mimetype='text/plain')
 
 
 @app.route('/📄resume📄/download')
