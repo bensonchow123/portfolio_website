@@ -6,7 +6,8 @@
   "scripts": {
     "build:css": "tailwindcss -i ./src/app.css -o ./static/css/tailwind.css --minify",
     "watch:css": "tailwindcss -i ./src/app.css -o ./static/css/tailwind.css --watch",
-    "build:pdf": "python build_pdf.py"
+    "build:pdf": "python build_pdf.py",
+    "build:images": "python build_images.py"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.3",
