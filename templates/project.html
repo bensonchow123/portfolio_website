@@ -10,8 +10,8 @@
 {# Split layout on desktop; stacked layout on smaller screens. #}
 <main id="main" class="flex h-[calc(100vh-64px)] items-center justify-end max-split:h-auto max-split:flex-col max-split:items-center">
 
-    {# Keep the media visible while reading. #}
-    <div class="fixed right-1/2 flex w-1/2 items-center justify-center max-split:sticky max-split:top-16 max-split:z-20 max-split:right-auto max-split:w-full max-split:border-b max-split:border-breeze-grey max-split:bg-term-panel/85 max-split:py-2 max-split:backdrop-blur-[10px]">
+    {# Keep the media visible while reading. Stacks above the chips, below the nav. #}
+    <div class="fixed right-1/2 flex w-1/2 items-center justify-center max-split:sticky max-split:top-16 max-split:z-30 max-split:right-auto max-split:w-full max-split:border-b max-split:border-breeze-grey max-split:bg-term-panel/85 max-split:py-2 max-split:backdrop-blur-[10px]">
         {% set slides = (project['videos'] | list if project.get('videos') else []) + (project['photos'] | list if project.get('photos') else []) %}
         {% if slides %}
         <div class="relative mx-auto w-[500px] max-w-[90vw]">
