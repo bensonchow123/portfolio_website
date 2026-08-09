@@ -77,11 +77,31 @@
         return;
     }
 
+    var cursor = 0;
+    var startedAt = null;
+
+    // Narrow screens size the panel by its content, so pin the finished height.
+    // Wider ones already have a fixed one from the stylesheet.
+    var panel = document.querySelector('[data-terminal]');
+    var narrow = window.matchMedia('(max-width: 1093.98px)');
+
+    function pin() {
+        if (!panel) return;
+        panel.style.height = '';
+        if (!narrow.matches) return;
+        var i;
+        for (i = cursor; i < steps.length; i++) show(steps[i]);
+        panel.style.height = panel.getBoundingClientRect().height + 'px';
+        for (i = cursor; i < steps.length; i++) hide(steps[i]);
+    }
+
+    pin();
     steps.forEach(hide);
     if (caret) caret.removeAttribute('hidden');
 
-    var cursor = 0;
-    var startedAt = null;
+    // The web font lands late and a rotation rewraps, both change the height.
+    if (document.fonts) document.fonts.ready.then(pin);
+    window.addEventListener('resize', pin);
 
     function frame(timestamp) {
         if (startedAt === null) startedAt = timestamp;
