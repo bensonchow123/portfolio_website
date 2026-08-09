@@ -165,7 +165,8 @@
         <p class="font-mono text-xs text-breeze-grey"><strong>Tags:</strong> {{ project.tags | join(', ') }}</p>
         {% endif %}
         {% if project.github %}
-        <p class="text-sm"><a href="{{ project.github }}" target="_blank" rel="noopener noreferrer" class="text-accent underline">{{ project.github }}</a></p>
+        {# Labelled like the project cards, a bare URL has nowhere to wrap. #}
+        <p class="text-sm"><a href="{{ project.github }}" target="_blank" rel="noopener noreferrer" class="text-accent underline">GitHub</a></p>
         {% endif %}
     </div>
     {% endfor %}
