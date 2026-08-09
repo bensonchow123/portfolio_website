@@ -104,6 +104,8 @@ USER site
 
 COPY --chown=site:site app.py music.py ./
 COPY --chown=site:site templates/ ./templates/
+# The /licence routes read these off the repo root.
+COPY --chown=site:site LICENSE LICENSE-CONTENT ./
 COPY --from=pdf --chown=site:site /app/static/ ./static/
 
 EXPOSE 8080
