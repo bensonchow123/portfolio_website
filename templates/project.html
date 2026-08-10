@@ -72,11 +72,11 @@
             <div class="mt-5 mb-2.5 flex flex-col gap-1">
                 {% if project.get('github') %}
                 <a href="{{ project['github'] }}" target="_blank" rel="noopener noreferrer"
-                   class="w-fit text-link underline-offset-2 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">Find on GitHub</a>
+                   class="w-fit text-accent underline-offset-2 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">Find on GitHub</a>
                 {% endif %}
                 {% if project.get('website') %}
                 <a href="{{ project['website'] }}" target="_blank" rel="noopener noreferrer"
-                   class="w-fit text-link underline-offset-2 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">View website</a>
+                   class="w-fit text-accent underline-offset-2 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">View website</a>
                 {% endif %}
             </div>
         </header>
@@ -90,7 +90,7 @@
                     [&_li]:my-1
                     [&_h2]:mt-5 [&_h2]:mb-2 [&_h2]:text-2xl
                     [&_h3]:mt-4 [&_h3]:mb-2 [&_h3]:text-xl
-                    [&_a]:text-link [&_a]:underline [&_a]:underline-offset-2
+                    [&_a]:text-accent [&_a]:underline [&_a]:underline-offset-2
                     [&_code]:rounded-sm [&_code]:bg-term-panel [&_code]:px-1 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-sm
                     [&_pre]:overflow-x-auto [&_pre]:rounded-md [&_pre]:bg-term-panel/50 [&_pre]:p-3
                     [&_img]:h-auto [&_img]:max-w-full [&_img]:rounded-md

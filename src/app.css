@@ -101,7 +101,6 @@
   /* Page accent, changed on <body> by route. */
   --color-accent: var(--color-breeze-blue);
 
-  /* These colors stay the same on every page. */
-  --color-link: var(--color-breeze-blue-intense);
+  /* This color stays the same on every page. */
   --color-meta: var(--color-breeze-black-intense);
 }
