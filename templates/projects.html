@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% from "_macros.html" import backdrop, chip with context %}
+{% from "_macros.html" import backdrop, chip, content_width with context %}
 
 {% block page_title %}Projects | Benson Chow{% endblock %}
 {% block page_description %}Projects Benson Chow has built: home IT and 3D printing setups, dorm servers, maps and tooling.{% endblock %}
@@ -15,7 +15,7 @@
 
     {# Fixed column counts, not auto-fill: the tracks are all 1fr so the only
        space between cards is gap-5, and the row spans the full 85%. #}
-    <div class="mx-auto grid w-[85%] grid-cols-2 gap-5 max-tiny:grid-cols-1 split:grid-cols-4 max-split:w-[92%]">
+    <div class="mx-auto grid {{ content_width }} grid-cols-2 gap-5 max-tiny:grid-cols-1 split:grid-cols-4">
         {% for project in projects %}
         {% include "card.html" %}
         {% endfor %}

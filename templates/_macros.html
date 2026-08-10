@@ -1,5 +1,10 @@
 {# Shared Jinja macros. Keep Tailwind class names as complete strings. #}
 
+{# 85% wide, 92% once the split collapses. card.html divides both by its column
+   count, so changing either needs the same edit to its sizes attribute. #}
+{% set content_width = 'w-[85%] max-split:w-[92%]' %}
+{% set stacked_width = 'max-split:w-[92%]' %}
+
 {# Full-page background image with an optional overlay. An <img> is used instead
    of a CSS background so the browser can pick a width from the srcset. #}
 {% macro backdrop(name, scrim='bg-term-panel/70') -%}
@@ -17,13 +22,13 @@
 {% if href -%}
 <a href="{{ href }}"
    {# Keep the chip above the card's stretched link. #}
-   class="relative z-20 inline-flex h-6 shrink-0 items-center rounded-none border border-breeze-grey bg-term-panel/40 px-2 font-mono text-[10px] tracking-wider whitespace-nowrap text-breeze-fg uppercase transition-colors duration-200 hover:border-accent hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent motion-reduce:transition-none">{{ label }}</a>
+   class="relative z-20 inline-flex h-6 shrink-0 items-center rounded-none border border-breeze-grey bg-term-panel/40 px-2 font-mono text-3xs tracking-wider whitespace-nowrap text-breeze-fg uppercase transition-colors duration-200 hover:border-accent hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent motion-reduce:transition-none">{{ label }}</a>
 {%- else -%}
-<span class="inline-flex h-6 shrink-0 items-center gap-1.5 rounded-none border border-accent bg-term-panel px-2 font-mono text-[10px] tracking-wider whitespace-nowrap text-white uppercase">
+<span class="inline-flex h-6 shrink-0 items-center gap-1.5 rounded-none border border-accent bg-term-panel px-2 font-mono text-3xs tracking-wider whitespace-nowrap text-white uppercase">
   {{ label }}
   {%- if remove_href %}
   <a href="{{ remove_href }}" aria-label="Clear the {{ label }} filter"
-     class="flex h-4 w-4 items-center justify-center rounded-none bg-breeze-grey text-[10px] leading-none text-term-panel transition-colors duration-200 hover:bg-breeze-fg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent motion-reduce:transition-none">&times;</a>
+     class="flex h-4 w-4 items-center justify-center rounded-none bg-breeze-grey text-3xs leading-none text-term-panel transition-colors duration-200 hover:bg-breeze-fg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent motion-reduce:transition-none">&times;</a>
   {%- endif %}
 </span>
 {%- endif %}

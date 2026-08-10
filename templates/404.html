@@ -7,20 +7,20 @@
 {% block body %}
 {{ backdrop('404-background') }}
 
-{# Show the failed request in the same style as the home-page terminal. #}
-<main id="main" class="mx-auto flex min-h-[70vh] w-[92%] max-w-[820px] flex-col justify-center py-10">
+{# Same style as the home terminal. flex-1 takes what the nav leaves so it centres. #}
+<main id="main" class="mx-auto flex w-[92%] flex-1 flex-col justify-center py-10 split:max-w-terminal">
     <h1 class="sr-only">404 — page not found</h1>
 
     {# One column for the panel and the fallback line, so their left edges agree
        at every width. #}
-    <div class="mx-auto w-[94%] max-w-[820px]">
+    <div class="w-full">
     <section aria-label="Terminal">
         {# Same panel as the home page: I-beam over the whole thing, corner ticks
            from the before/after pseudo elements. #}
         <div class="cursor-[image-set(url('/static/cursors/breeze-light-text-32.png')_1x,url('/static/cursors/breeze-light-text-64.png')_2x)_16_15,text]
                     relative overflow-hidden rounded-none
                     border border-breeze-grey bg-term-panel/95 px-5 py-4 font-mono
-                    shadow-[0_1px_10px_rgba(35,38,39,0.55)]
+                    shadow-terminal
                     before:pointer-events-none before:absolute before:top-0 before:left-0
                     before:z-20 before:h-2 before:w-2 before:border-t before:border-l
                     before:border-accent before:content-['']
@@ -31,7 +31,7 @@
             {% set wanted = request.path | truncate(34, true, '…') %}
             {% set prompt %}<span class="font-bold whitespace-nowrap"><span class="text-breeze-green-intense">you@bensonc.how</span>:<span class="text-breeze-blue-intense">~</span>$</span>{% endset %}
 
-            <div class="relative z-[999] text-[length:clamp(12px,0.82vw,17px)] leading-relaxed text-breeze-fg">
+            <div class="relative z-999 text-[length:clamp(12px,0.82vw,17px)] leading-relaxed text-breeze-fg">
                 <div class="break-all">{{ prompt }} curl -sI https://{{ request.host }}{{ wanted }}</div>
                 <div class="mt-1">HTTP/2 <span class="font-bold text-accent">404</span></div>
                 <div>server: nginx</div>

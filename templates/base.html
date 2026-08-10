@@ -72,11 +72,13 @@
     {# Breeze Light, the pale variant, because every page is dark. Each pair of
        numbers is that cursor's own hotspot and auto is the required fallback.
        The descendant variants outrank a plain cursor-pointer on the element. #}
-    <body class="min-h-screen bg-term-panel selection:bg-[#3daee9] selection:text-[#fcfcfc]
+    {# text-sm is the sitewide base. Flex column so a page takes the leftover
+       height with flex-1, dvh so a phone address bar cannot cover content. #}
+    <body class="flex min-h-dvh flex-col bg-term-panel text-sm selection:bg-breeze-blue-intense selection:text-breeze-white
                  cursor-[image-set(url('/static/cursors/breeze-light-32.png')_1x,url('/static/cursors/breeze-light-64.png')_2x)_4_4,auto]
                  [&_a]:cursor-[image-set(url('/static/cursors/breeze-light-pointer-32.png')_1x,url('/static/cursors/breeze-light-pointer-64.png')_2x)_16_4,pointer]
                  [&_button]:cursor-[image-set(url('/static/cursors/breeze-light-pointer-32.png')_1x,url('/static/cursors/breeze-light-pointer-64.png')_2x)_16_4,pointer]
-                 forced-colors:cursor-auto"
+                 forced-colors:cursor-auto {% block body_class %}{% endblock %}"
           {%- if accents.get(request.endpoint) %}
           style="--color-accent:{{ accents[request.endpoint] }}"
           {%- endif %}>
@@ -92,7 +94,7 @@
                 <li><a href="{{ url_for(endpoint) }}"
                        style="--nav-accent:{{ accents[endpoint] }}"
                        {% if request.endpoint == endpoint %}aria-current="page"{% endif %}
-                       class="rounded-none px-3 py-1.5 font-mono text-sm tracking-widest uppercase no-underline transition-colors duration-200 hover:bg-[var(--nav-accent)] hover:text-term-panel focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent max-split:px-2 max-split:text-xs motion-reduce:transition-none {{ 'text-accent' if request.endpoint == endpoint else 'text-breeze-fg' }}">{{ label }}</a></li>
+                       class="rounded-none px-3 py-1.5 font-mono text-sm tracking-widest uppercase no-underline transition-colors duration-200 hover:bg-(--nav-accent) hover:text-term-panel focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent max-split:px-2 max-split:text-xs motion-reduce:transition-none {{ 'text-accent' if request.endpoint == endpoint else 'text-breeze-fg' }}">{{ label }}</a></li>
                 {% endfor %}
             </ul>
         </nav>
