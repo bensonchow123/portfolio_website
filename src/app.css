@@ -79,6 +79,17 @@
   --breakpoint-split: 1094px;
   --breakpoint-tiny: 600px;
 
+  /* Two steps below text-xs, for dense labels and captions. */
+  --text-2xs: 0.6875rem;
+  --text-3xs: 0.625rem;
+
+  /* Glass panels and the drop shadow both terminals use. */
+  --blur-glass: 10px;
+  --shadow-terminal: 0 1px 10px --alpha(var(--color-breeze-black) / 55%);
+
+  /* Width shared by the terminal panel and the 404 column. */
+  --container-terminal: 820px;
+
   /* Use one font family throughout the site. */
   --font-sans: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
   --font-display: var(--font-sans);

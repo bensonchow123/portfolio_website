@@ -1,26 +1,29 @@
 {% extends "base.html" %}
-{% from "_macros.html" import backdrop, chip, icon with context %}
+{% from "_macros.html" import backdrop, chip, icon, stacked_width with context %}
 
 {% block page_title %}{{ project['project_name'] }} | Benson Chow{% endblock %}
 {% block page_description %}{{ project['short'] }}{% endblock %}
+
+{# Desktop locks to the viewport so the text column scrolls on its own. #}
+{% block body_class %}split:h-dvh split:overflow-hidden{% endblock %}
 
 {% block body %}
 {{ backdrop('project-background') }}
 
 {# Split layout on desktop; stacked layout on smaller screens. #}
-<main id="main" class="flex h-[calc(100vh-64px)] items-center justify-end max-split:h-auto max-split:flex-col max-split:items-center">
+<main id="main" class="flex min-h-0 flex-1 items-center justify-end max-split:h-auto max-split:flex-col max-split:items-center">
 
     {# Keep the media visible while reading. Stacks above the chips, below the nav. #}
-    <div class="fixed right-1/2 flex w-1/2 items-center justify-center max-split:sticky max-split:top-16 max-split:z-30 max-split:right-auto max-split:w-full max-split:border-b max-split:border-breeze-grey max-split:bg-term-panel/85 max-split:py-2 max-split:backdrop-blur-[10px]">
+    <div class="fixed right-1/2 flex w-1/2 items-center justify-center max-split:sticky max-split:top-16 max-split:z-30 max-split:right-auto max-split:w-full max-split:border-b max-split:border-breeze-grey max-split:bg-term-panel/85 max-split:py-2 max-split:backdrop-blur-glass">
         {% set slides = (project['videos'] | list if project.get('videos') else []) + (project['photos'] | list if project.get('photos') else []) %}
         {% if slides %}
-        <div class="relative mx-auto w-[500px] max-w-[90vw]">
+        <div class="relative mx-auto w-125 max-w-[90vw]">
             {# Scroll-snap keeps swiping useful even without JavaScript. #}
             <div id="carousel" data-carousel
                  class="flex snap-x snap-mandatory scroll-smooth overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                 {% for slide in slides %}
                 <div id="slide-{{ loop.index }}"
-                     class="flex h-[500px] w-full shrink-0 snap-center items-center justify-center max-md:h-[26vh] md:max-split:h-[30vh]">
+                     class="flex h-125 w-full shrink-0 snap-center items-center justify-center max-md:h-52 md:max-split:h-60">
                     {% if slide is string and slide.startswith('<') %}
                     {{ slide | safe }}
                     {% else %}
@@ -40,7 +43,7 @@
                 <button data-carousel-prev hidden type="button" aria-label="Previous image"
                         class="inline-flex cursor-pointer items-center justify-center rounded-none border border-accent bg-term-panel/60 px-3 py-1 text-accent transition-colors duration-200 hover:bg-accent hover:text-term-panel focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent split:px-4 split:py-1.5 text-lg split:text-2xl motion-reduce:transition-none">{{ icon('chevron_left') }}</button>
                 <span data-carousel-count
-                      class="font-mono text-[10px] tracking-widest text-breeze-grey tabular-nums split:text-xs">01 / {{ '%02d' | format(slides | length) }}</span>
+                      class="font-mono text-3xs tracking-widest text-breeze-grey tabular-nums split:text-xs">01 / {{ '%02d' | format(slides | length) }}</span>
                 <button data-carousel-next hidden type="button" aria-label="Next image"
                         class="inline-flex cursor-pointer items-center justify-center rounded-none border border-accent bg-term-panel/60 px-3 py-1 text-accent transition-colors duration-200 hover:bg-accent hover:text-term-panel focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent split:px-4 split:py-1.5 text-lg split:text-2xl motion-reduce:transition-none">{{ icon('chevron_right') }}</button>
             </div>
@@ -58,10 +61,10 @@
         {% endif %}
     </div>
 
-    <div class="flex h-full w-1/2 flex-col overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden max-split:h-auto max-split:w-full max-split:overflow-visible max-split:px-5">
+    <div class="flex h-full w-1/2 flex-col overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden max-split:h-auto {{ stacked_width }} max-split:overflow-visible">
         <header>
             <h1 class="mt-5 font-display text-[60px] leading-tight font-extrabold text-white max-split:mt-2.5 max-split:text-[40px]">{{ project['project_name'] }}</h1>
-            <p class="mr-[100px] mb-5 text-meta max-split:mr-5 max-split:mb-2.5">{{ project['date'] }}</p>
+            <p class="mr-25 mb-5 text-xs text-meta max-split:mr-5 max-split:mb-2.5">{{ project['date'] }}</p>
 
             <div class="flex flex-wrap gap-1">
                 {% for tag in project['tags'] %}
