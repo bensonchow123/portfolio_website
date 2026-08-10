@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% from "_macros.html" import backdrop with context %}
+{% from "_macros.html" import backdrop, content_width with context %}
 
 {% block page_title %}404 | Benson Chow{% endblock %}
 {% block page_description %}HTTP 404. The page you asked for isn't there.{% endblock %}
@@ -8,7 +8,7 @@
 {{ backdrop('404-background') }}
 
 {# Same style as the home terminal. flex-1 takes what the nav leaves so it centres. #}
-<main id="main" class="mx-auto flex w-[92%] flex-1 flex-col justify-center py-10 split:max-w-terminal">
+<main id="main" class="mx-auto flex {{ content_width }} flex-1 flex-col justify-center py-10 split:max-w-terminal">
     <h1 class="sr-only">404 — page not found</h1>
 
     {# One column for the panel and the fallback line, so their left edges agree
