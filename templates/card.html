@@ -4,10 +4,10 @@
 
     <div class="relative h-37.5 shrink-0 overflow-hidden border-b border-breeze-grey bg-term-panel">
         {% set thumb = project['photos'][0] if project.get('photos') else url_for('static', filename='images/project_default.avif') %}
-        {# Tracks the grid in projects.html: 4 cols of 85% at split, 2 cols of 92%
+        {# Tracks the grid in projects.html: 4 cols of 85% at split, 2 cols of 94%
            above tiny, 1 col below it, all with a 20px gap. #}
         <img src="{{ thumb }}" srcset="{{ srcset(thumb) }}"
-             sizes="(min-width: 1094px) calc(21.25vw - 15px), (min-width: 600px) calc(46vw - 10px), 92vw"
+             sizes="(min-width: 1094px) calc(21.25vw - 15px), (min-width: 600px) calc(47vw - 10px), 94vw"
              alt="{{ project['project_name'] }}" loading="lazy" decoding="async"
              class="h-full w-full object-contain p-2 transition-transform duration-300 group-hover:scale-103 motion-reduce:transition-none">
         {# Fades the image into the card body instead of ending on a hard edge. #}
