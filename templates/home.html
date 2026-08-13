@@ -1,12 +1,14 @@
 {% extends "base.html" %}
-{% from "_macros.html" import backdrop, ext_link, icon, stacked_width with context %}
+{% from "_macros.html" import backdrop, caret, ext_link, focus_ring, icon, no_scrollbar, panel_solid, panel_width, stacked_width with context %}
+{# Class runs this template repeats. #}
+{% set body_link = 'text-accent underline underline-offset-2 ' ~ focus_ring %}
 
 {# Licence links used in the fastfetch block. #}
 {% macro licence(label, href) -%}
 <a href="{{ href }}" target="_blank" rel="noopener noreferrer"
    class="text-breeze-grey underline decoration-dotted decoration-from-font underline-offset-2
           transition-colors duration-200 hover:text-breeze-fg hover:decoration-solid
-          focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent
+          {{ focus_ring }}
           motion-reduce:transition-none">[{{ label }}]</a>
 {%- endmacro %}
 
@@ -52,13 +54,16 @@
 
     {# Align with the terminal, this is the only scrollable column. #}
     <main id="main"
-          class="flex h-full w-1/2 flex-col overflow-y-auto pt-64
-                 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden
+          class="flex h-full w-1/2 flex-col overflow-y-auto split:justify-center
+                 {{ no_scrollbar | safe }}
                  max-split:h-auto max-split:w-full max-split:items-center
                  max-split:overflow-visible max-split:pt-6">
+        {# The terminal's height, so centring this box puts its top on the terminal's
+           top. The intro below overflows it on purpose. #}
+        <div class="split:h-96 max-split:contents">
         <div class="flex flex-col justify-center">
             {# Small offset to align the heading with the terminal border. #}
-            <h1 class="m-0 -mt-[0.13em] font-display text-[80px] leading-none font-extrabold text-white max-split:text-[70px] max-tiny:text-[40px]">
+            <h1 class="m-0 -mt-[0.13em] font-display text-7xl leading-none font-extrabold text-white max-tiny:text-4xl">
                 <span class="block max-split:hidden">Benson</span>
                 <span class="block max-split:hidden">Chow</span>
                 <span class="hidden max-split:block">Benson chow</span>
@@ -70,7 +75,7 @@
                     ('https://open.spotify.com/user/31wfzod4x3udnenb4k562jhihiyu?si=342a4d15ec754519', 'spotify', 'Spotify')
                 ] %}
                 <a href="{{ href }}" target="_blank" rel="noopener noreferrer" aria-label="{{ label }}"
-                   class="mr-3 ml-0.5 text-2xl text-breeze-fg opacity-60 transition-opacity duration-200 hover:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent max-split:opacity-100 motion-reduce:transition-none">{{ icon(name) }}</a>
+                   class="mr-3 ml-0.5 text-2xl text-breeze-fg opacity-60 transition-opacity duration-200 hover:opacity-100 {{ focus_ring }} max-split:opacity-100 motion-reduce:transition-none">{{ icon(name) }}</a>
                 {% endfor %}
             </div>
 
@@ -78,9 +83,9 @@
                class="group mt-5 inline-flex w-fit items-center gap-2.5 rounded-none
                       border border-accent bg-term-panel/60 py-2 pr-4 pl-3.5
                       font-mono text-xs tracking-wider text-breeze-fg uppercase
-                      backdrop-blur-glass transition duration-200
+                      transition duration-200
                       hover:bg-term-panel/75 hover:text-white
-                      focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent
+                      {{ focus_ring }}
                       max-split:mx-auto motion-reduce:transition-none">
                 {{ icon('key', 'text-base text-accent') }}
                 GPG public key
@@ -92,22 +97,17 @@
         {# Under the GPG button in flow, lifted into the left column on wide screens.
            No padding of its own, the panel inside sets the width. #}
         <section aria-label="Terminal"
-                 class="mt-8 w-full split:absolute split:top-64 split:left-0 split:mt-0 split:w-1/2">
+                 class="mt-8 w-full split:absolute split:top-1/2 split:left-0 split:mt-0 split:w-1/2 split:-translate-y-1/2">
             {# Fixed height on wide screens. Narrower ones take the height type.js pins. #}
             <div data-terminal
                  class="cursor-[image-set(url('/static/cursors/breeze-light-text-32.png')_1x,url('/static/cursors/breeze-light-text-64.png')_2x)_16_15,text]
-                        relative mx-auto h-96 {{ stacked_width }} split:w-[94%] split:max-w-terminal
-                        overflow-hidden rounded-none border border-breeze-grey bg-term-panel/95
-                        px-5 py-4 font-mono shadow-terminal
-                        max-split:h-auto max-split:px-4 max-split:py-3
-                        before:pointer-events-none before:absolute before:top-0 before:left-0
-                        before:z-20 before:h-2 before:w-2 before:border-t before:border-l
-                        before:border-accent before:content-['']
-                        after:pointer-events-none after:absolute after:right-0 after:bottom-0
-                        after:z-20 after:h-2 after:w-2 after:border-r after:border-b
-                        after:border-accent after:content-['']">
+ mx-auto h-96 {{ panel_width }}
+ overflow-hidden
+ px-5 py-4 font-mono shadow-terminal
+ max-split:h-auto max-split:px-4 max-split:py-3
+ {{ panel_solid | safe }}">
                 {# Keep the content in the HTML so it also works without JavaScript. #}
-                <div class="relative z-30 text-[length:clamp(12px,0.82vw,17px)] text-breeze-fg max-split:text-[13px] max-tiny:text-2xs">
+                <div class="relative z-30 text-[length:clamp(12px,0.82vw,17px)] text-breeze-fg max-split:text-xs max-tiny:text-2xs">
                     {# Colors match the Konsole Breeze palette in app.css. #}
                     <span class="font-bold text-breeze-green-intense">you@bensonc.how</span>:<span class="font-bold text-breeze-blue-intense">~</span>$
                     <span data-type>
@@ -115,7 +115,7 @@
                         {# Print fastfetch as one delayed block. #}
                         <span data-instant data-delay="1000"
                               class="my-2 flex items-start gap-4 text-[length:clamp(10px,0.78vw,16px)] leading-[1.3]
-                                     max-split:gap-3 max-split:text-[12.5px] max-tiny:gap-2 max-tiny:text-3xs">
+                                     max-split:gap-3 max-split:text-xs max-tiny:gap-2 max-tiny:text-3xs">
                             {# Preserve spaces and line breaks in the Tux art. #}
                             <pre aria-hidden="true" class="shrink-0 max-tiny:hidden">
                             {%- for row in tux_art -%}
@@ -164,7 +164,7 @@
                         </span>
                         {# The next prompt appears immediately after fastfetch. #}
                         <span data-instant><span class="font-bold text-breeze-green-intense">you@bensonc.how</span>:<span class="font-bold text-breeze-blue-intense">~</span>$</span>
-                    </span><span data-caret hidden aria-hidden="true" class="inline-block h-[1.05em] w-[0.55em] translate-y-[0.15em] animate-blink bg-breeze-fg motion-reduce:animate-none"></span>
+                    </span><span data-caret hidden aria-hidden="true" class="{{ caret }}"></span>
                 </div>
             </div>
         </section>
@@ -172,14 +172,15 @@
         <div class="mt-10 mr-2.5 max-split:mt-8 max-split:mr-0 {{ stacked_width }}">
             <div class="flex flex-col gap-4 pl-1 pb-10 text-white">
                 <p>Hi, I am a year 3 CS with AI student at University of York.</p>
-                <p>I am currently learning system adminatration and helping to manage 2 Dell poweredge r740XDs in the campus datacenters.</p>
+                <p>I am currently learning system administration and helping to manage 2 Dell poweredge R740xd in the campus datacenters.</p>
                 <p>I also love 3D printing and learning CAD, mostly using my QIDI Q1 Pro coreXY printer and Kingroon filament dryer to make custom parts for my other interests.</p>
-                <p>I am additionally interested in high-fidelity audio and collect FLAC music. To manage my library, I built a personal streaming service on a Raspberry Pi, along with a tool for music analysis that tracks every track I play. You can see the data on the <a href="{{ url_for('music') }}" class="text-accent underline underline-offset-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">Music page</a>.</p>
+                <p>I am additionally interested in high-fidelity audio and collect FLAC music. To manage my library, I built a personal streaming service on a Raspberry Pi, along with a tool for music analysis that tracks every track I play. You can see the data on the <a href="{{ url_for('music') }}" class="{{ body_link }}">Music page</a>.</p>
                 <p>Another hobby is building and modding mechanical keyboards, my favorite build so far is a customized Keychron Q3.</p>
                 <p>Programming ties all these interests together. I also daily-drive an Arch Linux system (LUKS-encrypted BTRFS with KDE Plasma). </p>
-                <p>This site is built with Python Flask, hosted on a fasthost VPS (also used for Wireguard port forward), through Gunicorn and Nginx, see the {{ ext_link('https://github.com/bensonchow123/vps-infrastructure', 'docker definition', 'text-accent underline underline-offset-2 transition-colors duration-200 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent motion-reduce:transition-none') }}.</p>
-                <p>You can read more about projects mentioned in the <a href="{{ url_for('projects') }}" class="text-accent underline underline-offset-2 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">Projects page</a>!</p>
+                <p>This site is built with Python Flask, hosted on a fasthost VPS (also used for Wireguard port forward), through Gunicorn and Nginx, see the {{ ext_link('https://github.com/bensonchow123/vps-infrastructure', 'docker definition', 'text-accent underline underline-offset-2 transition-colors duration-200 hover:text-white ' ~ focus_ring ~ ' motion-reduce:transition-none') }}.</p>
+                <p>You can read more about projects mentioned in the <a href="{{ url_for('projects') }}" class="{{ body_link }}">Projects page</a>!</p>
             </div>
+        </div>
         </div>
     </main>
 </div>

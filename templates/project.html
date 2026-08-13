@@ -1,5 +1,8 @@
 {% extends "base.html" %}
-{% from "_macros.html" import backdrop, chip, icon, stacked_width with context %}
+{% from "_macros.html" import backdrop, chip, focus_ring, icon, no_scrollbar, panel_width, stacked_width with context %}
+{# Class runs this template repeats. #}
+{% set nav_button = 'inline-flex cursor-pointer items-center justify-center rounded-none border border-accent bg-term-panel/60 px-3 py-1 text-accent transition-colors duration-200 hover:bg-accent hover:text-term-panel ' ~ focus_ring ~ ' split:px-4 split:py-1.5 text-lg split:text-2xl motion-reduce:transition-none' %}
+{% set ext_link_style = 'w-fit text-accent underline-offset-2 hover:underline ' ~ focus_ring %}
 
 {% block page_title %}{{ project['project_name'] }} | Benson Chow{% endblock %}
 {% block page_description %}{{ project['short'] }}{% endblock %}
@@ -14,21 +17,21 @@
 <main id="main" class="flex min-h-0 flex-1 items-center justify-end max-split:h-auto max-split:flex-col max-split:items-center">
 
     {# Keep the media visible while reading. Stacks above the chips, below the nav. #}
-    <div class="fixed right-1/2 flex w-1/2 items-center justify-center max-split:sticky max-split:top-16 max-split:z-30 max-split:right-auto max-split:w-full max-split:border-b max-split:border-breeze-grey max-split:bg-term-panel/85 max-split:py-2 max-split:backdrop-blur-glass">
+    <div class="fixed right-1/2 flex w-1/2 items-center justify-center max-split:sticky max-split:top-16 max-split:z-30 max-split:right-auto max-split:w-full max-split:border-b max-split:border-breeze-grey max-split:bg-term-panel/85 max-split:py-2 ">
         {% set slides = (project['videos'] | list if project.get('videos') else []) + (project['photos'] | list if project.get('photos') else []) %}
         {% if slides %}
-        <div class="relative mx-auto w-125 max-w-[90vw]">
+        <div class="relative mx-auto {{ panel_width }}">
             {# Scroll-snap keeps swiping useful even without JavaScript. #}
             <div id="carousel" data-carousel
-                 class="flex snap-x snap-mandatory scroll-smooth overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                 class="flex snap-x snap-mandatory scroll-smooth overflow-x-auto {{ no_scrollbar | safe }}">
                 {% for slide in slides %}
                 <div id="slide-{{ loop.index }}"
-                     class="flex h-125 w-full shrink-0 snap-center items-center justify-center max-md:h-52 md:max-split:h-60">
+                     class="flex h-[55vh] w-full shrink-0 snap-center items-center justify-center max-md:h-52 md:max-split:h-60">
                     {% if slide is string and slide.startswith('<') %}
                     {{ slide | safe }}
                     {% else %}
-                    {# The carousel box is 500px wide, and 90vw takes over below 556px. #}
-                    <img src="{{ slide }}" srcset="{{ srcset(slide) }}" sizes="(min-width: 556px) 500px, 90vw"
+                    {# The box fills the left column up to the 1200px the sources are capped at. #}
+                    <img src="{{ slide }}" srcset="{{ srcset(slide) }}" sizes="(min-width: 556px) 47vw, 94vw"
                          alt="{{ project['project_name'] }} photo {{ loop.index }}"
                          loading="{{ 'eager' if loop.first else 'lazy' }}" decoding="async"
                          class="max-h-full max-w-full object-contain">
@@ -41,11 +44,11 @@
             {# Keep the controls below the image so portrait photos have room. #}
             <div class="mt-2 flex items-center justify-center gap-3">
                 <button data-carousel-prev hidden type="button" aria-label="Previous image"
-                        class="inline-flex cursor-pointer items-center justify-center rounded-none border border-accent bg-term-panel/60 px-3 py-1 text-accent transition-colors duration-200 hover:bg-accent hover:text-term-panel focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent split:px-4 split:py-1.5 text-lg split:text-2xl motion-reduce:transition-none">{{ icon('chevron_left') }}</button>
+                        class="{{ nav_button }}">{{ icon('chevron_left') }}</button>
                 <span data-carousel-count
                       class="font-mono text-3xs tracking-widest text-breeze-grey tabular-nums split:text-xs">01 / {{ '%02d' | format(slides | length) }}</span>
                 <button data-carousel-next hidden type="button" aria-label="Next image"
-                        class="inline-flex cursor-pointer items-center justify-center rounded-none border border-accent bg-term-panel/60 px-3 py-1 text-accent transition-colors duration-200 hover:bg-accent hover:text-term-panel focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent split:px-4 split:py-1.5 text-lg split:text-2xl motion-reduce:transition-none">{{ icon('chevron_right') }}</button>
+                        class="{{ nav_button }}">{{ icon('chevron_right') }}</button>
             </div>
             {# Hide the dots on small screens; the counter is enough there. #}
             <div class="mt-2 hidden flex-wrap justify-center gap-1.5 split:flex">
@@ -53,7 +56,7 @@
                 <a href="#slide-{{ loop.index }}" data-carousel-dot
                    aria-label="Go to image {{ loop.index }} of {{ slides | length }}"
                    {% if loop.first %}aria-current="true"{% endif %}
-                   class="h-1.5 w-4 rounded-none bg-breeze-grey transition-all duration-200 hover:bg-breeze-fg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent aria-[current=true]:w-7 aria-[current=true]:bg-accent motion-reduce:transition-none"></a>
+                   class="h-1.5 w-4 rounded-none bg-breeze-grey transition-all duration-200 hover:bg-breeze-fg {{ focus_ring }} aria-[current=true]:w-7 aria-[current=true]:bg-accent motion-reduce:transition-none"></a>
                 {% endfor %}
             </div>
             {% endif %}
@@ -61,9 +64,9 @@
         {% endif %}
     </div>
 
-    <div class="flex h-full w-1/2 flex-col overflow-y-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden max-split:h-auto {{ stacked_width }} max-split:overflow-visible">
+    <div class="flex h-full w-1/2 flex-col overflow-y-auto {{ no_scrollbar | safe }} max-split:h-auto {{ stacked_width }} max-split:overflow-visible">
         <header>
-            <h1 class="mt-5 font-display text-[60px] leading-tight font-extrabold text-white max-split:mt-2.5 max-split:text-[40px]">{{ project['project_name'] }}</h1>
+            <h1 class="mt-5 font-display text-6xl leading-tight font-extrabold text-white max-split:mt-2.5 max-split:text-4xl">{{ project['project_name'] }}</h1>
             <p class="mr-25 mb-5 text-xs text-meta max-split:mr-5 max-split:mb-2.5">{{ project['date'] }}</p>
 
             <div class="flex flex-wrap gap-1">
@@ -75,11 +78,11 @@
             <div class="mt-5 mb-2.5 flex flex-col gap-1">
                 {% if project.get('github') %}
                 <a href="{{ project['github'] }}" target="_blank" rel="noopener noreferrer"
-                   class="w-fit text-accent underline-offset-2 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">Find on GitHub</a>
+                   class="{{ ext_link_style }}">Find on GitHub</a>
                 {% endif %}
                 {% if project.get('website') %}
                 <a href="{{ project['website'] }}" target="_blank" rel="noopener noreferrer"
-                   class="w-fit text-accent underline-offset-2 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">View website</a>
+                   class="{{ ext_link_style }}">View website</a>
                 {% endif %}
             </div>
         </header>
