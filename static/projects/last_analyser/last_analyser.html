@@ -1,0 +1,99 @@
+<div>
+    <p>This is my own Last.fm listening history analyser, running on my own machines. It keeps my listening history in a local database, so after it has synced I can browse and analyse it without an internet connection.</p>
+    <p>It has two backends. <code>scrobble_vault</code> syncs and serves the data, and <code>last_llm_service</code> lets me analyse it using local or cloud LLM models. The SvelteKit frontend has a summary page using the vault and a chat page for the LLM service.</p>
+    <p>I made it because I want to move away from proprietary music streaming services, but I still want a way to get music recommendations.</p>
+    <P>Slide 1 is a recording of the whole thing running.</p>
+
+    <p class="lb">The project consists of 7 main parts:</p>
+    <ul>
+        <li>Scrobble vault</li>
+        <li>Scrobble vault frontend, the summary page</li>
+        <li>Last LLM service</li>
+        <li>Last LLM service frontend, the chat page</li>
+        <li>Last LLM service over MCP</li>
+        <li>Settings</li>
+        <li>Setup</li>
+    </ul>
+
+    <p class="lb">Scrobble vault (seen in images 2 and 3)</p>
+    <ul>
+        <li><code>scrobble_vault</code> pulls 200 scrobbles at a time from the Last.fm API into five Postgres 18 tables, which are <code>artists</code>, <code>albums</code>, <code>tracks</code>, <code>scrobbles</code> and <code>last_sync</code>.</li>
+        <li>On the first run, it goes through my whole listening history. After that, it runs every 15 minutes and only fetches new listens.</li>
+        <li>Artist, album and track information is cached locally. I also normalise the names, and a unique index on the track and timestamp stops duplicate requests and duplicate listens.</li>
+        <li>Last.fm allows five requests per second, so every request goes through the same 200 ms gate.</li>
+        <li>
+            <p>The vault has three read endpoints:</p>
+            <ul>
+                <li><code>/music-summary</code> is used by the summary page.</li>
+                <li><code>/vibed-sql-runner</code> lets the LLM service run database queries.</li>
+                <li><code>/semantic-search</code> lets the LLM service search artists, albums and tracks by their meaning.</li>
+            </ul>
+        </li>
+        <li>If the LLM service is turned off, the SQL runner and semantic search endpoints return a 404, so the vault can still run on its own.</li>
+        <li>
+            <p>SQL runner:</p>
+            <ul>
+                <li><code>/vibed-sql-runner</code> runs SQL written by a model, which can be dangerous, so I put two layers of protection in front of it.</li>
+                <li>The first layer parses the query using <code>sqlglot</code> instead of checking strings. Markdown code fences and trailing semicolons are removed first because models often send SQL in a code block.</li>
+                <li>Only <code>SELECT</code> queries are allowed. The whole syntax tree is checked, so a write query cannot be hidden inside a CTE or subquery. It also blocks 16 functions, including <code>pg_sleep</code> and the <code>dblink</code> family.</li>
+                <li>Only the five real tables can be queried. If there is no limit, it adds one of 100. If the limit is too high, it caps it at 1000.</li>
+                <li>The query is rebuilt from the parsed syntax tree before it is run, so it does not directly run the model's original text.</li>
+                <li>The second layer is a Postgres role that can only read, made on the first container run. Even if the validator is bypassed, it still cannot write to the database. Vectors are also removed from results, so a <code>SELECT *</code> does not put all the embeddings into the model context.</li>
+                <li>If a query is rejected, it returns a 422 with the reason. The model can then change its query instead of getting stuck.</li>
+            </ul>
+        </li>
+        <li>
+            <p>Semantic search:</p>
+            <ul>
+                <li><code>/semantic-search</code> gives every artist, album and track a 384 dimension embedding from <code>all-MiniLM-L6-v2</code>, stored in a <code>vector(384)</code> column using pgvector.</li>
+                <li>For artists, I embed their tags, similar artists and bio. For albums, I embed their tags, track listing and wiki information. So I can search for what something sounds like, not just its name.</li>
+                <li>The results are ranked by cosine distance and each result has a similarity score, which helps the model decide if the match is useful.</li>
+                <li>I use FastEmbed for this, which is an ONNX build without PyTorch. It can run on a CPU, is only an 87 MB download, and can be turned off without stopping the rest of the sync.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <p class="lb">Scrobble vault frontend, the summary page (seen in images 4, 5 and 6)</p>
+    <ul>
+        <li>The overview page counts scrobbles, artists, albums and tracks over 7 days, 30 days, 365 days or all time.</li>
+        <li>It also shows the top artists, albums and tracks with cover art, plus music that I discovered for the first time during that period.</li>
+        <li>Listening patterns are shown as a 24 bar hour chart next to a 7 bar weekday chart.</li>
+        <li>The music page on this site uses the same summary page, reading from my server. You can see it live on the <a href="/music">music page</a>.</li>
+    </ul>
+
+    <p class="lb">Last LLM service</p>
+    <ul>
+        <li><code>scrobble_vault</code> holds the music data and tools, while <code>last_llm_service</code> runs the agent loop that uses them.</li>
+        <li>The four tools are <code>describe_schema</code>, <code>query_music_db</code>, <code>get_music_summary</code> and <code>search_music</code>. I define them once, then expose them through both MCP and the OpenAI tool format.</li>
+        <li>The OpenAI side talks to any compatible endpoint, so the chat page can run on a local Ollama model or a hosted one.</li>
+        <li>The agent can use up to 20 tool rounds for each question. This lets it read the database schema, make a query, notice a mistake and query again before answering.</li>
+        <li>Before sending the summary to a model, I remove the cover art URLs and cap discovery lists. The raw 365 day summary is nearly 1 MB otherwise.</li>
+    </ul>
+
+    <p class="lb">Last LLM service frontend, the chat page (seen in images 7 and 8)</p>
+    <ul>
+        <li>The chat streams responses over server sent events. It shows a chip for each tool call, which pulses while it is running and gets ticked when it returns, so you can see what it is doing during a slower question.</li>
+        <li>Conversations are kept in the browser, so there are no accounts or server side chat histories. Answers are rendered as sanitised Markdown.</li>
+    </ul>
+
+    <p class="lb">Last LLM service over MCP (seen in image 9)</p>
+    <ul>
+        <li>The same four tools are also served over MCP, so any client that supports it can use them with whatever model that client runs, Claude for example in the images.</li>
+        <li>So it will work with providers that doesn't provide a OpenAI API compatible API, or prices tokens it way too high, like Claude.</li>
+    </ul>
+
+    <p class="lb">Settings (seen in image 10)</p>
+    <ul>
+        <li>I split the config into two parts. A <code>.env</code> file holds the values needed before startup, and a settings API handles the rest. For a normal install on one machine, I do not need to edit the <code>.env</code> file.</li>
+        <li>Each service publishes a spec with its labels, types, ranges, help text and secret fields. Adding a setting is a JSON edit, not a new form.</li>
+        <li>The settings page covers my Last.fm details, sync frequency, rate limit, model and the cap on tool rounds. Saving the settings is enough, nothing needs to restart, and every field shows whether it is a default, saved value or still needed.</li>
+    </ul>
+
+    <p class="lb">Setup (seen in images 11 and 12)</p>
+    <ul>
+        <li>One Compose file brings up the database, vault, frontend and LLM services. I can also name one service on the command line if I only want to run that part.</li>
+        <li>Everything binds to loopback by default, so the vault can run on a box that is always on while the frontend and model run on my laptop over a Wireguard VPN.</li>
+        <li>What I actually run is two separate installs. My server runs the vault and its database, while my desktop runs the full stack with its own vault.</li>
+        <li>Every version tag publishes images to the GitHub Container Registry, so a smaller machine can pull an image instead of building it. There is also a development override that mounts the source, so an edit applies without a rebuild.</li>
+    </ul>
+</div>
