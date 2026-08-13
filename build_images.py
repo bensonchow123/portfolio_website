@@ -1,36 +1,35 @@
-"""
-Encode the AVIF ladder that srcset() serves from.
-`python build_images.py [--force] [--prune]`
-
-Drop an image next to the ones it belongs with, run this, then reference the
-.avif it writes. Widths come from the directory the source sits in.
-"""
+"""Make AVIF versions for responsive images.
+Run this script after adding an image."""
 import argparse
 import os
+import re
 import shutil
 import subprocess
 import sys
 import tempfile
 
-# ffmpeg reads AVIF too, so an already-encoded drop still gets a ladder.
+# We can read AVIF files too, so added AVIF files get the same sizes.
 SOURCE_EXTENSIONS = ('.jpg', '.jpeg', '.png', '.tif', '.tiff', '.webp', '.avif')
 
-# variants: the -<width>.avif rungs. cap: widest the canonical file may be,
-# None to keep the source width. Backdrops keep it because they cover the
-# viewport, photos do not because they sit in a 500px box.
+# `variants` lists the smaller files we make. `cap` is the largest main file.
+# Backgrounds keep their original width. Photos are shown at about 500px.
 PROFILES = {
     'backdrop': {'variants': (768, 1280, 1920), 'cap': None, 'quality': 55},
     'image': {'variants': (256,), 'cap': 512, 'quality': 70},
     'photo': {'variants': (400, 800), 'cap': 1200, 'quality': 62},
 }
 
+# Skip sizes that are too close together. They add another request without
+# helping much, and can make rescaled screenshots look softer.
+MIN_GAP = 0.15
+
 ROOTS = (
     ('static/images', lambda name: 'backdrop' if name.endswith('-background') else 'image'),
     ('static/projects', lambda name: 'photo'),
 )
 
-# The og:image stays a JPEG. Social scrapers are still unreliable on AVIF, and
-# it is never rendered on the site, so converting it would cost link previews.
+# Keep the social preview image as a JPEG. Some crawlers still do not support AVIF.
+# It is not shown on the site anyway.
 SKIP = {'benson-chow.jpg'}
 
 
@@ -42,8 +41,7 @@ def run(command):
 
 
 def source_width(path):
-    """Upright width. A phone photo tagged sideways stores its width and height
-    the wrong way round, and ffmpeg rotates on decode, so swap them here too."""
+    """Return the displayed width, even for a sideways phone photo."""
     fields = dict(line.split('=', 1) for line in run(
         ['ffprobe', '-v', 'error', '-select_streams', 'v:0',
          '-show_entries', 'stream=width,height:side_data=rotation',
@@ -54,37 +52,50 @@ def source_width(path):
 
 
 def quality_to_crf(quality):
-    # libaom takes 0-63 where lower is better, inverse of the 0-100 scale the
-    # profiles are written in. Measured: quality 62 lands on crf 24.
+    # libaom uses a CRF scale from 0 to 63. Lower values mean higher quality.
+    # We turn our 0 to 100 setting around for it.
     return round((100 - quality) * 63 / 100)
 
 
-def encode(source, target, width, quality, scratch):
-    """Scale and encode in one pass. Written to a temporary file first, so a
-    source that is its own canonical output can be replaced safely."""
+def encode(source, width, quality, scratch):
+    """Make one resized AVIF in a temporary folder.
+    The caller keeps it only if it should replace the current file."""
     staged = os.path.join(scratch, 'staged.avif')
     run(['ffmpeg', '-y', '-v', 'error', '-i', source,
-         # -2 keeps the height even, lanczos matches the sharpness of the
-         # existing ladder rather than the softer bicubic default.
+         # Let ffmpeg choose an even height. Lanczos keeps text sharper than the default.
          '-vf', 'scale=%d:-2:flags=lanczos+accurate_rnd' % width,
          '-c:v', 'libaom-av1', '-crf', str(quality_to_crf(quality)),
          '-cpu-used', '4', '-pix_fmt', 'yuv420p', '-still-picture', '1',
          '-f', 'avif', staged])
-    os.replace(staged, target)
+    return staged
 
 
 def outputs_for(source, profile):
-    """Every file this source should produce, as (path, width) pairs."""
+    """List the AVIF files for this image, from widest to narrowest.
+    That lets us compare each size with the next wider one."""
     width = source_width(source)
     base = os.path.splitext(source)[0]
     cap = profile['cap']
 
     planned = [('%s.avif' % base, min(width, cap) if cap else width)]
-    for rung in profile['variants']:
-        # A rung at or above the canonical width would duplicate it.
-        if rung < planned[0][1]:
+    for rung in sorted(profile['variants'], reverse=True):
+        if rung <= planned[-1][1] * (1 - MIN_GAP):
             planned.append(('%s-%d.avif' % (base, rung), rung))
     return width, planned
+
+
+def sweep(planned):
+    """Remove old resized files the current plan does not need anymore."""
+    base = os.path.splitext(planned[0][0])[0]
+    keep = {os.path.basename(path) for path, _ in planned}
+    directory = os.path.dirname(base) or '.'
+
+    stale = []
+    for name in sorted(os.listdir(directory)):
+        if re.fullmatch(re.escape(os.path.basename(base)) + r'-\d+\.avif', name) and name not in keep:
+            os.remove(os.path.join(directory, name))
+            stale.append(os.path.join(directory, name))
+    return stale
 
 
 def find_sources():
@@ -92,7 +103,7 @@ def find_sources():
         for directory, _, names in os.walk(root):
             for name in sorted(names):
                 stem, extension = os.path.splitext(name)
-                # A generated rung is not a source, or every run would recurse.
+                # Do not treat a generated size as a source. Otherwise the next run loops over it.
                 if stem.rsplit('-', 1)[-1].isdigit() and extension.lower() == '.avif':
                     continue
                 if extension.lower() in SOURCE_EXTENSIONS and name not in SKIP:
@@ -100,12 +111,12 @@ def find_sources():
 
 
 def needs_encode(source, source_pixels, target, target_width, force):
-    if force:
-        return True
-    # An AVIF source is its own canonical file, so mtimes say nothing. Only
-    # rewrite it when it is wider than the profile allows.
+    # If the source is already AVIF, it is also the main output file.
+    # Only remake it when its width no longer fits. Otherwise quality slowly drops.
     if os.path.abspath(source) == os.path.abspath(target):
         return source_pixels != target_width
+    if force:
+        return True
     return not os.path.exists(target) or os.path.getmtime(target) < os.path.getmtime(source)
 
 
@@ -121,20 +132,26 @@ def main():
         if shutil.which(tool) is None:
             sys.exit('%s is not installed' % tool)
 
-    written = skipped = pruned = 0
-    scratch = tempfile.mkdtemp()
+    written = skipped = dropped = pruned = 0
+    # Keep the temporary file nearby so os.replace stays on one filesystem.
+    scratch = tempfile.mkdtemp(dir='.')
     try:
         for source, profile in find_sources():
             pixels, planned = outputs_for(source, profile)
+
+            for target in sweep(planned):
+                print('%s  dropped, too close to the width above it' % target)
+                dropped += 1
+
             for target, width in planned:
                 if not needs_encode(source, pixels, target, width, args.force):
                     skipped += 1
                     continue
-                encode(source, target, width, profile['quality'], scratch)
+                os.replace(encode(source, width, profile['quality'], scratch), target)
                 print('%s  %dw  %.0f kB' % (target, width, os.path.getsize(target) / 1024))
                 written += 1
 
-            # Never delete a source that is also its own canonical output.
+            # Keep a source when it is also the main AVIF output.
             same = os.path.abspath(source) == os.path.abspath(planned[0][0])
             if args.prune and not same and all(os.path.exists(t) for t, _ in planned):
                 os.remove(source)
@@ -142,7 +159,8 @@ def main():
     finally:
         shutil.rmtree(scratch, ignore_errors=True)
 
-    print('wrote %d, up to date %d, pruned %d' % (written, skipped, pruned))
+    print('wrote %d, up to date %d, dropped %d, pruned %d'
+          % (written, skipped, dropped, pruned))
     if written and not args.prune:
         print('sources kept, pass --prune to drop them once you are happy')
 
