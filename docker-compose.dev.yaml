@@ -18,7 +18,7 @@ services:
     # Share the host's network stack, so loopback is the one loopback.
     # App and livereload listen on 5500 directly, no port mapping needed.
     network_mode: host
-    command: ["sh", "-c", "python build_pdf.py && python app.py"]
+    command: ["sh", "-c", "python -m scripts.build_pdf && python app.py"]
     volumes:
       # Mount the source so edits appear without rebuilding.
       - .:/app
@@ -36,7 +36,7 @@ services:
     tty: true
     volumes:
       # CSS inputs and output.
-      - ./src:/app/src
+      - ./assets:/app/assets
       - ./templates:/app/templates
       - ./static/js:/app/static/js
       - ./static/css:/app/static/css
