@@ -26,7 +26,7 @@ USER site
 COPY --chown=site:site package.json package-lock.json ./
 RUN npm ci
 
-COPY --chown=site:site src/ ./src/
+COPY --chown=site:site assets/ ./assets/
 COPY --chown=site:site templates/ ./templates/
 COPY --chown=site:site static/js/ ./static/js/
 
@@ -61,13 +61,14 @@ RUN groupadd --gid ${GID} site \
 
 USER site
 
-COPY --chown=site:site app.py music.py build_pdf.py ./
+COPY --chown=site:site app.py music.py ./
+COPY --chown=site:site scripts/ ./scripts/
 COPY --chown=site:site templates/ ./templates/
 COPY --chown=site:site static/ ./static/
 COPY --from=css --chown=site:site /app/static/css/tailwind.css ./static/css/tailwind.css
 
 ARG SITE_URL=https://bensonc.how
-RUN SITE_URL=${SITE_URL} python build_pdf.py
+RUN SITE_URL=${SITE_URL} python -m scripts.build_pdf
 
 
 # Development image with livereload and PDF build dependencies.

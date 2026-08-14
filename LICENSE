@@ -31,9 +31,10 @@ What the MIT License covers
 
 The source code of this site, written by Benson Chow:
 
-    app.py, music.py, build_pdf.py
+    app.py, music.py
+    scripts/
     templates/
-    src/
+    assets/
     static/js/
     static/css/
     Dockerfile, docker-compose*.yaml, and the build configuration

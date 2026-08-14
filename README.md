@@ -10,8 +10,10 @@ docker compose pull && docker compose up -d     # published image, no host port
 docker compose -f docker-compose.dev.yaml up    # dev, http://127.0.0.1:5500
 ```
 
-Without containers, install `requirements-dev.txt`, then `python build_pdf.py`
-for the résumé and `python app.py` to serve. `tailwind.css` is committed so a
+Without containers, install `requirements-dev.txt`, then `python -m
+scripts.build_pdf` for the résumé and `python app.py` to serve. Build scripts
+run as modules from the repo root, that is what keeps `from app import` working
+from inside `scripts/`. `tailwind.css` is committed so a
 clone runs without Node. Rebuild with `npm run build:css`, never leaving a
 session on `watch:css`, which writes unminified output.
 
@@ -34,7 +36,7 @@ with no width suffix. Restart after, the widths are cached per process.
 
 ## Notes
 
-Tailwind v4 is configured in `src/app.css` alone and scans templates literally,
+Tailwind v4 is configured in `assets/app.css` alone and scans templates literally,
 so never build a class name by concatenation in Jinja. No custom CSS except
 `resume.css`, which the WeasyPrint PDF needs. Only two JS files exist and it
 should stay that way. Environment is all optional, see `.env.example`, though

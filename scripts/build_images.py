@@ -1,5 +1,5 @@
 """Make AVIF versions for responsive images.
-Run this script after adding an image."""
+Run `python -m scripts.build_images` from the repo root after adding an image."""
 import argparse
 import os
 import re

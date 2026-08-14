@@ -10,7 +10,7 @@ from KDE's Konsole terminal emulator, by the KDE Visual Design Group.
     Licence:  GPL-2.0-or-later, full text in GPL-2.0-or-later.txt
 
 Nothing from Konsole ships in this repo. The values are transcribed into
-src/app.css as --color-breeze-* theme tokens, eight normal and eight intense,
+assets/app.css as --color-breeze-* theme tokens, eight normal and eight intense,
 and every colour on the site resolves to one of them.
 
 On the licence

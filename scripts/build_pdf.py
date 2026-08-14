@@ -1,6 +1,6 @@
 """
 Render the resume PDF once, at build time.
-`python build_pdf.py`
+`python -m scripts.build_pdf`, from the repo root so `app` imports.
 """
 import os
 

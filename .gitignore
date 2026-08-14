@@ -5,7 +5,7 @@ __pycache__/
 .vscode/
 .idea/
 .envrc
-# Build artefact, written by build_pdf.py during the image build
+# Build artefact, written by scripts/build_pdf.py during the image build
 static/resume/
 # Build artefact, the css stage rebuilds it and overwrites the copy in static/
 static/css/tailwind.css

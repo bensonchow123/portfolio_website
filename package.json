@@ -4,10 +4,10 @@
   "version": "1.0.0",
   "description": "Tailwind build for the Flask portfolio. The Flask runtime never needs Node: static/css/tailwind.css is committed.",
   "scripts": {
-    "build:css": "tailwindcss -i ./src/app.css -o ./static/css/tailwind.css --minify",
-    "watch:css": "tailwindcss -i ./src/app.css -o ./static/css/tailwind.css --watch",
-    "build:pdf": "python build_pdf.py",
-    "build:images": "python build_images.py"
+    "build:css": "tailwindcss -i ./assets/app.css -o ./static/css/tailwind.css --minify",
+    "watch:css": "tailwindcss -i ./assets/app.css -o ./static/css/tailwind.css --watch",
+    "build:pdf": "python -m scripts.build_pdf",
+    "build:images": "python -m scripts.build_images"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.3",

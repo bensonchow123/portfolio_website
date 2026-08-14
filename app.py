@@ -35,7 +35,7 @@ app.get_send_file_max_age = (
     lambda filename: 31536000 if filename and filename.lower().endswith(_IMMUTABLE) else None
 )
 
-# Where build_pdf.py writes the resume, and where the download route reads it.
+# Where scripts/build_pdf.py writes the resume, and where the download route reads it.
 PDF_DIR = 'static/resume'
 PDF_NAME = 'Benson_Chow_Resume.pdf'
 
@@ -157,10 +157,10 @@ def licence(which):
 
 @app.route('/📄resume📄/download')
 def download_resume():
-    """Serve the PDF built by build_pdf.py"""
+    """Serve the PDF built by scripts/build_pdf.py"""
     pdf_path = get_static_file(os.path.join(PDF_DIR, PDF_NAME))
     if not os.path.exists(pdf_path):
-        app.logger.error("Resume PDF missing, run build_pdf.py")
+        app.logger.error("Resume PDF missing, run scripts/build_pdf.py")
         return render_template('404.html'), 404
 
     return send_from_directory(get_static_file(PDF_DIR), PDF_NAME, as_attachment=True)
