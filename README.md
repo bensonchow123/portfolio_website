@@ -1,6 +1,6 @@
 # bensonc.how
 
-Personal site: about me, projects, listening stats and résumé. Flask + Jinja2,
+Personal site at [bensonc.how](https://bensonc.how/), about me, projects, listening stats and résumé. Flask + Jinja2,
 server rendered, Gunicorn on `:8080`. This repo is only the site image. Nginx
 and the scrobble_vault the music page reads are each their own repo, and
 production is the infrastructure repo running the published image.
