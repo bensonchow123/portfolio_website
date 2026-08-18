@@ -13,9 +13,11 @@ docker compose -f docker-compose.dev.yaml up    # dev, http://127.0.0.1:5500
 Without containers, install `requirements-dev.txt`, then `python -m
 scripts.build_pdf` for the résumé and `python app.py` to serve. Build scripts
 run as modules from the repo root, that is what keeps `from app import` working
-from inside `scripts/`. `tailwind.css` is committed so a
-clone runs without Node. Rebuild with `npm run build:css`, never leaving a
-session on `watch:css`, which writes unminified output.
+from inside `scripts/`. `tailwind.css` is generated, build it before serving:
+
+```bash
+npm run build:css
+```
 
 ## Adding images
 
