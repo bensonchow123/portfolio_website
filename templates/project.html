@@ -88,7 +88,7 @@
         </header>
 
 {# Style the stored description because it has no classes of its own. #}
-        <div class="pb-10 text-white
+        <div class="pb-10 leading-6 text-white
                     [&_p]:my-3 [&_ul]:my-3 [&_ol]:my-3
                     [&_ul]:list-disc [&_ul]:list-outside [&_ul]:ps-6
                     [&_ol]:list-decimal [&_ol]:list-outside [&_ol]:ps-6
@@ -97,7 +97,7 @@
                     [&_h2]:mt-5 [&_h2]:mb-2 [&_h2]:text-2xl
                     [&_h3]:mt-4 [&_h3]:mb-2 [&_h3]:text-xl
                     [&_a]:text-accent [&_a]:underline [&_a]:underline-offset-2
-                    [&_code]:rounded-none [&_code]:border [&_code]:border-accent/30 [&_code]:bg-accent/10 [&_code]:px-1 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-sm [&_code]:text-accent
+                    [&_code]:box-decoration-clone [&_code]:rounded-none [&_code]:border [&_code]:border-accent/30 [&_code]:bg-accent/10 [&_code]:px-1 [&_code]:py-0 [&_code]:font-mono [&_code]:text-sm [&_code]:text-accent
                     [&_img]:h-auto [&_img]:max-w-full [&_img]:rounded-md
                     [&_.lb]:italic">{{ project['description'] | safe }}</div>
     </div>
