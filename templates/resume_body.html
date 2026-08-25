@@ -37,31 +37,17 @@
     <div data-entry class="mb-5 break-inside-avoid">
         <div data-entry-head class="{{ entry_row }}">
             <div data-entry-title>
-                <h3 class="font-bold text-white">Data Science Intern</h3>
-                <p class="{{ entry_note }}">Arup</p>
+                <h3 class="font-bold text-white">Remote Software Engineer</h3>
+                <p class="{{ entry_note }}">drow.cloud</p>
             </div>
-            <span data-date class="{{ entry_date }}">Jul – Sep 2024</span>
+            <span data-date class="{{ entry_date }}">Sep 2025 - April 2026</span>
         </div>
         <ul class="{{ bullets }}">
-            <li class="mb-1">Automated processing and formatting of Hong Kong Annual Traffic Census data, reducing manual workload and errors.</li>
-            <li class="mb-1">Developed a PyQt6-based Windows application with a user-friendly interface for data input/ selection and tool execution.</li>
-            <li class="mb-1">Implemented six specialized tools to convert and validate custom CDL, A/B, COR, and XDT files into standardized Excel reports.</li>
-            <li class="mb-1">Leveraged multithreading to maintain responsive UI during intensive data processing tasks.</li>
-            <li class="mb-1">Packaged the application as a standalone .exe using PyInstaller for seamless distribution to non-technical staff.</li>
-        </ul>
-    </div>
-
-    <div data-entry class="mb-5 break-inside-avoid">
-        <div data-entry-head class="{{ entry_row }}">
-            <div data-entry-title>
-                <h3 class="font-bold text-white">Software Engineering Intern</h3>
-                <p class="{{ entry_note }}">AI Lab Limited</p>
-            </div>
-            <span data-date class="{{ entry_date }}">Jun – Jul 2025</span>
-        </div>
-        <ul class="{{ bullets }}">
-            <li class="mb-1">Researched the ESP32 micro controller for a teaching curriculum, creating a DIY security camera as a demonstration project.</li>
-            <li class="mb-1">Developed multiple web applications using Flask, Python, JavaScript, and HTML.</li>
+            <li class="mb-1">Migrated the local document management system I built during the internship, which uses OCR, vector search and local AI-driven document analysis, to a Windows system with a GTX 5070ti, utilising WSL2 & Docker, delivering the application to a paying user.</li>
+            <li class="mb-1">Did the same migration to an NVIDIA DGX Spark, for ARM support.</li>
+            <li class="mb-1">Added features like syncing the vector database to a Windows directory, AJAX requests to the backend for local AI document analysis and ability to select different local LLM models for analysis.</li>
+            <li class="mb-1">On a Apple Mac Studio M3 Ultra with 512GB of unified memory, I set up Surfsense manually, configuring OpenSSH, a VPN, Redis, PostgreSQL, Docling and other backend services.</li>
+            <li class="mb-1">Wrote .plist files for those services so they start on boot with the correct environment variables.</li>
         </ul>
     </div>
 
@@ -71,11 +57,11 @@
                 <h3 class="font-bold text-white">Software Engineering Intern</h3>
                 <p class="{{ entry_note }}">drow.cloud</p>
             </div>
-            <span data-date class="{{ entry_date }}">Jul – Sep 2025</span>
+            <span data-date class="{{ entry_date }}">Jul - Sep 2025</span>
         </div>
         <ul class="{{ bullets }}">
             <li class="mb-1">Researched the finetuning of an AI powered optical character recognition (OCR) program for document scanning.</li>
-            <li class="mb-1">Developed a document management system that utilizes OCR, vector databases for search, and local AI-driven document analysis, utilizing a GNU/ Linux system with three RTX Ada 5880 GPUs.</li>
+            <li class="mb-1">Developed a offline document management system that utilizes OCR, vector databases for search, and local AI-driven document analysis, utilizing a GNU/ Linux system with three RTX Ada 5880 GPUs.</li>
         </ul>
         <p class="mt-1 text-sm">
             <a href="{{ url_for('static', filename='documents/drow_intern.pdf', _external=True) }}"
@@ -86,18 +72,31 @@
     <div data-entry class="mb-5 break-inside-avoid">
         <div data-entry-head class="{{ entry_row }}">
             <div data-entry-title>
-                <h3 class="font-bold text-white">Remote Software Engineer</h3>
-                <p class="{{ entry_note }}">drow.cloud</p>
+                <h3 class="font-bold text-white">Software Engineering Intern</h3>
+                <p class="{{ entry_note }}">AI Lab Limited</p>
             </div>
-            <span data-date class="{{ entry_date }}">Sep 2025 – April 2026</span>
+            <span data-date class="{{ entry_date }}">Jun - Jul 2025</span>
         </div>
         <ul class="{{ bullets }}">
-            <li class="mb-1">Migrated the document management system to a Windows system with a GTX 5070ti, utilising WSL2, and delivered the application to a paying user.</li>
-            <li class="mb-1">Did the same migration on an NVIDIA DGX Spark, this time on ARM based Ubuntu instead of WSL2.</li>
-            <li class="mb-1">Working remotely, I installed OpenSSH servers on both machines, development is through an SSH connection through a WireGuard VPN.</li>
-            <li class="mb-1">Added features like syncing the vector database to a Windows directory, AJAX requests to the backend for local AI document analysis and ability to select different LLM models for analysis.</li>
-            <li class="mb-1">On a Apple Mac Studio M3 Ultra with 512GB of unified memory, I set up Surfsense manually, configuring OpenSSH, a VPN, Redis, PostgreSQL, Docling and other backend services.</li>
-            <li class="mb-1">Wrote .plist files for those services so they start on boot with the correct environment variables.</li>
+            <li class="mb-1">Researched the ESP32 micro controller for a teaching curriculum, creating a DIY security camera as a demonstration project.</li>
+            <li class="mb-1">Developed multiple web applications using Flask, Python, JavaScript, and HTML.</li>
+        </ul>
+    </div>
+
+    <div data-entry class="mb-5 break-inside-avoid">
+        <div data-entry-head class="{{ entry_row }}">
+            <div data-entry-title>
+                <h3 class="font-bold text-white">Data Science Intern</h3>
+                <p class="{{ entry_note }}">Arup</p>
+            </div>
+            <span data-date class="{{ entry_date }}">Jul - Sep 2024</span>
+        </div>
+        <ul class="{{ bullets }}">
+            <li class="mb-1">Automated processing and formatting of Hong Kong Annual Traffic Census data, reducing manual workload and errors.</li>
+            <li class="mb-1">Developed a PyQt6-based Windows application with a user-friendly interface for data input/ selection and tool execution.</li>
+            <li class="mb-1">Implemented six specialized tools to convert and validate custom CDL, A/B, COR, and XDT files into standardized Excel reports.</li>
+            <li class="mb-1">Leveraged multithreading to maintain responsive UI during intensive data processing tasks.</li>
+            <li class="mb-1">Packaged the application as a standalone .exe using PyInstaller for seamless distribution to non-technical staff.</li>
         </ul>
     </div>
 </section>
@@ -111,14 +110,14 @@
                 <h3 class="font-bold text-white">Computer Science with Artifical Intelligence Bachelor</h3>
                 <p class="{{ entry_note }}">University of York</p>
             </div>
-            <span data-date class="{{ entry_date }}">2024 – present</span>
+            <span data-date class="{{ entry_date }}">2024 - present</span>
         </div>
         <p class="text-breeze-fg">On track for a first class degree.</p>
         <p class="mt-1 text-breeze-fg"><strong>Relevant coursework:</strong>
             <a href="https://github.com/bensonchow123/Oxford-IIIT-Pet-Classifier" target="_blank" rel="noopener noreferrer" class="text-accent underline">Oxford-IIIT Pet classifier</a>,
             <a href="https://github.com/B-B-ENG1" target="_blank" rel="noopener noreferrer" class="text-accent underline">ENG1 group game project</a></p>
         <ul class="{{ bullets }}">
-            <li class="mb-1">Trained an image classifier on the Oxford-IIIT Pet dataset, reaching 72% accuracy over 30 epochs.</li>
+            <li class="mb-1">Trained an 30 class image classifier on the Oxford-IIIT Pet dataset, reaching 72% accuracy over 30 epochs.</li>
             <li class="mb-1">Built a top down 2D game with a team, then picked up another group's codebase and continued their game for the handover assessment.</li>
         </ul>
         <p class="mt-1 text-breeze-fg"><strong>Societies:</strong> Infrastructure Officer, York Free and Open Source Society (YFOSS)</p>
@@ -134,7 +133,7 @@
                 <h3 class="font-bold text-white">A-Level</h3>
                 <p class="{{ entry_note }}">Malvern College</p>
             </div>
-            <span data-date class="{{ entry_date }}">2022 – 2024</span>
+            <span data-date class="{{ entry_date }}">2022 - 2024</span>
         </div>
         <p class="text-breeze-fg"><strong>Relevant coursework:</strong> Campus Interactive Map</p>
         <ul class="{{ bullets }}">
