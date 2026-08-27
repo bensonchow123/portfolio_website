@@ -37,7 +37,7 @@ app.get_send_file_max_age = (
 
 # Where scripts/build_pdf.py writes the resume, and where the download route reads it.
 PDF_DIR = 'static/resume'
-PDF_NAME = 'Benson_Chow_Resume.pdf'
+PDF_NAME = 'benson_chow_resume.pdf'
 
 # Both licences live at the repo root so GitHub picks them up. The home page
 # links to them, so serve those same files rather than keeping a second copy.

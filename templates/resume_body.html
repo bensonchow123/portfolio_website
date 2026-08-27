@@ -33,6 +33,29 @@
 
 <section data-section class="mb-6">
     <h2 class="{{ section_head }}"><span data-accent-num class="text-accent">02</span><span data-accent-num-sep class="text-breeze-grey">/</span><span>Work Experience</span><span data-screen-only class="{{ dashed_rule }}"></span></h2>
+    <div data-entry class="mb-5 break-inside-avoid">
+        <div data-entry-head class="{{ entry_row }}">
+            <div data-entry-title>
+                <h3 class="font-bold text-white">Project research assistant</h3>
+                <p class="{{ entry_note }}">Logistics and Supply Chain MultiTech R&D Center</p>
+            </div>
+            <span data-date class="{{ entry_date }}">June 2026 - August 2026</span>
+        </div>
+        <ul class="{{ bullets }}">
+            <li class="mb-1">Built tag-driven CI/CD pipelines for two internal services with GitHub Actions and self-hosted runners, gated on integration tests against the started containers.</li>
+            <li class="mb-1">Wrote an idempotent Bash script that provisions a bare Linux VM into a deployment target.</li>
+            <li class="mb-1">Containerised both services with Docker Compose behind Traefik, automating TLS certificate setup and mapping internal hostnames into the containers.</li>
+            <li class="mb-1">Coordinated firewall rule changes and port openings with the corporate IT team to make the services reachable across the intranet.</li>
+            <li class="mb-1">Integrated SFTPGo into a Django REST Framework backend, with role-based access control through Keycloak.</li>
+            <li class="mb-1">Added API key authenticated endpoints for machine to machine transfers between the two services.</li>
+            <li class="mb-1">Wrote a Django scheduler service, deployed in its own container, for periodic dispatch between them.</li>
+            <li class="mb-1">Built the React and TypeScript frontend, covered by a Django test suite.</li>
+        </ul>
+        <p class="mt-1 text-sm">
+            <a href="{{ url_for('static', filename='documents/benson_chow_lscm_internship_certificate.pdf', _external=True) }}"
+               target="_blank" rel="noopener noreferrer" class="text-accent underline">Internship certificate</a>
+        </p>
+    </div>
 
     <div data-entry class="mb-5 break-inside-avoid">
         <div data-entry-head class="{{ entry_row }}">
@@ -64,7 +87,7 @@
             <li class="mb-1">Developed a offline document management system that utilizes OCR, vector databases for search, and local AI-driven document analysis, utilizing a GNU/ Linux system with three RTX Ada 5880 GPUs.</li>
         </ul>
         <p class="mt-1 text-sm">
-            <a href="{{ url_for('static', filename='documents/drow_intern.pdf', _external=True) }}"
+            <a href="{{ url_for('static', filename='documents/benson_chow_drow_internship_certificate.pdf', _external=True) }}"
                target="_blank" rel="noopener noreferrer" class="text-accent underline">Internship certificate</a>
         </p>
     </div>
