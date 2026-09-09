@@ -1,4 +1,12 @@
 # Local development with live reload and a CSS watcher.
+
+# Everything tailwind reads except node_modules, which stays the image's musl build.
+x-css-mounts: &css_mounts
+  - ./assets:/app/assets
+  - ./templates:/app/templates
+  - ./static/js:/app/static/js
+  - ./static/css:/app/static/css
+
 services:
   web:
     # Includes the tools needed for live reload and PDF generation.
@@ -6,8 +14,9 @@ services:
       context: .
       target: dev
     image: portfolio_web:dev
-    # Match the host user so bind mounted files stay writable.
-    user: "${UID:-1000}:${GID:-1000}"
+    # Match the host user so bind mounted files stay writable, ids come from .env
+    # because bash keeps UID readonly and would always fall through to 1000.
+    user: "${HOST_UID:-1000}:${HOST_GID:-1000}"
     environment:
       # No proxy in development.
       - PROXY_FIX_HOPS=0
@@ -19,24 +28,36 @@ services:
     # App and livereload listen on 5500 directly, no port mapping needed.
     network_mode: host
     command: ["sh", "-c", "python -m scripts.build_pdf && python app.py"]
+    # Let the CSS build finish first, so Flask never serves the old or half written stylesheet.
+    depends_on:
+      css-build:
+        condition: service_completed_successfully
     volumes:
       # Mount the source so edits appear without rebuilding.
       - .:/app
 
-  # Rebuild CSS when source files change.
-  css:
+  # Write the stylesheet once and exit, so web and the watcher can wait on the exit code.
+  # https://docs.docker.com/compose/how-tos/startup-order/
+  css-build:
     build:
       context: .
       target: css
     image: portfolio_css:dev
-    command: ["npm", "run", "watch:css"]
+    # Compose reuses an existing tag, and package.json is not mounted, so it use old copy.
+    pull_policy: build
+    command: ["npm", "run", "build:css"]
     # Keep generated CSS owned by the host user.
-    user: "${UID:-1000}:${GID:-1000}"
+    user: "${HOST_UID:-1000}:${HOST_GID:-1000}"
+    volumes: *css_mounts
+
+  # Rebuild CSS when source files change.
+  css:
+    image: portfolio_css:dev
+    command: ["npm", "run", "watch:css"]
+    user: "${HOST_UID:-1000}:${HOST_GID:-1000}"
     stdin_open: true
     tty: true
-    volumes:
-      # CSS inputs and output.
-      - ./assets:/app/assets
-      - ./templates:/app/templates
-      - ./static/js:/app/static/js
-      - ./static/css:/app/static/css
+    depends_on:
+      css-build:
+        condition: service_completed_successfully
+    volumes: *css_mounts
