@@ -1,6 +1,28 @@
 {
   "projects": [
     {
+      "project_name": "home IT upgrade 2026",
+      "directory_name": "2026_home_it_upgrade",
+      "date": "June 2026 - September 2026",
+      "short": "Pillow rabbit cam, FOSS router and NAS fix in my home in the summer of 2026.",
+      "status": "completed",
+      "weight": 10,
+      "tags": [
+        "Hardware", "Networking"
+      ],
+      "photos": [
+        "/static/projects/2026_home_it_upgrade/pillow_rabbit_cam.avif",
+        "/static/projects/2026_home_it_upgrade/rabbit.avif",
+        "/static/projects/2026_home_it_upgrade/computy1.avif",
+        "/static/projects/2026_home_it_upgrade/840_evo_firmware.avif",
+        "/static/projects/2026_home_it_upgrade/proxmox.avif",
+        "/static/projects/2026_home_it_upgrade/opnsense.avif",
+        "/static/projects/2026_home_it_upgrade/dead_ssd.avif",
+        "/static/projects/2026_home_it_upgrade/os_in_alpine.avif",
+        "/static/projects/2026_home_it_upgrade/qnap_no_ssd.avif"
+      ]
+    },
+    {
       "project_name": "Last-analyser",
       "directory_name": "last_analyser",
       "date": "February 2026 - present",

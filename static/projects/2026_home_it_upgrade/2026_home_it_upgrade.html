@@ -1,0 +1,105 @@
+<div>
+    <p>Following last year, this is the documentation to my home IT equiment and systems in the summer of 2026.</p>
+    <p>We finally got fiber optic cables to our apartment and got Gigabit internet, and no longer behind a NAT.</p>
+    <p class="lb">The updates consist of:</p>
+    <ul>
+        <li>Pillow rabbit cam</li>
+        <li>OPNsense router in Proxmox</li>
+        <li>NAS fix</li>
+    </ul>
+
+    <p class="lb">Pillow rabbit cam (image 1, 2)</p>
+    <ul>
+        <li>
+            <p>Hardware (closeup in image 1):</p>
+            <ul>
+                <li>Raspberry Pi 2 Model B, quad core with 1GB of RAM</li>
+                <li>A 3.5 inch 480x320 SPI TFT screen</li>
+                <li>A TP-LINK 150Mbps USB wifi dongle</li>
+                <li>A USB webcam</li>
+                <li>A clear acrylic case</li>
+                <li>A 120GB microSD card and a micro USB power supply</li>
+            </ul>
+        </li>
+        <li>
+            <p>Hardware usage</p>
+            <ul>
+                <li>The PI was sitting around for years and now there is finally a usecase for it.</li>
+                <li>The screen is used to align camera easily, displaying the rabbit stream.</li>
+                <li>The USB webcam to capture Pillow the rabbit.</li>
+                <li>The case comes with the screen, so is the microSD card.</li>
+
+            </ul>
+        </li>
+        <li>
+            <p>Software usage (screenshot of rabbit feed in image 2):</p>
+            <ul>
+                <li>Raspbian PI lite (basicly Armbian based on Debian 13 Trixie) is installed on the microSD card.</li>
+                <li>The wifi dongle is setted up through <code>raspi-config</code>, cause the PI 2 have no onboard wifi.</li>
+                <li>The vendor's <code>LCD35-show</code> script adds the <code>tft35a</code> overlay, the panel comes up as <code>/dev/fb1</code> at 480x320 and 16 bit, with <code>rotate=270</code> in <code>/boot/firmware/config.txt</code> to sit the right way up.</li>
+                <li><code>fbcp</code> comes with LCD-show to mirror fb0 onto fb1, it is commented out of <code>/etc/rc.local</code> cause ffmpeg writes to the panel itself.</li>
+                <li>ustreamer serves the webcam as MJPEG on port 8080 at 640x360 and 10fps, which is about all the dongle can carry, with a <code>/stream</code> and a <code>/snapshot</code> endpoint.</li>
+                <li>For the panel a loop pulls <code>/snapshot</code> once a second and ffmpeg writes it to <code>/dev/fb1</code> as <code>rgb565le</code>, the screen is only there to aim the camera.</li>
+                <li>A <code>tft-camera.service</code> unit requires <code>ustreamer.service</code> and restarts always, so the feed is back on the panel after a reboot.</li>
+                <li>rabbit.bensonc.how is a Cloudflare record pointing at the PI's local IP, Caddy reverse proxies it to port 8080 with <code>flush_interval -1</code> so MJPEG is not buffered, and a <code>rewrite / /stream</code> makes the bare domain the feed (image 2).</li>
+            </ul>
+        </li>
+    </ul>
+
+    <p class="lb">OPNsense router in Proxmox (image 3, 4, 5, 6)</p>
+    <ul>
+        <li>
+            <p>Hardware (closeup in image 3):</p>
+            <ul>
+                <li>Elite Desk g2 mini, with Intel i5 6500t</li>
+                <li>12GB of DDR4 2400Mhz Ram</li>
+                <li>256gb gen3 NVME SSD</li>
+                <li>250GB Samsung 840 evo Sata SSD</li>
+                <li>Cable Matter USB 3.0 to ethernet adapter</li>
+                <li>All the parts are second hand at the total cost of around £90</li>
+            </ul>
+        </li>
+        <li>
+            <p>Hardware usage</p>
+            <ul>
+                <li>All the Xiaomi AX3000NE's from last year are now in AP mode</li>
+                <li>There is 4 cores on the PC, but the OPNsense only needs 2 cores, so Proxmox let me run other stuff on same box.</li>
+                <li>The 840 Evo has the TLC voltage drift problem where old data horrible read speed, so Samsung's Performance Restoration tool is ran off a USB stick to flash new firmware and rewrite every cell (image 4).</li>
+                <li>The two SSDs are in a ZFS mirror in RAID 1 config, so if one fail the other takes it place with no problem.</li>
+                <li>The mirror is needed cause I won't be in Hong Kong for a while and it just provides redundance.</li>
+                <li>There is only one ethernet port, but router needs two NICs, so the USB to ethernet adapter needed.</li>
+                <li>LAN is through the more stable on board ethernet port while WAN is through the USB.</li>
+            </ul>
+        </li>
+        <li>
+            <p>Software usage (screenshots in image 5, 6):</p>
+            <ul>
+                <li>The USB NIC is configured as a Linux networking bridge so it can be assigned to the OPNsense VM.</li>
+                <li>OPNsense is installed in a VM for security, allocating 2VCPU cores, 40GB disk and 6GB RAM.</li>
+                <li>Unbound is the DNS resolver for the whole LAN, with the blocklists turned on so ads and trackers are filtered on every device without installing anything on them.</li>
+                <li>Tailscale is installed on the OPNsense VM, so the router is reachable from my tailnet.</li>
+                <li>OPNsense also acts as a subnet router, advertising the home LAN to my tailnet so I can get on to the home network from anywhere.</li>
+            </ul>
+        </li>
+    </ul>
+
+    <p class="lb">NAS fix (image 7, 8, 9)</p>
+    <ul>
+        <li>
+            <p>What broke (the dead SSD in image 7):</p>
+            <ul>
+                <li>The 120GB SSD that boots last year's QNAP NAS is dead.</li>
+                <li>It is like the only SATA SSD I have with a DRAM cache, so it sucks.</li>
+                <li>I don't have another SSD so the whole OS has to fit in the 4GB of eMMC on the NAS, which is the reason Debian went on an external SSD last year.</li>
+            </ul>
+        </li>
+        <li>
+            <p>The fix (image 8, 9):</p>
+            <ul>
+                <li>Alpine Linux is installed on the 4GB eMMC instead.</li>
+                <li>Last year's setup is replicated on top, the 3TB mounted at <code>/data</code> and the 4TB at <code>/backup</code>, with the Samba share and the Borg backups (image 8).</li>
+                <li>The NAS now boots on its own with nothing hanging off the USB port (image 9).</li>
+            </ul>
+        </li>
+    </ul>
+</div>
