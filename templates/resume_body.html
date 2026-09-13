@@ -6,6 +6,15 @@
 {% set section_head = 'mb-3 flex items-center gap-2 font-mono text-sm font-bold tracking-widest text-white uppercase' %}
 {% set bullets = 'ms-4 list-disc list-outside text-breeze-fg marker:text-accent' %}
 {% set body_link = 'text-breeze-fg no-underline hover:text-white hover:underline' %}
+
+{# Certificates and letters, chipped like the skills so an attachment does not
+   read as body text. Sits inline in the macro, nothing else wants this run. #}
+{% macro document_link(label, filename) -%}
+<a href="{{ url_for('static', filename='documents/' ~ filename, _external=True) }}"
+   target="_blank" rel="noopener noreferrer" data-doc
+   class="mr-1 mb-1 inline-block border border-accent px-2 py-0.5 font-mono text-2xs font-bold tracking-wider text-accent uppercase no-underline transition-colors duration-200 hover:bg-accent hover:text-term-panel motion-reduce:transition-none">{{ label }}</a>
+{%- endmacro %}
+
 {# Shared by resume.html (screen) and resume_pdf.html (WeasyPrint), so everything
    here has to survive into the PDF. Anything that shouldn't print lives upstream. #}
 <header data-resume-header class="mb-6 border-b border-breeze-grey pb-4 text-center">
@@ -51,9 +60,9 @@
             <li class="mb-1">Wrote a Django scheduler service, deployed in its own container, for periodic dispatch between them.</li>
             <li class="mb-1">Built the React and TypeScript frontend, covered by a Django test suite.</li>
         </ul>
-        <p class="mt-1 text-sm">
-            <a href="{{ url_for('static', filename='documents/benson_chow_lscm_internship_certificate.pdf', _external=True) }}"
-               target="_blank" rel="noopener noreferrer" class="text-accent underline">Internship certificate</a>
+        <p data-docs>
+            {{- document_link('Internship certificate', 'benson_chow_lscm_internship_certificate.pdf') }}
+            {{- document_link('Internship reference letter', 'benson_chow_lscm_internship_reference_letter.pdf') }}
         </p>
     </div>
 
@@ -86,9 +95,8 @@
             <li class="mb-1">Researched the finetuning of an AI powered optical character recognition (OCR) program for document scanning.</li>
             <li class="mb-1">Developed a offline document management system that utilizes OCR, vector databases for search, and local AI-driven document analysis, utilizing a GNU/ Linux system with three RTX Ada 5880 GPUs.</li>
         </ul>
-        <p class="mt-1 text-sm">
-            <a href="{{ url_for('static', filename='documents/benson_chow_drow_internship_certificate.pdf', _external=True) }}"
-               target="_blank" rel="noopener noreferrer" class="text-accent underline">Internship certificate</a>
+        <p data-docs>
+            {{- document_link('Internship certificate', 'benson_chow_drow_internship_certificate.pdf') }}
         </p>
     </div>
 
